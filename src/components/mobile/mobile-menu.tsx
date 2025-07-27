@@ -1,6 +1,6 @@
 import { CircleArrowRight, Menu } from 'lucide-react';
 import { useState } from 'react';
-import { NavbarLink } from '../navbar/navbar-link';
+import { PageLinks } from '@/components';
 
 export function MobileMenu() {
   const [visible, setVisible] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export function MobileMenu() {
             <p>Back</p>
           </div>
           <ul>
-            <NavbarLink isMobile={true} onClick={() => setVisible(false)} />
+            <PageLinks isMobile={true} onClick={() => setVisible(false)} />
           </ul>
         </div>
       </div>

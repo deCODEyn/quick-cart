@@ -1,6 +1,6 @@
 export interface NavbarLinkType {
   onClick?: () => void;
-  isMobile: boolean;
+  isMobile?: boolean;
 }
 
 export type PageLinksType = {

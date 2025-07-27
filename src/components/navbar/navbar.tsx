@@ -1,4 +1,4 @@
-import { NavbarItems, NavbarLink } from '@/components';
+import { NavbarItems, PageLinks } from '@/components';
 
 export function Navbar() {
   return (
@@ -6,7 +6,7 @@ export function Navbar() {
       <h1>Logo</h1>
 
       <ul className="hidden gap-5 text-gray-700 text-sm md:flex">
-        <NavbarLink />
+        <PageLinks />
       </ul>
 
       <NavbarItems />
