@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { products } from '@/assets/assets';
 import type { ShopContextProviderProps, ShopContextType } from '@/types';
+import { products } from '@/utils/assets';
 
 export const ShopContext = createContext<ShopContextType>({
-  products: [],
+  products,
   currency: '',
   delivery_fee: 0,
 });

@@ -12,7 +12,9 @@ export function PageLinks({ isMobile = false, onClick }: NavbarLinkType) {
   return links.map((link) => (
     <li key={link.label}>
       <NavLink
-        className="flex flex-col items-center gap-1 text-gray-900"
+        className={({ isActive }) =>
+          `flex flex-col items-center gap-1 ${isActive && isMobile ? 'bg-black text-white' : ' text-gray-900'} `
+        }
         onClick={onClick}
         to={link.href}
       >

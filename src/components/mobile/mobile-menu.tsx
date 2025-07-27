@@ -18,7 +18,7 @@ export function MobileMenu() {
         <div className="flex flex-col text-gray-700">
           <div className="flex items-center gap-4 p-3">
             <CircleArrowRight
-              className="h-6 rotate-180 cursor-pointer"
+              className="h-6 cursor-pointer"
               onClick={() => setVisible(false)}
             />
             <p>Back</p>

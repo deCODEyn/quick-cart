@@ -10,3 +10,8 @@ export interface ImageInterface extends ImgHTMLAttributes<HTMLImageElement> {
   objectPosition?: string;
   sizes?: string;
 }
+
+export type TitleType = {
+  title: string;
+  span: string;
+};

@@ -1,3 +1,16 @@
+export type GridProductsType = {
+  products: ProductsType[];
+  currency: string;
+};
+
+export type ProductItemType = {
+  id: string;
+  image: string[];
+  name: string;
+  price: number;
+  currency: string;
+};
+
 export type ProductsType = {
   _id: string;
   name: string;
