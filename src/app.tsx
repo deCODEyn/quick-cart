@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Navbar } from '@/components';
+import { Footer, Navbar } from '@/components';
 import {
   About,
   Cart,
@@ -28,6 +28,8 @@ export default function App() {
         <Route element={<PlaceOrder />} path="/place-order" />
         <Route element={<Product />} path="/product/:productId" />
       </Routes>
+
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Hero, SectionHome } from '@/components';
+import { Hero, NewsletterBox, OurPolicy, SectionHome } from '@/components';
 
 export function Home() {
   return (
@@ -18,6 +18,8 @@ export function Home() {
           quisquam distinctio.
         </p>
       </SectionHome>
+      <OurPolicy />
+      <NewsletterBox />
     </div>
   );
 }
