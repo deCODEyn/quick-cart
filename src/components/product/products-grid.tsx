@@ -3,9 +3,7 @@ import type { ArrayProductsType } from '@/types';
 
 export function ProductsGrid({ products }: ArrayProductsType) {
   if (!products || products.length === 0) {
-    return (
-      <p className="text-center text-gray-600">Nenhum produto encontrado.</p>
-    );
+    return <p className="text-center text-gray-600">No products found.</p>;
   }
 
   return (

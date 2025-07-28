@@ -12,6 +12,7 @@ export function FilterSection({
   subCategoryOptions,
 }: FilterSectionInterface) {
   const [showFilter, setShowFilter] = useState(false);
+
   return (
     <div className="min-w-60">
       <button

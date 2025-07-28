@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Footer, Navbar } from '@/components';
+import { Footer, Navbar, SearchBar } from '@/components';
 import {
   About,
   Cart,
@@ -16,6 +16,7 @@ export default function App() {
   return (
     <div className="lg:px[9vw px-4 sm:px-[5vw] md:px-[7vw">
       <Navbar />
+      <SearchBar />
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<About />} path="/about" />

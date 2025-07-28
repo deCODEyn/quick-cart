@@ -4,7 +4,6 @@ import { assets } from '@/utils/assets';
 export function Hero() {
   return (
     <div className="flex flex-col border border-gray-400 md:flex-row">
-      {/* Left Side */}
       <div className="flex w-full items-center justify-center py-10 md:w-1/2 md:py-0">
         <div className="text-[#414141]">
           <div className="flex items-center gap-2">
@@ -20,7 +19,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-      {/* Right Side */}
       <Image
         alt="Banner da sessão Hero da HomePage"
         className="w-full md:w-1/2"

@@ -3,7 +3,7 @@ import { ShopContext } from '@/context/ShopContext';
 import type { ProductType } from '@/types';
 
 export function useProductFilter() {
-  const { products } = useContext(ShopContext);
+  const { products, showSearch, search } = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState<ProductType[]>([]);
   const [category, setCategory] = useState<string[]>([]);
   const [subCategory, setSubCategory] = useState<string[]>([]);
@@ -31,6 +31,12 @@ export function useProductFilter() {
   useEffect(() => {
     let productsCopy = products.slice();
 
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
@@ -53,7 +59,7 @@ export function useProductFilter() {
     }
 
     setFilterProducts(productsCopy);
-  }, [products, category, subCategory, sortType]);
+  }, [products, category, subCategory, sortType, showSearch, search]);
 
   return {
     filteredAndSortedProducts: filterProducts,
