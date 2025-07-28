@@ -4,6 +4,6 @@ export interface NavbarLinkType {
 }
 
 export type PageLinksType = {
-  label: string;
   href: string;
+  label: string;
 };

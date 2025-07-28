@@ -16,7 +16,6 @@ export default function App() {
   return (
     <div className="lg:px[9vw px-4 sm:px-[5vw] md:px-[7vw">
       <Navbar />
-
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<About />} path="/about" />
@@ -28,7 +27,6 @@ export default function App() {
         <Route element={<PlaceOrder />} path="/place-order" />
         <Route element={<Product />} path="/product/:productId" />
       </Routes>
-
       <Footer />
     </div>
   );

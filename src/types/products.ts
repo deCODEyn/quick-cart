@@ -1,6 +1,5 @@
-export type GridProductsType = {
-  products: ProductsType[];
-  currency: string;
+export type ArrayProductsType = {
+  products: ProductType[];
 };
 
 export type ProductItemType = {
@@ -8,18 +7,17 @@ export type ProductItemType = {
   image: string[];
   name: string;
   price: number;
-  currency: string;
 };
 
-export type ProductsType = {
+export type ProductType = {
   _id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string[];
-  category: string;
-  subCategory: string;
-  sizes: string[];
-  date: number;
   bestseller: boolean;
+  category: string;
+  date: number;
+  description: string;
+  name: string;
+  image: string[];
+  price: number;
+  sizes: string[];
+  subCategory: string;
 };

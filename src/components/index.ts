@@ -1,7 +1,9 @@
+export * from '@/components/collection/filter-group';
+export * from '@/components/collection/filter-section';
+export * from '@/components/collection/sort-select';
 export * from '@/components/elements/image';
 export * from '@/components/elements/title';
 export * from '@/components/footer/footer';
-export * from '@/components/home/grid-products';
 export * from '@/components/home/hero';
 export * from '@/components/home/newsletter-box';
 export * from '@/components/home/our-policy';
@@ -12,3 +14,4 @@ export * from '@/components/navbar/navbar-items';
 export * from '@/components/navbar/page-links';
 export * from '@/components/navbar/user-item';
 export * from '@/components/product/product-item';
+export * from '@/components/product/products-grid';

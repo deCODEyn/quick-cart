@@ -56,14 +56,14 @@ import p_img50 from '@/assets/p_img50.png';
 import p_img51 from '@/assets/p_img51.png';
 import p_img52 from '@/assets/p_img52.png';
 
-import type { ProductsType } from '@/types';
+import type { ProductType } from '@/types';
 
 export const assets = {
   hero_img,
   logo,
 };
 
-export const products: ProductsType[] = [
+export const products: ProductType[] = [
   {
     _id: 'aaaaa',
     name: 'Women Round Neck Cotton Top',
