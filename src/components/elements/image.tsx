@@ -1,4 +1,6 @@
 /** biome-ignore-all lint/performance/noImgElement: Image Component. Process all images in the application. */
+
+import { Loader } from 'lucide-react';
 import type { ImageInterface } from '@/types';
 
 export function Image({
@@ -20,7 +22,7 @@ export function Image({
     objectPosition,
   };
 
-  return (
+  return src ? (
     <img
       alt={alt}
       className={className}
@@ -32,5 +34,19 @@ export function Image({
       width={width}
       {...rest}
     />
+  ) : (
+    <div
+      aria-label="Loading image..."
+      className={`${className || ''} flex items-center justify-center bg-gray-200 text-gray-500`}
+      role="img"
+      style={{
+        width: width || '100%',
+        height: height || 'auto',
+        ...finalStyle,
+      }}
+      {...rest}
+    >
+      <Loader className="animate-spin text-xl" />
+    </div>
   );
 }

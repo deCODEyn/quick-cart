@@ -1,4 +1,4 @@
-export interface NavbarLinkType {
+export interface NavbarLinkInterface {
   onClick?: () => void;
   isMobile?: boolean;
 }
