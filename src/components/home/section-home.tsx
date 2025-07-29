@@ -18,7 +18,6 @@ export function SectionHome({
     <div className="my-10">
       <Title span={span} title={title} />
       {children}
-
       <ProductsGrid products={filteredProducts} />
     </div>
   );

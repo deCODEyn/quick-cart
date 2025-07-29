@@ -11,7 +11,7 @@ export function ProductItem({ id, image, name, price }: ProductItemType) {
     <Link className="cursor-pointer text-gray-700" to={`/product/${id}`}>
       <div className="overflow-hidden">
         <Image
-          alt={`Imagem do produto ${name}`}
+          alt={`Product image of the ${name}`}
           className="transition ease-in-out hover:scale-110"
           src={image[0]}
         />

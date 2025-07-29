@@ -20,7 +20,7 @@ export function Hero() {
         </div>
       </div>
       <Image
-        alt="Banner da sessão Hero da HomePage"
+        alt="Home page banner image"
         className="w-full md:w-1/2"
         src={assets.hero_img}
       />

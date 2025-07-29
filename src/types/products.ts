@@ -21,3 +21,9 @@ export type ProductType = {
   sizes: string[];
   subCategory: string;
 };
+
+export type RelatedProductsType = {
+  productId: string;
+  category: string;
+  subCategory: string;
+};

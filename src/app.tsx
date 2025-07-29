@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Footer, Navbar, SearchBar } from '@/components';
+import { Footer, Navbar, ScrollToTop, SearchBar } from '@/components';
 import {
   About,
   Cart,
@@ -15,6 +15,7 @@ import {
 export default function App() {
   return (
     <div className="lg:px[9vw px-4 sm:px-[5vw] md:px-[7vw">
+      <ScrollToTop />
       <Navbar />
       <SearchBar />
       <Routes>
