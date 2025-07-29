@@ -1,7 +1,7 @@
 import { SearchIcon } from 'lucide-react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShopContext } from '@/context/ShopContext';
+import { ShopContext } from '@/context/shop-context';
 
 export function SearchItem() {
   const { setShowSearch } = useContext(ShopContext);

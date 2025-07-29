@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '@/components';
-import { ShopContext } from '@/context/ShopContext';
+import { ShopContext } from '@/context/shop-context';
 import type { ProductItemType } from '@/types';
 
 export function ProductItem({ id, image, name, price }: ProductItemType) {

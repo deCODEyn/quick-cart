@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Footer, Navbar, ScrollToTop, SearchBar } from '@/components';
 import {
   About,
@@ -15,6 +16,7 @@ import {
 export default function App() {
   return (
     <div className="lg:px[9vw px-4 sm:px-[5vw] md:px-[7vw">
+      <ToastContainer newestOnTop />
       <ScrollToTop />
       <Navbar />
       <SearchBar />

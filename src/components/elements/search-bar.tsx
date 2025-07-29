@@ -1,7 +1,7 @@
 import { SearchIcon, X } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ShopContext } from '@/context/ShopContext';
+import { ShopContext } from '@/context/shop-context';
 
 export function SearchBar() {
   const { search, setSearch, showSearch, setShowSearch } =

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { ProductsGrid, Title } from '@/components';
-import { ShopContext } from '@/context/ShopContext';
+import { ShopContext } from '@/context/shop-context';
 import type { ProductType, RelatedProductsType } from '@/types';
 
 export function RelatedProducts({

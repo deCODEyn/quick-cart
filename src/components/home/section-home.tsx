@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProductsGrid, Title } from '@/components';
-import { ShopContext } from '@/context/ShopContext';
+import { ShopContext } from '@/context/shop-context';
 import type { SectionHomeType } from '@/types';
 
 export function SectionHome({
