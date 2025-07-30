@@ -1,28 +1,18 @@
 import { SearchIcon, X } from 'lucide-react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ShopContext } from '@/context/shop-context';
 
 export function SearchBar() {
-  const { search, setSearch, showSearch, setShowSearch } =
+  const { search, setSearch, showSearch, handlerCloseSearchBar } =
     useContext(ShopContext);
-  const [visible, setVisible] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.pathname.includes('collection')) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  }, [location]);
+  if (!(showSearch && location.pathname.includes('collection'))) {
+    return null;
+  }
 
-  const handlerCloseSearchBar = () => {
-    setShowSearch(false);
-    setSearch('');
-  };
-
-  return showSearch && visible ? (
+  return (
     <div className="border-gray-300 border-t border-b bg-gray-50 text-center">
       <div className="mx-3 my-5 inline-flex w-3/4 items-center justify-center rounded-full border border-gray-400 px-5 py-2 md:w-1/2">
         <input
@@ -39,5 +29,5 @@ export function SearchBar() {
         onClick={handlerCloseSearchBar}
       />
     </div>
-  ) : null;
+  );
 }

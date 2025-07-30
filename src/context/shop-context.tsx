@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from 'react';
+import { useSearchBar } from '@/hooks/use-search-bar';
 import type {
   AddCartItemType,
   CartItemsType,
@@ -25,12 +26,21 @@ export const ShopContext = createContext<ShopContextInterface>({
   addToCart: () => {
     /* default empty function */
   },
+  getCartCount: () => 0,
+  handlerCloseSearchBar: () => {
+    /* default empty function */
+  },
 });
 
 const ShopContextProvider = ({ children }: ShopContextProviderType) => {
-  const [search, setSearch] = useState('');
-  const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState<CartItemsType>({});
+  const {
+    search,
+    setSearch,
+    showSearch,
+    setShowSearch,
+    handlerCloseSearchBar,
+  } = useSearchBar();
   const currency = '$';
   const delivery_fee = 10;
 
@@ -53,6 +63,20 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     });
   }, []);
 
+  const getCartCount = () => {
+    return Object.values(cartItems).reduce<number>(
+      (totalItemsCount, itemSizes) => {
+        const quantities = Object.values(itemSizes);
+        const productCount = quantities.reduce(
+          (sum, quantity) => sum + quantity,
+          0
+        );
+        return totalItemsCount + productCount;
+      },
+      0
+    );
+  };
+
   const value = {
     products,
     currency,
@@ -61,8 +85,10 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     setSearch,
     showSearch,
     setShowSearch,
+    handlerCloseSearchBar,
     cartItems,
     addToCart,
+    getCartCount,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

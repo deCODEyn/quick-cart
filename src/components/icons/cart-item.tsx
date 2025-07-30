@@ -1,8 +1,12 @@
 import { ShoppingCart } from 'lucide-react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { ShopContext } from '@/context/shop-context';
 
 export function CartItem() {
-  const itemsInCart = 10;
+  const { getCartCount } = useContext(ShopContext);
+  const itemsInCart = getCartCount();
+
   return (
     <Link className="relative" to="/cart">
       <ShoppingCart className="w-6 min-w-6 cursor-pointer" />

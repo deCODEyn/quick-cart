@@ -2,6 +2,8 @@ import type { ProductType } from '@/types';
 
 export interface ShopContextInterface {
   addToCart: ({ id, size }: AddCartItemType) => void;
+  getCartCount: () => number;
+  handlerCloseSearchBar: () => void;
   setSearch: (value: string) => void;
   setShowSearch: (value: boolean) => void;
   cartItems: CartItemsType;

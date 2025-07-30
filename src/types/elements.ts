@@ -10,6 +10,14 @@ export interface ImageInterface
   width?: number | string;
 }
 
+export interface UseSearchBarReturn {
+  handlerCloseSearchBar: () => void;
+  setSearch: (value: string) => void;
+  setShowSearch: (value: boolean) => void;
+  search: string;
+  showSearch: boolean;
+}
+
 export type TitleType = {
   span: string;
   title: string;
