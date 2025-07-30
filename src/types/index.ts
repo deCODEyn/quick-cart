@@ -5,3 +5,4 @@ export * from '@/types/home';
 export * from '@/types/layout';
 export * from '@/types/navbar';
 export * from '@/types/products';
+export * from '@/types/shop-cart';

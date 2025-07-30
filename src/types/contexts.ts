@@ -1,4 +1,4 @@
-import type { ProductType } from '@/types';
+import type { AddCartItemType, CartItemsType, ProductType } from '@/types';
 
 export interface ShopContextInterface {
   addToCart: ({ id, size }: AddCartItemType) => void;
@@ -13,20 +13,6 @@ export interface ShopContextInterface {
   search: string;
   showSearch: boolean;
 }
-
-export type AddCartItemType = {
-  id: string;
-  size: string;
-  name?: string;
-};
-
-export type CartItemSizeType = {
-  [size: string]: number;
-};
-
-export type CartItemsType = {
-  [itemId: string]: CartItemSizeType;
-};
 
 export type ShopContextProviderType = {
   children: React.ReactNode;

@@ -1,5 +1,4 @@
 /** biome-ignore-all lint/performance/noImgElement: Image Component. Process all images in the application. */
-
 import { Loader } from 'lucide-react';
 import type { ImageInterface } from '@/types';
 

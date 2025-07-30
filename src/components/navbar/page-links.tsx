@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import type { NavbarLinkType, PageLinksType } from '@/types';
+import type { NavbarLinkInterface, PageLinksType } from '@/types';
 
-export function PageLinks({ isMobile = false, onClick }: NavbarLinkType) {
+export function PageLinks({ isMobile = false, onClick }: NavbarLinkInterface) {
   const links: PageLinksType[] = [
     { label: 'home', href: '/' },
     { label: 'collection', href: '/collection' },

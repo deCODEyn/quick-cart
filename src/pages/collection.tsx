@@ -1,5 +1,5 @@
 import { FilterSection, ProductsGrid, SortSelect, Title } from '@/components';
-import { useProductFilter } from '@/hooks/use-product-filter';
+import { useProductFilter } from '@/hooks';
 
 export function Collection() {
   const {

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ShopContext } from '@/context/shop-context';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks';
 import type { AddCartItemType } from '@/types';
 
 export function AddToCartButton({ id, size, name }: AddCartItemType) {
