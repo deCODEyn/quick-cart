@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { ShopContext } from '@/context/shop-context';
 
 export function CartItem() {
-  const { getCartCount } = useContext(ShopContext);
-  const itemsInCart = getCartCount();
+  const { getCartItemCount } = useContext(ShopContext);
+  const itemsInCart = getCartItemCount();
 
   return (
     <Link className="relative" to="/cart">

@@ -10,7 +10,7 @@ export function useToast(): UseToastReturn {
     hideProgressBar: true,
     pauseOnFocusLoss: false,
     pauseOnHover: false,
-    position: 'top-center',
+    position: 'top-left',
     progress: undefined,
     theme: 'colored',
     transition: Zoom,

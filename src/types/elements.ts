@@ -18,6 +18,15 @@ export interface UseSearchBarReturn {
   showSearch: boolean;
 }
 
+export type LinkButtonType = {
+  href: string;
+  label: string;
+};
+
+export type DisplayPriceType = {
+  price: number;
+};
+
 export type TitleType = {
   span: string;
   title: string;

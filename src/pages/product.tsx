@@ -1,4 +1,3 @@
-// import { Star } from 'lucide-react';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
@@ -30,6 +29,10 @@ export function Product() {
   useEffect(() => {
     fetchProductData();
   }, [fetchProductData]);
+
+  useEffect(() => {
+    productId ? setCurrentSize('') : null;
+  }, [productId]);
 
   const handleSelectSize = useCallback((size: string) => {
     setCurrentSize(size);

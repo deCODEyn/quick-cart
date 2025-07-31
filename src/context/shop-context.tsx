@@ -11,8 +11,7 @@ const initialCartItems: CartItemsType = {};
 
 export const ShopContext = createContext<ShopContextInterface>({
   products,
-  currency: '',
-  delivery_fee: 0,
+  deliveryFee: 0,
   search: '',
   setSearch: () => {
     /* default empty function */
@@ -25,14 +24,28 @@ export const ShopContext = createContext<ShopContextInterface>({
   addToCart: () => {
     /* default empty function */
   },
-  getCartCount: () => 0,
+  getCartItemCount: () => 0,
   handlerCloseSearchBar: () => {
     /* default empty function */
   },
+  updateQuantity: () => {
+    /* default empty function */
+  },
+  deleteFromCart() {
+    /* default empty function */
+  },
+  getCartAmount: () => 0,
 });
 
 const ShopContextProvider = ({ children }: ShopContextProviderType) => {
-  const { cartItems, addToCart, getCartCount } = useShopCart();
+  const {
+    cartItems,
+    addToCart,
+    deleteFromCart,
+    updateQuantity,
+    getCartItemCount,
+    getCartAmount,
+  } = useShopCart();
   const {
     search,
     setSearch,
@@ -40,13 +53,11 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     setShowSearch,
     handlerCloseSearchBar,
   } = useSearchBar();
-  const currency = '$';
-  const delivery_fee = 10;
+  const deliveryFee = 10;
 
   const value = {
     products,
-    currency,
-    delivery_fee,
+    deliveryFee,
     search,
     setSearch,
     showSearch,
@@ -54,7 +65,10 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     handlerCloseSearchBar,
     cartItems,
     addToCart,
-    getCartCount,
+    deleteFromCart,
+    updateQuantity,
+    getCartItemCount,
+    getCartAmount,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
