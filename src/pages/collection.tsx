@@ -27,7 +27,7 @@ export function Collection() {
       />
       <div className="flex-1">
         <div className="mb-4 flex items-center justify-between text-base md:text-2xl">
-          <Title span="COLLECTIONS" title="ALL" />
+          <Title span="collections" title="all" />
           <SortSelect
             currentSortType={currentSortType}
             onSortChange={handleSortChange}

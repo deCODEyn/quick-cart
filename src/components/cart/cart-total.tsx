@@ -10,7 +10,7 @@ export function CartTotal() {
   return (
     <div className="w-full">
       <div className="text-2xl">
-        <Title span="TOTALS" title="CART" />
+        <Title span="totals" title="cart" />
       </div>
       <div className="mt-2 flex flex-col gap-2 text-sm">
         <CartSummaryRow price={subtotal} title="Subtotal" />

@@ -34,7 +34,7 @@ export function FilterSection({
           onToggle={onCategoryToggle}
           options={categoryOptions}
           selectedOptions={selectedCategories}
-          title="CATEGORIES"
+          title="categories"
         />
       </div>
       <div
@@ -44,7 +44,7 @@ export function FilterSection({
           onToggle={onSubCategoryToggle}
           options={subCategoryOptions}
           selectedOptions={selectedSubCategories}
-          title="TYPE"
+          title="type"
         />
       </div>
     </div>

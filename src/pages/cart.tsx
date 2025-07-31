@@ -29,7 +29,7 @@ export function Cart() {
   return getCartItemCount() !== 0 ? (
     <div className="border-t pt-14">
       <div className="mb-3 text-2xl">
-        <Title span="CART" title="YOUR" />
+        <Title span="cart" title="your" />
       </div>
       <div>
         {cartData.map((item) => {
