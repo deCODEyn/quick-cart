@@ -1,5 +1,5 @@
 export function NewsletterBox() {
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
@@ -10,11 +10,11 @@ export function NewsletterBox() {
       </p>
       <p className="mt-3 text-gray-400">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure rerum quia
-        impedit sequi iste consequuntur earum dolor soluta.
+        impedit sequi iste consequuntur earum.
       </p>
       <form
-        className="mx-auto my-8 flex w-full items-center gap-3 border pl-3 sm:w-1/2"
-        onSubmit={onSubmitHandler}
+        className="mx-auto my-8 flex w-full items-center gap-3 rounded border pl-3 sm:w-1/2"
+        onSubmit={handleSubmit}
       >
         <input
           className="w-full outline-none sm:flex-1"
@@ -22,10 +22,10 @@ export function NewsletterBox() {
           type="email"
         />
         <button
-          className="bg-black px-10 py-4 text-white text-xs"
+          className="bg-black px-10 py-4 text-white text-xs uppercase"
           type="submit"
         >
-          SUBSCRIBE
+          subscribe
         </button>
       </form>
     </div>

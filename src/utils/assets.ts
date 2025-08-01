@@ -1,3 +1,4 @@
+import about_img from '@/assets/about_img.png';
 import hero_img from '@/assets/hero_img.png';
 import logo from '@/assets/logo.png';
 import p_img1 from '@/assets/p_img1.png';
@@ -57,10 +58,10 @@ import p_img51 from '@/assets/p_img51.png';
 import p_img52 from '@/assets/p_img52.png';
 import razorpay_logo from '@/assets/razorpay_logo.png';
 import stripe_logo from '@/assets/stripe_logo.png';
-
 import type { ProductType } from '@/types';
 
 export const assets = {
+  about_img,
   hero_img,
   logo,
   razorpay_logo,
