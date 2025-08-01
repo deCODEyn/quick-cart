@@ -50,7 +50,7 @@ export function Cart() {
         <div className="w-full sm:w-[450px]">
           <CartTotal />
           <div className="w-full pt-10 text-end">
-            <LinkButton href="/place-order" label="PROCEED TO CHECKOUT" />
+            <LinkButton href="/place-order" label="proceed to checkout" />
           </div>
         </div>
       </div>

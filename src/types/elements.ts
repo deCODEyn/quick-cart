@@ -21,6 +21,7 @@ export interface UseSearchBarReturn {
 export type LinkButtonType = {
   href: string;
   label: string;
+  className?: string;
 };
 
 export type DisplayPriceType = {
