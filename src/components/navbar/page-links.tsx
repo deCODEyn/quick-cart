@@ -20,7 +20,7 @@ export function PageLinks({ isMobile = false, onClick }: NavbarLinkInterface) {
       >
         {({ isActive }) => (
           <>
-            <p>{link.label.toUpperCase()}</p>
+            <p className="uppercase">{link.label}</p>
             <hr
               className={`h-[2.5px] w-2/3 border-none bg-gray-700 ${isActive && !isMobile ? 'block' : 'hidden'}`}
             />
