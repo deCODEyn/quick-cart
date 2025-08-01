@@ -12,7 +12,7 @@ export type ProductDescriptionType = {
   description: string;
 };
 
-export type ProductImageType = {
+export type ProductInfoType = {
   product: ProductType;
 };
 
@@ -21,11 +21,6 @@ export type ProductItemType = {
   image: string[];
   name: string;
   price: number;
-};
-
-export type ProductInfoType = {
-  currency: string;
-  product: ProductType;
 };
 
 export type ProductType = {

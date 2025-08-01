@@ -13,12 +13,13 @@ import type { ProductType } from '@/types';
 
 export function Product() {
   const { productId } = useParams();
-  const { products, currency } = useContext(ShopContext);
+  const { products } = useContext(ShopContext);
   const [productData, setProductData] = useState<ProductType>();
   const [currentSize, setCurrentSize] = useState<string>('');
 
   const fetchProductData = useCallback(() => {
     const foundProduct = products.find((item) => item._id === productId);
+
     if (foundProduct) {
       setProductData(foundProduct);
     } else {
@@ -43,7 +44,7 @@ export function Product() {
       <div className="flex flex-col gap-12 md:flex-row md:gap-12">
         <ProductImageGalery product={productData} />
         <div className="flex-1">
-          <ProductInfo currency={currency} product={productData} />
+          <ProductInfo product={productData} />
           {productData.sizes && productData.sizes.length > 0 && (
             <ProductSizeSelector
               currentSize={currentSize}

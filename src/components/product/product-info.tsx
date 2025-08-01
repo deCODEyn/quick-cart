@@ -1,7 +1,8 @@
 // import { Star } from "lucide-react";
 import type { ProductInfoType } from '@/types';
+import { currency } from '@/utils/constants';
 
-export function ProductInfo({ product, currency }: ProductInfoType) {
+export function ProductInfo({ product }: ProductInfoType) {
   return (
     <>
       <h1 className="mt-2 font-medium text-2xl">{product.name}</h1>

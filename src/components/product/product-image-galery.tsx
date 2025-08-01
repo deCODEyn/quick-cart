@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Image } from '@/components';
-import type { ProductImageType } from '@/types';
+import type { ProductInfoType } from '@/types';
 
-export function ProductImageGalery({ product }: ProductImageType) {
+export function ProductImageGalery({ product }: ProductInfoType) {
   const [currentImage, setCurrentImage] = useState<string>('');
 
   const handleThumbnailClick = (imageUrl: string) => {
