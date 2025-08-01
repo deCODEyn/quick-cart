@@ -20,7 +20,7 @@ export const CartItemCard = React.memo(
     };
 
     return (
-      <div className="grid grid-cols-[4fr_0.5fr_0.5fr] items-center gap-4 border-t border-b py-4 text-gray-700 sm:grid-cols-[4fr_2fr_0.5fr]">
+      <div className="grid grid-cols-[4fr_0.5fr_0.5fr] items-center gap-4 border-t py-4 text-gray-700 sm:grid-cols-[4fr_2fr_0.5fr]">
         <div className="flex items-start gap-6">
           <Image
             alt={`Image of ${product.name} in cart`}

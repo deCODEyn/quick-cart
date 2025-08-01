@@ -31,7 +31,7 @@ export function Cart() {
       <div className="mb-3 text-2xl">
         <Title span="cart" title="your" />
       </div>
-      <div>
+      <div className="border-b-2">
         {cartData.map((item) => {
           const productData = products.find(
             (product) => product._id === item.id
