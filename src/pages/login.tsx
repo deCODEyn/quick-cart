@@ -3,7 +3,7 @@ import { useState } from 'react';
 export function Login() {
   const [currentState, setCurrentState] = useState('Sign Up');
 
-  const handlerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     //lógica de login para usuário.
@@ -14,7 +14,7 @@ export function Login() {
   return (
     <form
       className="m-auto mt-14 flex w-[90%] flex-col items-center gap-4 text-gray-800 sm:max-w-96"
-      onSubmit={handlerSubmit}
+      onSubmit={handleSubmit}
     >
       <div className="mt-10 mb-2 inline-flex items-center gap-2">
         <p className="prata-regular text-3xl">{currentState}</p>

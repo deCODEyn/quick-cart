@@ -11,7 +11,7 @@ export interface ImageInterface
 }
 
 export interface UseSearchBarReturn {
-  handlerCloseSearchBar: () => void;
+  handleCloseSearchBar: () => void;
   setSearch: (value: string) => void;
   setShowSearch: (value: boolean) => void;
   search: string;

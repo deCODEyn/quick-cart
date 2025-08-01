@@ -12,8 +12,8 @@ export function ProductItem({ id, image, name, price }: ProductItemType) {
           src={image[0]}
         />
       </div>
-      <p className="pt-3 pb-1 text-sm">{name}</p>
-      <p className="font-medium text-sm">
+      <p className="h-12 pt-3 pb-1 text-sm lg:h-8">{name}</p>
+      <p className="mb-6 font-medium text-sm md:mt-5">
         <DisplayPrice price={price} />
       </p>
     </Link>

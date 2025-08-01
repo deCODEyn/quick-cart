@@ -14,7 +14,7 @@ export function useSearchBar(): UseSearchBarReturn {
     }
   }, [location.pathname]);
 
-  const handlerCloseSearchBar = useCallback(() => {
+  const handleCloseSearchBar = useCallback(() => {
     setShowSearch(false);
     setSearch('');
   }, []);
@@ -24,6 +24,6 @@ export function useSearchBar(): UseSearchBarReturn {
     setSearch,
     showSearch,
     setShowSearch,
-    handlerCloseSearchBar,
+    handleCloseSearchBar,
   };
 }

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { ShopContext } from '@/context/shop-context';
 
 export function SearchBar() {
-  const { search, setSearch, showSearch, handlerCloseSearchBar } =
+  const { search, setSearch, showSearch, handleCloseSearchBar } =
     useContext(ShopContext);
   const location = useLocation();
 
@@ -24,10 +24,7 @@ export function SearchBar() {
         />
         <SearchIcon className="w-4" />
       </div>
-      <X
-        className="inline w-5 cursor-pointer"
-        onClick={handlerCloseSearchBar}
-      />
+      <X className="inline w-5 cursor-pointer" onClick={handleCloseSearchBar} />
     </div>
   );
 }

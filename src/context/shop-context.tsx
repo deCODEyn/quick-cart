@@ -25,7 +25,7 @@ export const ShopContext = createContext<ShopContextInterface>({
     /* default empty function */
   },
   getCartItemCount: () => 0,
-  handlerCloseSearchBar: () => {
+  handleCloseSearchBar: () => {
     /* default empty function */
   },
   updateQuantity: () => {
@@ -46,13 +46,8 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     getCartItemCount,
     getCartAmount,
   } = useShopCart();
-  const {
-    search,
-    setSearch,
-    showSearch,
-    setShowSearch,
-    handlerCloseSearchBar,
-  } = useSearchBar();
+  const { search, setSearch, showSearch, setShowSearch, handleCloseSearchBar } =
+    useSearchBar();
   const deliveryFee = 10;
 
   const value = {
@@ -62,7 +57,7 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     setSearch,
     showSearch,
     setShowSearch,
-    handlerCloseSearchBar,
+    handleCloseSearchBar,
     cartItems,
     addToCart,
     deleteFromCart,
