@@ -6,6 +6,7 @@ export * from '@/components/cart/empty-cart';
 export * from '@/components/collection/filter-group';
 export * from '@/components/collection/filter-section';
 export * from '@/components/collection/sort-select';
+export * from '@/components/contact/contact-info-card';
 export * from '@/components/elements/add-to-cart-button';
 export * from '@/components/elements/copyright';
 export * from '@/components/elements/display-price';

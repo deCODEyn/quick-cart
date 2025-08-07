@@ -1,7 +1,9 @@
-import { Image, NewsletterBox, Title } from '@/components';
+import { ContactInfoCard, Image, NewsletterBox, Title } from '@/components';
 import { assets } from '@/utils/assets';
 
 export function Contact() {
+  const address = ['Business Address, 999', 'City, State', 'Country'];
+
   return (
     <div>
       <div className="border-t pt-10 text-center text-2xl">
@@ -13,16 +15,12 @@ export function Contact() {
           className="w-full md:max-w-[480px]"
           src={assets.contact_img}
         />
-        <div className="flex flex-col items-start justify-center gap-6">
-          <p className="font-semibold text-gray-600 text-xl">Our Store</p>
-          <p className="text-gray-500">
-            Business Address, 999 <br /> City, State <br />
-            Country
-          </p>
-          <p className="text-gray-500">
-            Phone: +12 (123) 456-7890 <br /> Email: admin@quickcart.com
-          </p>
-        </div>
+        <ContactInfoCard
+          address={address}
+          email="admin@quickcart.com"
+          phone="+12 (123) 456-7890"
+          title="Our Store"
+        />
       </div>
       <NewsletterBox />
     </div>
