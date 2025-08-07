@@ -1,4 +1,4 @@
-import { Image, NewsletterBox, Title } from '@/components';
+import { FeatureCard, Image, NewsletterBox, Title } from '@/components';
 import { assets } from '@/utils/assets';
 
 export function About() {
@@ -24,7 +24,7 @@ export function About() {
             earum sapiente aut blanditiis quaerat velit culpa dicta fugiat
             pariatur nostrum in iure, et nihil. Cum commodi natus ab quam quas!
           </p>
-          <p className="font-bold text-gray-800">Our Mission</p>
+          <h3 className="font-bold text-gray-800">Our Mission</h3>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             Reprehenderit odio explicabo, sunt, saepe similique doloribus
@@ -37,27 +37,21 @@ export function About() {
         <Title span="choose us" title="why" />
       </div>
       <div className="mb-20 flex flex-col gap-1 text-sm md:flex-row">
-        <div className="flex flex-col gap-5 border px-10 py-8 sm:py-20 md:px-16">
-          <p className="h-6 font-bold">Quality Assurance:</p>
-          <p className="mt-2 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet esse
-            ex architecto ipsa doloremque quaerat sed. Earum!
-          </p>
-        </div>
-        <div className="flex flex-col gap-5 border px-10 py-8 sm:py-20 md:px-16">
-          <p className="h-6 font-bold">Convenience:</p>
-          <p className="mt-2 text-gray-600">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem
-            dolorem possimus architecto recusandae unde.
-          </p>
-        </div>
-        <div className="flex flex-col gap-5 border px-10 py-8 sm:py-20 md:px-16">
-          <p className="h-6 font-bold">Exceptionl Customer Service:</p>
-          <p className="mt-2 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
-            asperiores! Pariatur quo aperiam ipsum suscipit omnis quisquam.
-          </p>
-        </div>
+        <FeatureCard
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet esse
+            ex architecto ipsa doloremque quaerat sed. Earum!"
+          title="Quality Assurance:"
+        />
+        <FeatureCard
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem
+            dolorem possimus architecto recusandae unde."
+          title="Convenience:"
+        />
+        <FeatureCard
+          description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
+            asperiores! Pariatur quo aperiam ipsum suscipit omnis quisquam."
+          title="Exceptionl Customer Service:"
+        />
       </div>
       <NewsletterBox />
     </div>

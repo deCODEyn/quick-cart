@@ -1,3 +1,4 @@
+export * from '@/components/about/feature-card';
 export * from '@/components/cart/cart-item-card';
 export * from '@/components/cart/cart-summary-row';
 export * from '@/components/cart/cart-total';
