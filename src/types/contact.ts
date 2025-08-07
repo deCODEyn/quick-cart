@@ -3,4 +3,4 @@ export type ContactInfoCardType = {
   address: string[];
   phone: string;
   email: string;
-}
+};

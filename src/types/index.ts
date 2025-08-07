@@ -1,5 +1,7 @@
+export * from '@/types/about';
 export * from '@/types/cart';
 export * from '@/types/collection';
+export * from '@/types/contact';
 export * from '@/types/contexts';
 export * from '@/types/elements';
 export * from '@/types/home';

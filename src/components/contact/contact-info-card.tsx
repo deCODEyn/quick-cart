@@ -1,4 +1,4 @@
-import type { ContactInfoCardType } from '@/types/contact';
+import type { ContactInfoCardType } from '@/types';
 
 export function ContactInfoCard({
   title,

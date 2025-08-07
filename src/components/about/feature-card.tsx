@@ -1,4 +1,4 @@
-import type { FeatureCardType } from '@/types/about';
+import type { FeatureCardType } from '@/types';
 
 export function FeatureCard({ title, description }: FeatureCardType) {
   return (

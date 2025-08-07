@@ -1,5 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import {
+  AddProducts,
+  AdminHome,
+  ListProducts,
+  ManageOrders,
+} from '@/admin/pages';
 import { AdminLayout, PublicLayout, ScrollToTop } from '@/layouts';
 import {
   About,
@@ -12,7 +18,8 @@ import {
   PlaceOrder,
   Product,
 } from '@/pages';
-import { AdminHome } from './admin/pages/admin-home';
+
+const backendUrl = '';
 
 export default function App() {
   const user = 'admin';
@@ -37,6 +44,9 @@ export default function App() {
         {user === 'admin' && (
           <Route element={<AdminLayout />} path="/admin">
             <Route element={<AdminHome />} index />
+            <Route element={<AddProducts />} path="add" />
+            <Route element={<ListProducts />} path="list" />
+            <Route element={<ManageOrders />} path="orders" />
           </Route>
         )}
       </Routes>

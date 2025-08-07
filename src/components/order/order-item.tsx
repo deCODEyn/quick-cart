@@ -1,5 +1,5 @@
 import { DisplayPrice, Image } from '@/components';
-import { useDateFormat } from '@/hooks/use-date-format';
+import { useDateFormat } from '@/hooks';
 import type { OrderItemType } from '@/types';
 
 export function OrderItem({ product, quantity, size }: OrderItemType) {

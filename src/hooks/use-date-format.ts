@@ -1,11 +1,10 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 export function useDateFormat(timestamp: number): string {
   const formattedDate = useMemo(() => {
     if (!timestamp) {
       return '';
     }
-
     const date = new Date(timestamp);
 
     return new Intl.DateTimeFormat('en-US', {
@@ -13,8 +12,6 @@ export function useDateFormat(timestamp: number): string {
       month: 'short',
       year: 'numeric',
     }).format(date);
-
-  }, [timestamp]); // O hook será recalculado apenas se o timestamp mudar
-
+  }, [timestamp]);
   return formattedDate;
 }
