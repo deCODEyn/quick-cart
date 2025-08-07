@@ -33,7 +33,7 @@ export const CartItemCard = React.memo(
               <p>
                 <DisplayPrice price={product.price} />
               </p>
-              <p className="sm:py1 border bg-slate-50 px-2 sm:px-3">
+              <p className="sm:py1 rounded-sm border bg-slate-50 px-2 sm:px-3">
                 {item.size}
               </p>
             </div>

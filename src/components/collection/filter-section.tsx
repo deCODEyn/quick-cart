@@ -28,7 +28,7 @@ export function FilterSection({
         )}
       </Button>
       <div
-        className={`mt-6 border border-gray-300 py-3 pl-5 ${showFilter ? '' : 'hidden'} md:block`}
+        className={`mt-6 rounded-xl border border-gray-300 py-3 pl-5 ${showFilter ? '' : 'hidden'} md:block`}
       >
         <FilterGroup
           onToggle={onCategoryToggle}
@@ -38,7 +38,7 @@ export function FilterSection({
         />
       </div>
       <div
-        className={`mt-6 border border-gray-300 py-3 pl-5 ${showFilter ? '' : 'hidden'} md:block`}
+        className={`mt-6 rounded-xl border border-gray-300 py-3 pl-5 ${showFilter ? '' : 'hidden'} md:block`}
       >
         <FilterGroup
           onToggle={onSubCategoryToggle}

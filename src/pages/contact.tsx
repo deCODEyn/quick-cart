@@ -12,7 +12,7 @@ export function Contact() {
       <div className="my-10 mb-28 flex flex-col justify-center gap-10 md:flex-row">
         <Image
           alt="Generic image for Contact Us session"
-          className="w-full md:max-w-[480px]"
+          className="w-full rounded-sm md:max-w-[480px]"
           src={assets.contact_img}
         />
         <ContactInfoCard

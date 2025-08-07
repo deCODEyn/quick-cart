@@ -4,10 +4,12 @@ export function ProductDescription({ description }: ProductDescriptionType) {
   return (
     <div className="mt-20">
       <div className="flex">
-        <p className="border px-5 py-3 font-bold text-sm">Description</p>
+        <p className="rounded-t-sm border px-5 py-3 font-bold text-sm">
+          Description
+        </p>
         {/* <p className="border px-5 py-3 text-sm"> Reviews (122)</p> */}
       </div>
-      <div className="flex flex-col gap-4 border p-6 text-gray-500 text-sm">
+      <div className="flex flex-col gap-4 rounded-sm rounded-tl-none border p-6 text-gray-500 text-sm">
         <p>{description}</p>
         <p>
           An e-commerce website is an online platform that facilitates the

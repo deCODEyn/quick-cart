@@ -5,7 +5,7 @@ import type { ProductItemType } from '@/types';
 export function ProductItem({ id, image, name, price }: ProductItemType) {
   return (
     <Link className="cursor-pointer text-gray-700" to={`/product/${id}`}>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden rounded-sm">
         <Image
           alt={`Product image of the ${name}`}
           className="transition ease-in-out hover:scale-110"

@@ -15,7 +15,7 @@ export function SearchBar() {
 
   return (
     <div className="border-gray-300 border-t border-b bg-gray-50 text-center">
-      <div className="mx-3 my-5 inline-flex w-3/4 items-center justify-center rounded-full border border-gray-400 px-5 py-2 md:w-1/2">
+      <div className="mx-3 my-5 inline-flex h-10 w-3/4 items-center justify-center rounded-full border border-gray-400 px-5 py-2 md:w-1/2">
         <Input
           className="flex-1 border-none bg-inherit text-sm shadow-none outline-none focus:bg-transparent focus-visible:ring-0"
           onChange={(e) => setSearch(e.target.value)}

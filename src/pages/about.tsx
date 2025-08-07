@@ -10,7 +10,7 @@ export function About() {
       <div className="my-10 flex flex-col gap-16 md:flex-row">
         <Image
           alt="Generic image for About Us session"
-          className="w-full md:max-w-[450px]"
+          className="w-full rounded-sm md:max-w-[450px]"
           src={assets.about_img}
         />
         <div className="flex flex-col justify-center gap-6 text-gray-600">

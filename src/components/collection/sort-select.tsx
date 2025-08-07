@@ -6,7 +6,7 @@ export function SortSelect({
 }: SortSelectInterface) {
   return (
     <select
-      className="ml-2 h-10 border-2 border-gray-300 px-2 text-sm"
+      className="ml-2 h-10 rounded-lg border-2 border-gray-300 px-2 text-sm"
       onChange={(e) => onSortChange(e.target.value)}
       value={currentSortType}
     >
