@@ -28,6 +28,8 @@ export * from '@/components/mobile/mobile-menu';
 export * from '@/components/navbar/navbar';
 export * from '@/components/navbar/navbar-items';
 export * from '@/components/navbar/page-links';
+export * from '@/components/order/order-item';
+export * from '@/components/order/order-status-inticator';
 export * from '@/components/place-order/form-delivery';
 export * from '@/components/place-order/input-form-delivery';
 export * from '@/components/place-order/payment-method-button';
@@ -38,5 +40,5 @@ export * from '@/components/product/product-item';
 export * from '@/components/product/product-size-selector';
 export * from '@/components/product/products-grid';
 export * from '@/components/product/related-products';
-export * from '@/components/ui/button'
-export * from '@/components/ui/input'
+export * from '@/components/ui/button';
+export * from '@/components/ui/input';

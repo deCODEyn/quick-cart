@@ -5,5 +5,6 @@ export * from '@/types/elements';
 export * from '@/types/home';
 export * from '@/types/layout';
 export * from '@/types/navbar';
+export * from '@/types/order';
 export * from '@/types/place-order';
 export * from '@/types/products';
