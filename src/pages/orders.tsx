@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DisplayPrice, Image, Title } from '@/components';
+import { Button, DisplayPrice, Image, Title } from '@/components';
 import { ShopContext } from '@/context/shop-context';
 
 export function Orders() {
@@ -41,12 +41,12 @@ export function Orders() {
                 <p className="h-2 min-w-2 rounded-full bg-green-500" />
                 <p className="text-sm md:text-base">Ready to ship</p>
               </div>
-              <button
-                className="rounded-sm border border-gray-300 px-4 py-2 font-medium text-sm"
+              <Button
+                className="cursor-pointer rounded-sm border border-gray-300 px-4 py-2 font-medium text-sm active:bg-gray-200"
                 type="button"
               >
                 Track Order
-              </button>
+              </Button>
             </div>
           </div>
         ))}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { InputForm } from '@/components';
+import { Button, InputForm } from '@/components';
 import type { FormDeliveryData, FormDeliveryInterface } from '@/types';
 
 export function FormDelivery({ onSubmit }: FormDeliveryInterface) {
@@ -110,9 +110,9 @@ export function FormDelivery({ onSubmit }: FormDeliveryInterface) {
         type="tel"
         value={formData.phone}
       />
-      <button className="hidden" type="submit">
+      <Button className="hidden" type="submit">
         Save address
-      </button>
+      </Button>
     </form>
   );
 }

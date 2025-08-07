@@ -9,7 +9,6 @@ export * from '@/components/elements/add-to-cart-button';
 export * from '@/components/elements/copyright';
 export * from '@/components/elements/display-price';
 export * from '@/components/elements/image';
-export * from '@/components/elements/input-form';
 export * from '@/components/elements/link-button';
 export * from '@/components/elements/newsletter-box';
 export * from '@/components/elements/search-bar';
@@ -25,12 +24,12 @@ export * from '@/components/icons/cart-item';
 export * from '@/components/icons/search-item';
 export * from '@/components/icons/trash-item';
 export * from '@/components/icons/user-item';
-export * from '@/components/layout/scroll-to-top';
 export * from '@/components/mobile/mobile-menu';
 export * from '@/components/navbar/navbar';
 export * from '@/components/navbar/navbar-items';
 export * from '@/components/navbar/page-links';
 export * from '@/components/place-order/form-delivery';
+export * from '@/components/place-order/input-form-delivery';
 export * from '@/components/place-order/payment-method-button';
 export * from '@/components/product/product-description';
 export * from '@/components/product/product-image-galery';
@@ -39,3 +38,5 @@ export * from '@/components/product/product-item';
 export * from '@/components/product/product-size-selector';
 export * from '@/components/product/products-grid';
 export * from '@/components/product/related-products';
+export * from '@/components/ui/button'
+export * from '@/components/ui/input'

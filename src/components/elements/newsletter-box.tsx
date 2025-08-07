@@ -1,6 +1,20 @@
+import { useState } from 'react';
+import { Button, Input } from '@/components';
+import { useToast } from '@/hooks';
+
 export function NewsletterBox() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const [email, setEmail] = useState('');
+  const { showSuccessToast } = useToast();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //lógica de fazer a subscrição
+    showSuccessToast('Congratulations, you have been successfully subscribed!');
+    setEmail('');
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -13,20 +27,24 @@ export function NewsletterBox() {
         impedit sequi iste consequuntur earum.
       </p>
       <form
-        className="mx-auto my-8 flex w-full items-center gap-3 rounded border pl-3 sm:w-1/2"
+        className="mx-auto my-8 flex w-full items-center gap-1 rounded pl-3 sm:w-1/2"
         onSubmit={handleSubmit}
       >
-        <input
-          className="w-full outline-none sm:flex-1"
+        <Input
+          className="h-10 w-full border bg-transparent outline-none focus:bg-transparent focus-visible:ring-0"
+          name="newsletter-email"
+          onChange={handleChange}
           placeholder="Enter your e-mail..."
+          required
           type="email"
+          value={email}
         />
-        <button
-          className="bg-black px-10 py-4 text-white text-xs uppercase"
+        <Button
+          className="h-10 cursor-pointer bg-black px-10 py-4 text-white text-xs uppercase hover:bg-gray-500 active:bg-gray-700"
           type="submit"
         >
           subscribe
-        </button>
+        </Button>
       </form>
     </div>
   );

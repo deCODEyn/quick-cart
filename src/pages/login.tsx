@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { Button, Input } from '@/components';
 
 export function Login() {
   const [currentState, setCurrentState] = useState('Sign Up');
+  const inputClass =
+    'w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0';
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     //lógica de login para usuário.
-    //Validar no backend o usuário e guardar autenticação no contexto.
+    //Validar no backend o usuário e guardar token de autenticação.
     //Após isso, implementar Logout no usuário.
   };
 
@@ -23,54 +26,57 @@ export function Login() {
       {currentState === 'Login' ? (
         ''
       ) : (
-        <input
-          className="w-full rounded border border-gray-800 px-3 py-2"
+        <Input
+          className={inputClass}
           placeholder="Username"
           required
           type="text"
         />
       )}
-      <input
-        className="w-full rounded border border-gray-800 px-3 py-2"
+      <Input
+        className={inputClass}
         placeholder="E-mail"
         required
         type="email"
       />
-      <input
-        className="w-full rounded border border-gray-800 px-3 py-2"
+      <Input
+        className={inputClass}
         placeholder="Password"
         required
         type="password"
       />
 
       <div className="mt-[-8px] flex w-full justify-between text-sm">
-        <button className="cursor-pointer appearance-none" type="button">
+        <Button
+          className="m-[-10px] cursor-pointer appearance-none"
+          type="button"
+        >
           Forgot your password?
-        </button>
+        </Button>
         {currentState === 'Login' ? (
-          <button
-            className="cursor-pointer appearance-none"
+          <Button
+            className="m-[-10px] cursor-pointer appearance-none"
             onClick={() => setCurrentState('Sign Up')}
             type="button"
           >
             Create Account
-          </button>
+          </Button>
         ) : (
-          <button
-            className="cursor-pointer appearance-none"
+          <Button
+            className="m-[-10px] cursor-pointer appearance-none"
             onClick={() => setCurrentState('Login')}
             type="button"
           >
             Login Here
-          </button>
+          </Button>
         )}
       </div>
-      <button
-        className="mt-2 rounded bg-black px-8 py-2 font-light text-white"
+      <Button
+        className="mt-2 h-10 w-30 rounded bg-black px-8 py-2 font-light text-white uppercase"
         type="submit"
       >
         {currentState === 'Login' ? 'Sign In' : 'Sign Up'}
-      </button>
+      </Button>
     </form>
   );
 }

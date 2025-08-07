@@ -4,6 +4,7 @@ export interface FormDeliveryInterface {
 
 export interface InputFormInterface {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
   label?: string;
   name: string;
   placeholder: string;

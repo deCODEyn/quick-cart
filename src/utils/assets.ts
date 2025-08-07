@@ -2,13 +2,19 @@ import about_img from '@/assets/about_img.png';
 import contact_img from '@/assets/contact_img.png';
 import hero_img from '@/assets/hero_img.png';
 import logo from '@/assets/logo.png';
-import p_img1 from '@/assets/p_img1.png';
+import p_img1_1 from '@/assets/p_img1_1.png';
+import p_img1_2 from '@/assets/p_img1_2.png';
+import p_img1_3 from '@/assets/p_img1_3.png';
+import p_img1_4 from '@/assets/p_img1_4.png';
 import p_img2_1 from '@/assets/p_img2_1.png';
 import p_img2_2 from '@/assets/p_img2_2.png';
 import p_img2_3 from '@/assets/p_img2_3.png';
 import p_img2_4 from '@/assets/p_img2_4.png';
 import p_img3 from '@/assets/p_img3.png';
-import p_img4 from '@/assets/p_img4.png';
+import p_img4_1 from '@/assets/p_img4_1.png';
+import p_img4_2 from '@/assets/p_img4_2.png';
+import p_img4_3 from '@/assets/p_img4_3.png';
+import p_img4_4 from '@/assets/p_img4_4.png';
 import p_img5 from '@/assets/p_img5.png';
 import p_img6 from '@/assets/p_img6.png';
 import p_img7 from '@/assets/p_img7.png';
@@ -77,7 +83,7 @@ export const products: ProductType[] = [
     description:
       'A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.',
     price: 100,
-    image: [p_img1],
+    image: [p_img1_1, p_img1_2, p_img1_3, p_img1_4],
     category: 'Women',
     subCategory: 'Topwear',
     sizes: ['S', 'M', 'L'],
@@ -116,7 +122,7 @@ export const products: ProductType[] = [
     description:
       'A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.',
     price: 110,
-    image: [p_img4],
+    image: [p_img4_1, p_img4_2, p_img4_3, p_img4_4],
     category: 'Men',
     subCategory: 'Topwear',
     sizes: ['S', 'M', 'XXL'],

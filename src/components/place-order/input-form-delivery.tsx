@@ -1,3 +1,4 @@
+import { Input } from '@/components';
 import type { InputFormInterface } from '@/types';
 
 export function InputForm({
@@ -9,7 +10,7 @@ export function InputForm({
   onChange,
 }: InputFormInterface) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-1 flex-col">
       {label && (
         <label
           className="mb-1 font-medium text-gray-700 text-sm"
@@ -18,8 +19,8 @@ export function InputForm({
           {label}
         </label>
       )}
-      <input
-        className="w-full rounded border border-gray-300 px-3.5 py-1.5 focus:outline-none focus:ring-2"
+      <Input
+        className="w-full rounded border-2 border-gray-300 px-3.5 py-1.5 focus:outline-none focus-visible:border-gray-500 focus-visible:ring-0"
         id={name}
         name={name}
         onChange={onChange}

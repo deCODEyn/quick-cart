@@ -1,4 +1,4 @@
-import { Image } from '@/components';
+import { Button, Image } from '@/components';
 import type { PaymentMethodButtonInterface } from '@/types';
 
 export function PaymentMethodButton({
@@ -16,8 +16,8 @@ export function PaymentMethodButton({
     ? 'bg-green-400'
     : 'bg-transparent border-gray-300';
   return (
-    <button
-      className={`flex cursor-pointer appearance-none items-center gap-3 border p-2 px-3 focus:outline-none focus-visible:ring-2 ${borderStyle}`}
+    <Button
+      className={`flex cursor-pointer appearance-none justify-start gap-3 border p-2 px-3 focus:outline-none focus-visible:ring-2 ${borderStyle}`}
       onClick={() => onClick(method)}
       type="button"
     >
@@ -29,6 +29,6 @@ export function PaymentMethodButton({
           {label}
         </p>
       )}
-    </button>
+    </Button>
   );
 }

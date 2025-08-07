@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
-import { FilterGroup } from '@/components';
+import { Button, FilterGroup } from '@/components';
 import type { FilterSectionInterface } from '@/types';
 
 export function FilterSection({
@@ -15,7 +15,7 @@ export function FilterSection({
 
   return (
     <div className="min-w-60">
-      <button
+      <Button
         className="m-0 my-2 flex cursor-pointer appearance-none items-center gap-2 border-none bg-transparent p-0 text-current text-xl focus:outline-none focus-visible:ring-2 md:cursor-default"
         onClick={() => setShowFilter(!showFilter)}
         type="button"
@@ -26,7 +26,7 @@ export function FilterSection({
         ) : (
           <ChevronDown className="h-4 md:hidden" />
         )}
-      </button>
+      </Button>
       <div
         className={`mt-6 border border-gray-300 py-3 pl-5 ${showFilter ? '' : 'hidden'} md:block`}
       >

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { DisplayPrice, Image, TrashItem } from '@/components';
+import { DisplayPrice, Image, Input, TrashItem } from '@/components';
 import { ShopContext } from '@/context/shop-context';
 import type { CartItemCardType } from '@/types';
 
@@ -39,7 +39,7 @@ export const CartItemCard = React.memo(
             </div>
           </div>
         </div>
-        <input
+        <Input
           className="max-w-10 border px-1 py-1 sm:max-w-20 sm:px-2"
           min={1}
           onChange={handleQuantityChange}

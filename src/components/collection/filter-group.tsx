@@ -1,3 +1,4 @@
+import { Input } from '@/components';
 import type { FilterGroupInterface } from '@/types';
 
 export function FilterGroup({
@@ -9,12 +10,12 @@ export function FilterGroup({
   return (
     <div>
       <p className="mb-3 font-medium text-sm uppercase">{title}</p>
-      <div className="flex flex-col gap-2 font-light text-gray-700 text-sm">
+      <div className="flex flex-col font-light text-gray-700 text-sm">
         {options.map((option) => (
-          <p className="flex gap-2" key={option}>
-            <input
+          <p className="flex justify-start gap-2" key={option}>
+            <Input
               checked={selectedOptions.includes(option)}
-              className="w-3"
+              className="h-5 w-3"
               onChange={() => onToggle(option)}
               type="checkbox"
               value={option}
