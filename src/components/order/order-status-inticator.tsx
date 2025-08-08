@@ -28,7 +28,7 @@ export function OrderStatusIndicator({ status }: OrderStatusIndicatorType) {
         <p className="text-sm md:text-base">{status}</p>
       </div>
       <Button
-        className="cursor-pointer rounded-sm border border-gray-300 px-4 py-2 font-medium text-sm active:bg-gray-200"
+        className="cursor-pointer rounded-sm border border-gray-300 bg-gray-100 px-4 py-2 font-medium text-current text-sm hover:bg-gray-300 active:bg-gray-200"
         type="button"
       >
         Track Order

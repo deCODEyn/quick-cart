@@ -16,7 +16,7 @@ export function FilterSection({
   return (
     <div className="min-w-60">
       <Button
-        className="m-0 my-2 flex cursor-pointer appearance-none items-center gap-2 border-none bg-transparent p-0 text-current text-xl focus:outline-none focus-visible:ring-2 md:cursor-default"
+        className="m-0 my-2 flex cursor-pointer appearance-none items-center gap-2 border-none bg-transparent p-0 text-current text-xl shadow-none hover:bg-transparent focus:outline-none focus-visible:ring-0 md:cursor-default"
         onClick={() => setShowFilter(!showFilter)}
         type="button"
       >

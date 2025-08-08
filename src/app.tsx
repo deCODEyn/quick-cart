@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import {
   AddProducts,
   AdminHome,
+  AdminLogin,
   ListProducts,
   ManageOrders,
 } from '@/admin/pages';
@@ -18,12 +19,7 @@ import {
   PlaceOrder,
   Product,
 } from '@/pages';
-
-const backendUrl = '';
-
 export default function App() {
-  const user = 'admin';
-
   return (
     <>
       <ToastContainer newestOnTop />
@@ -41,14 +37,14 @@ export default function App() {
           <Route element={<Product />} path="product/:productId" />
         </Route>
 
-        {user === 'admin' && (
-          <Route element={<AdminLayout />} path="/admin">
-            <Route element={<AdminHome />} index />
-            <Route element={<AddProducts />} path="add" />
-            <Route element={<ListProducts />} path="list" />
-            <Route element={<ManageOrders />} path="orders" />
-          </Route>
-        )}
+        <Route element={<AdminLogin />} path="/login/admin" />
+
+        <Route element={<AdminLayout />} path="/admin">
+          <Route element={<AdminHome />} index />
+          <Route element={<AddProducts />} path="add" />
+          <Route element={<ListProducts />} path="list" />
+          <Route element={<ManageOrders />} path="orders" />
+        </Route>
       </Routes>
     </>
   );

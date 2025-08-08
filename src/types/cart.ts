@@ -1,4 +1,4 @@
-import type { ProductType } from './products';
+import type { ProductType } from '@/types';
 
 export interface UseShopCartReturn {
   addToCart: ({ id, size }: CartUpdateItemType) => void;

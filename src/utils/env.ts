@@ -1,7 +1,7 @@
 import z from 'zod';
 
 const envSchema = z.object({
-  BACKEND_URL: z.url().startsWith('http://'),
+  VITE_BACKEND_URL: z.url().startsWith('http://', { message: "URL must start with 'http://'" }),
 });
 
-export const env = envSchema.parse(process.env);
+export const env = envSchema.parse(import.meta.env);
