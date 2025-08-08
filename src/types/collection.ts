@@ -8,10 +8,8 @@ export interface FilterGroupInterface {
 export interface FilterSectionInterface {
   onCategoryToggle: (value: string) => void;
   onSubCategoryToggle: (value: string) => void;
-  categoryOptions: string[];
   selectedCategories: string[];
   selectedSubCategories: string[];
-  subCategoryOptions: string[];
 }
 
 export interface SortSelectInterface {

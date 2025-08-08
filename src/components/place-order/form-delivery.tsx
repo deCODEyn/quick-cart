@@ -55,7 +55,7 @@ export function FormDelivery({ onSubmit }: FormDeliveryInterface) {
         type="email"
         value={formData.email}
       />
-      <div className="grid grid-cols-[5fr_2fr] gap-3">
+      <div className="grid grid-cols-[6fr_2fr] gap-3">
         <InputForm
           name="street"
           onChange={handleChange}
@@ -66,7 +66,7 @@ export function FormDelivery({ onSubmit }: FormDeliveryInterface) {
         <InputForm
           name="houseNumber"
           onChange={handleChange}
-          placeholder="House num."
+          placeholder="House nº"
           type="number"
           value={formData.houseNumber}
         />

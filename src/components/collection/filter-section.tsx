@@ -2,14 +2,13 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import { Button, FilterGroup } from '@/components';
 import type { FilterSectionInterface } from '@/types';
+import { allCategories, allSubCategories } from '@/utils/constants';
 
 export function FilterSection({
-  categoryOptions,
   onCategoryToggle,
   onSubCategoryToggle,
   selectedCategories,
   selectedSubCategories,
-  subCategoryOptions,
 }: FilterSectionInterface) {
   const [showFilter, setShowFilter] = useState(false);
 
@@ -32,7 +31,7 @@ export function FilterSection({
       >
         <FilterGroup
           onToggle={onCategoryToggle}
-          options={categoryOptions}
+          options={allCategories}
           selectedOptions={selectedCategories}
           title="category"
         />
@@ -42,7 +41,7 @@ export function FilterSection({
       >
         <FilterGroup
           onToggle={onSubCategoryToggle}
-          options={subCategoryOptions}
+          options={allSubCategories}
           selectedOptions={selectedSubCategories}
           title="subcategory"
         />

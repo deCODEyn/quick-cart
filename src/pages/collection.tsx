@@ -12,18 +12,13 @@ export function Collection() {
     handleSortChange,
   } = useProductFilter();
 
-  const allCategories = ['Men', 'Women', 'Kids'];
-  const allSubCategories = ['Topwear', 'Bottomwear', 'Winterwear'];
-
   return (
     <div className="flex flex-col gap-1 border-t pt-10 sm:gap-10 md:flex-row">
       <FilterSection
-        categoryOptions={allCategories}
         onCategoryToggle={handleCategoryToggle}
         onSubCategoryToggle={handleSubCategoryToggle}
         selectedCategories={selectedCategories}
         selectedSubCategories={selectedSubCategories}
-        subCategoryOptions={allSubCategories}
       />
       <div className="flex-1">
         <div className="mb-4 flex items-center justify-between text-base md:text-2xl">

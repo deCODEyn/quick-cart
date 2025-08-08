@@ -34,7 +34,7 @@ export function NewsletterBox() {
           className="h-10 w-full border bg-transparent outline-none focus:bg-transparent focus-visible:ring-0"
           name="newsletter-email"
           onChange={handleChange}
-          placeholder="Enter your e-mail..."
+          placeholder="Enter your e-mail"
           required
           type="email"
           value={email}
