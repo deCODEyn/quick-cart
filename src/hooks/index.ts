@@ -1,3 +1,4 @@
+export * from '@/hooks/use-auth';
 export * from '@/hooks/use-date-format';
 export * from '@/hooks/use-product-filter';
 export * from '@/hooks/use-search-bar';

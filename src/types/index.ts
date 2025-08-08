@@ -1,4 +1,5 @@
 export * from '@/types/about';
+export * from '@/types/auth';
 export * from '@/types/cart';
 export * from '@/types/collection';
 export * from '@/types/contact';

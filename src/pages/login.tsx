@@ -11,9 +11,6 @@ export function Login() {
     //Após isso, implementar Logout no usuário.
   };
 
-  const inputClass =
-    'w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0';
-
   return (
     <form
       className="m-auto mt-14 flex w-[90%] flex-col items-center gap-4 text-gray-800 sm:max-w-96"
@@ -26,16 +23,21 @@ export function Login() {
         <hr className="h-[1.5px] w-8 border-none bg-gray-800" />
       </div>
       {!isLogin && (
-        <Input className={inputClass} placeholder="Name" required type="text" />
+        <Input
+          className="w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0"
+          placeholder="Name"
+          required
+          type="text"
+        />
       )}
       <Input
-        className={inputClass}
+        className="w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0"
         placeholder="E-mail"
         required
         type="email"
       />
       <Input
-        className={inputClass}
+        className="w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0"
         placeholder="Password"
         required
         type="password"
@@ -44,14 +46,14 @@ export function Login() {
       <div className="mt-[-8px] flex w-full justify-between text-sm">
         {isLogin && (
           <Button
-            className="m-[-10px] cursor-pointer appearance-none"
+            className="m-[-10px] cursor-pointer appearance-none border-none bg-transparent text-current shadow-none hover:bg-transparent focus:outline-none focus-visible:ring-0"
             type="button"
           >
             Forgot your password?
           </Button>
         )}
         <Button
-          className="m-[-10px] cursor-pointer appearance-none"
+          className="m-[-10px] cursor-pointer appearance-none border-none bg-transparent text-current shadow-none hover:bg-transparent focus:outline-none focus-visible:ring-0"
           onClick={() => setIsLogin(!isLogin)}
           type="button"
         >

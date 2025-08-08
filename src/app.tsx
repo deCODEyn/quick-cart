@@ -6,7 +6,7 @@ import {
   AdminLogin,
   ListProducts,
   ManageOrders,
-} from '@/admin/pages';
+} from '@/admin/admin-pages';
 import { AdminLayout, PublicLayout, ScrollToTop } from '@/layouts';
 import {
   About,

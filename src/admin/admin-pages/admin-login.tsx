@@ -1,21 +1,39 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@/components';
+import { useToast } from '@/hooks';
+import { useAuth } from '@/hooks/use-auth';
 
 export function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { authLogin } = useAuth();
+  const navigate = useNavigate();
+  const { showWarningToast, showSuccessToast } = useToast();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    try {
-      e.preventDefault();
-    } catch (error) {}
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const loginSuccess = await authLogin(email, password);
+    if (loginSuccess) {
+      const userRole = localStorage.getItem('userRole');
+      if (userRole === 'Admin') {
+        showSuccessToast('Login successful.');
+        navigate('/admin');
+      } else {
+        showWarningToast(
+          'Access denied. User without administrator permission.',
+          { autoClose: 3000 }
+        );
+        navigate('/');
+      }
+    }
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="max-w-md rounded-lg bg-white px-8 py-6 shadow-md">
         <h1 className="mb-4 font-bold text-2xl">Administrative Panel</h1>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="mb-3 min-w-72">
             <p className="mb-2 font-medium text-gray-700 text-sm">
               Email Address
