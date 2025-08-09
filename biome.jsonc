@@ -1,15 +1,19 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
   "extends": ["ultracite"],
-  "files": {
-    "experimentalScannerIgnores": ["src/index.css"]
-  },
   "formatter": {
     "formatWithErrors": true
   },
   "json": {
     "parser": {
       "allowComments": true
+    }
+  },
+  "linter": {
+    "rules": {
+      "nursery": {
+        "noUnknownAtRule": "off"
+      }
     }
   }
 }
