@@ -44,3 +44,4 @@ export * from '@/components/product/products-grid';
 export * from '@/components/product/related-products';
 export * from '@/components/ui/button';
 export * from '@/components/ui/input';
+export * from '@/components/ui/textarea';
