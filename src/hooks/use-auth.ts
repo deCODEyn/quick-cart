@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks';
+import { decodeJwt } from '@/lib/jwt';
 import type { UseAuthReturn, UserRoleType } from '@/types';
 import { env } from '@/utils/env';
-import { decodeJwt } from '@/utils/jwt';
 
 export function useAuth(): UseAuthReturn {
   const { showErrorToast } = useToast();

@@ -1,5 +1,5 @@
+import { assets } from '@/assets';
 import { ContactInfoCard, Image, NewsletterBox, Title } from '@/components';
-import { assets } from '@/utils/assets';
 
 export function Contact() {
   const address = ['Business Address, 999', 'City, State', 'Country'];

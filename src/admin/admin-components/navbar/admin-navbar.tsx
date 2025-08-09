@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
+import { assets } from '@/assets';
 import { Button, Image } from '@/components';
-import { assets } from '@/utils/assets';
 
 export function AdminNavbar() {
   return (

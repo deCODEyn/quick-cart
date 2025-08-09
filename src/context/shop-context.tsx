@@ -1,11 +1,11 @@
 import { createContext } from 'react';
 import { useSearchBar, useShopCart } from '@/hooks';
+import { products } from '@/mock/products';
 import type {
   CartItemsType,
   ShopContextInterface,
   ShopContextProviderType,
 } from '@/types';
-import { products } from '@/utils/assets';
 
 const initialCartItems: CartItemsType = {};
 

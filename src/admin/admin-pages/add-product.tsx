@@ -1,11 +1,10 @@
-/** biome-ignore-all lint/suspicious/noConsole: <dev> */
 import axios from 'axios';
 import { ImageUp } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { Button, Image, Input, Textarea } from '@/components';
+import { allCategories, allSubCategories, sizes } from '@/constants';
 import { useToast } from '@/hooks';
 import type { ImageFiles, ProductData } from '@/types';
-import { allCategories, allSubCategories, sizes } from '@/utils/constants';
 import { env } from '@/utils/env';
 
 export function AddProducts() {

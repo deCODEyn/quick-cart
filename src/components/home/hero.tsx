@@ -1,5 +1,5 @@
+import { assets } from '@/assets';
 import { Image } from '@/components';
-import { assets } from '@/utils/assets';
 
 export function Hero() {
   return (

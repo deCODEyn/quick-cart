@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { assets } from '@/assets';
 import {
   CartTotal,
   FormDelivery,
@@ -7,7 +8,6 @@ import {
   Title,
 } from '@/components';
 import type { FormDeliveryData } from '@/types';
-import { assets } from '@/utils/assets';
 
 export function PlaceOrder() {
   const [method, setMethod] = useState('cod');

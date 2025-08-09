@@ -1,12 +1,12 @@
 /** biome-ignore-all lint/correctness/useExhaustiveDependencies: products is a logical dependency for getCartAmount */
 import { useCallback, useState } from 'react';
+import { products } from '@/mock/products';
 import type {
   CartItemsType,
   CartUpdateItemType,
   CartUpdateQuantityType,
   UseShopCartReturn,
 } from '@/types';
-import { products } from '@/utils/assets';
 
 export function useShopCart(): UseShopCartReturn {
   const [cartItems, setCartItems] = useState<CartItemsType>({});

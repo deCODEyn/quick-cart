@@ -1,5 +1,5 @@
+import { assets } from '@/assets';
 import { FeatureCard, Image, NewsletterBox, Title } from '@/components';
-import { assets } from '@/utils/assets';
 
 export function About() {
   return (

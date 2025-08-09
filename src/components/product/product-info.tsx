@@ -1,6 +1,6 @@
 // import { Star } from "lucide-react";
+import { currency } from '@/constants';
 import type { ProductInfoType } from '@/types';
-import { currency } from '@/utils/constants';
 
 export function ProductInfo({ product }: ProductInfoType) {
   return (

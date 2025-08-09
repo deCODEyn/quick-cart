@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import { links } from '@/constants';
 import type { NavbarLinkInterface } from '@/types';
-import { links } from '@/utils/constants';
 
 export function PageLinks({ isMobile = false, onClick }: NavbarLinkInterface) {
   return links.map((link) => (

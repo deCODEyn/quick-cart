@@ -1,8 +1,8 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import { Button, FilterGroup } from '@/components';
+import { allCategories, allSubCategories } from '@/constants';
 import type { FilterSectionInterface } from '@/types';
-import { allCategories, allSubCategories } from '@/utils/constants';
 
 export function FilterSection({
   onCategoryToggle,
