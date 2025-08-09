@@ -11,22 +11,18 @@ export interface UseShopCartReturn {
 
 export type AddCartItemType = {
   id: string;
-  size: string;
   name: string;
+  size: string;
 };
 
 export type CartDisplayItem = {
   id: string;
-  size: string;
   quantity: number;
+  size: string;
 };
 
 export type CartItemCardType = {
-  item: {
-    id: string;
-    size: string;
-    quantity: number;
-  };
+  item: CartDisplayItem;
   product: ProductType;
 };
 
@@ -39,9 +35,9 @@ export type CartItemsType = {
 };
 
 export type CartSummaryRowType = {
-  title: string;
-  price: number;
   isTotal?: boolean;
+  price: number;
+  title: string;
 };
 
 export type CartUpdateItemType = {

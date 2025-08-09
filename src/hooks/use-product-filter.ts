@@ -1,8 +1,8 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { ShopContext } from '@/context/shop-context';
-import type { ProductType } from '@/types';
+import type { ProductType, UseProductFilterReturn } from '@/types';
 
-export function useProductFilter() {
+export function useProductFilter(): UseProductFilterReturn {
   const { products, showSearch, search } = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState<ProductType[]>([]);
   const [category, setCategory] = useState<string[]>([]);

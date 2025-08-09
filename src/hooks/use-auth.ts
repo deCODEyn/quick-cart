@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks';
 import { decodeJwt } from '@/lib/jwt';
+import { api } from '@/services/api';
 import type { UseAuthReturn, UserRoleType } from '@/types';
-import { env } from '@/utils/env';
 
 export function useAuth(): UseAuthReturn {
   const { showErrorToast } = useToast();
@@ -11,9 +11,12 @@ export function useAuth(): UseAuthReturn {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const roleFromStorage = localStorage.getItem('userRole') as UserRoleType;
-    if (roleFromStorage) {
-      setUserRole(roleFromStorage);
+    const token = localStorage.getItem('token');
+    if (token) {
+      const user = decodeJwt(token);
+      if (user) {
+        setUserRole(user.role);
+      }
     }
     setLoading(false);
   }, []);
@@ -23,20 +26,12 @@ export function useAuth(): UseAuthReturn {
     password: string
   ): Promise<boolean> => {
     try {
-      const response = await axios.post(
-        `${env.VITE_BACKEND_URL}/api/user/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const response = await api.post('/user/login', { email, password });
       const token = response.headers['x-access-token'] as string;
       if (token) {
         const user = decodeJwt(token);
         if (user) {
           localStorage.setItem('token', token);
-          localStorage.setItem('userEmail', user.email);
-          localStorage.setItem('userId', user.userId);
           localStorage.setItem('userRole', user.role);
           setUserRole(user.role);
         }

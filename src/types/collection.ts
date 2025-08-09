@@ -1,3 +1,5 @@
+import type { ProductType } from "@/types";
+
 export interface FilterGroupInterface {
   onToggle: (valeu: string) => void;
   options: string[];
@@ -15,4 +17,14 @@ export interface FilterSectionInterface {
 export interface SortSelectInterface {
   onSortChange: (sortType: string) => void;
   currentSortType: string;
+}
+
+export interface UseProductFilterReturn {
+  handleCategoryToggle: (value: string) => void;
+  handleSortChange: (value: string) => void;
+  handleSubCategoryToggle: (value: string) => void;
+  currentSortType: string;
+  filteredAndSortedProducts: ProductType[];
+  selectedCategories: string[];
+  selectedSubCategories: string[];
 }

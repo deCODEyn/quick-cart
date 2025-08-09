@@ -4,11 +4,12 @@ import { useCallback, useState } from 'react';
 import { Button, Image, Input, Textarea } from '@/components';
 import { allCategories, allSubCategories, sizes } from '@/constants';
 import { useToast } from '@/hooks';
+import { usePrivateRequest } from '@/hooks/use-private-request';
 import type { ImageFiles, ProductData } from '@/types';
-import { env } from '@/utils/env';
 
 export function AddProducts() {
   const { showSuccessToast, showErrorToast } = useToast();
+  const privateRequest = usePrivateRequest();
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState<ImageFiles>({
     image1: null,
@@ -102,17 +103,9 @@ export function AddProducts() {
     setIsLoading(true);
     try {
       const formData = buildFormData(productData, images);
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${env.VITE_BACKEND_URL}/api/products`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await privateRequest.post('/products', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       if (response.data.success) {
         showSuccessToast(response.data.message);
         setImages({ image1: null, image2: null, image3: null, image4: null });

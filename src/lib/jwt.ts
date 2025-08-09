@@ -1,8 +1,10 @@
+import type { UserRoleType } from "@/types";
+
 interface DecodedToken {
-  userId: string;
   email: string;
-  role: 'Admin' | 'User';
   exp: number;
+  role: UserRoleType
+  userId: string;
 }
 
 function base64UrlDecode(str: string): string {
@@ -15,9 +17,8 @@ export function decodeJwt(token: string): DecodedToken | null {
     const payload = token.split('.')[1];
     const decodedPayload = base64UrlDecode(payload);
     return JSON.parse(decodedPayload) as DecodedToken;
-  } catch (e) {
-    // biome-ignore lint/suspicious/noConsole: <developer>
-    console.error('Falha ao decodificar o token JWT:', e);
+  } catch (_e) {
+    // Falha ao decodificar o token JWT
     return null;
   }
 }

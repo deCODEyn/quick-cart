@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from '@/app';
 import ShopContextProvider from '@/context/shop-context.tsx';
 
-// biome-ignore lint/style/noNonNullAssertion: mandatory by React
+/** biome-ignore lint/style/noNonNullAssertion: mandatory by React */
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <ShopContextProvider>

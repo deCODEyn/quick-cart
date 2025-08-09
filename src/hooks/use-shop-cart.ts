@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: products is a logical dependency for getCartAmount */
 import { useCallback, useState } from 'react';
 import { products } from '@/mock/products';
 import type {
@@ -77,6 +76,7 @@ export function useShopCart(): UseShopCartReturn {
     }, 0);
   }, [cartItems]);
 
+  /** biome-ignore lint/correctness/useExhaustiveDependencies: products is a logical dependency for getCartAmount */
   const getCartItemCount = useCallback(() => {
     return Object.values(cartItems).reduce((totalItemsCount, itemSize) => {
       const quantities = Object.values(itemSize);

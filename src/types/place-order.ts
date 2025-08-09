@@ -25,8 +25,8 @@ export type FormDeliveryData = {
   country: string;
   email: string;
   firstName: string;
-  lastName: string;
   houseNumber: string;
+  lastName: string;
   phone: string;
   state: string;
   street: string;

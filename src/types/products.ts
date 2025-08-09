@@ -54,7 +54,7 @@ export type ProductType = {
 };
 
 export type RelatedProductsType = {
-  productId: string;
   category: string;
+  productId: string;
   subCategory: string;
 };

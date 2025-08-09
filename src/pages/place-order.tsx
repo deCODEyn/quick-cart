@@ -12,9 +12,8 @@ import type { FormDeliveryData } from '@/types';
 export function PlaceOrder() {
   const [method, setMethod] = useState('cod');
 
-  const handleDeliverySubmit = (formData: FormDeliveryData) => {
-    // biome-ignore lint/suspicious/noConsole: used for development only
-    console.log('Form data:', formData);
+  const handleDeliverySubmit = (_formData: FormDeliveryData) => {
+    // Lógica para enviar formulário de endereço do usuário.
   };
 
   return (

@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/performance/noImgElement: Image Component. Process all images in the application. */
 import { Loader } from 'lucide-react';
 import type { ImageInterface } from '@/types';
 
@@ -22,6 +21,7 @@ export function Image({
   };
 
   return src ? (
+    /** biome-ignore lint/performance/noImgElement: Image Component. Process all images in the application. */
     <img
       alt={alt}
       className={className}
