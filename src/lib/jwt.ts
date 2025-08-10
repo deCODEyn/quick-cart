@@ -1,9 +1,9 @@
-import type { UserRoleType } from "@/types";
+import type { UserRoleType } from '@/types';
 
 interface DecodedToken {
   email: string;
   exp: number;
-  role: UserRoleType
+  role: UserRoleType;
   userId: string;
 }
 

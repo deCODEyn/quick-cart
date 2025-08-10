@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@/components';
-import { useToast } from '@/hooks';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth, useToast } from '@/hooks';
 
 export function AdminLogin() {
   const [email, setEmail] = useState('');

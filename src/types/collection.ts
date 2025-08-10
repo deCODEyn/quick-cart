@@ -1,4 +1,4 @@
-import type { ProductType } from "@/types";
+import type { ProductType } from '@/types';
 
 export interface FilterGroupInterface {
   onToggle: (valeu: string) => void;

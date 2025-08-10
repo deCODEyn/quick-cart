@@ -1,20 +1,11 @@
 import { useState } from 'react';
 import { Button, InputForm } from '@/components';
+import { initialDeliveryData } from '@/constants';
 import type { FormDeliveryData, FormDeliveryInterface } from '@/types';
 
 export function FormDelivery({ onSubmit }: FormDeliveryInterface) {
-  const [formData, setFormData] = useState<FormDeliveryData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    street: '',
-    houseNumber: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: '',
-    phone: '',
-  });
+  const [formData, setFormData] =
+    useState<FormDeliveryData>(initialDeliveryData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

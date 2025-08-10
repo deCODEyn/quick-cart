@@ -8,25 +8,8 @@ export type ArrayProductsType = {
   products: ProductType[];
 };
 
-export type ImageFiles = {
-  image1: File | null;
-  image2: File | null;
-  image3: File | null;
-  image4: File | null;
-};
-
 export type ProductDescriptionType = {
   description: string;
-};
-
-export type ProductData = {
-  bestseller: boolean;
-  category: string;
-  description: string;
-  name: string;
-  price: number | string;
-  sizes: string[];
-  subCategory: string;
 };
 
 export type ProductInfoType = {
