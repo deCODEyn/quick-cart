@@ -11,16 +11,19 @@ export interface ShopContextInterface {
   getCartAmount: () => number;
   getCartItemCount: () => number;
   getProducts: () => Promise<void>;
-  handleCloseSearchBar: () => void;
-  setSearch: (value: string) => void;
-  setShowSearch: (value: boolean) => void;
   updateQuantity: ({ id, size, quantity }: CartUpdateQuantityType) => void;
   cartItems: CartItemsType;
   products: ProductType[];
+}
+
+export interface UIContextInterface {
+  handleCloseSearchBar: () => void;
+  setSearch: (value: string) => void;
+  setShowSearch: (value: boolean) => void;
   search: string;
   showSearch: boolean;
 }
 
-export type ShopContextProviderType = {
+export type ContextProviderType = {
   children: React.ReactNode;
 };

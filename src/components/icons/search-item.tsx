@@ -1,10 +1,10 @@
 import { SearchIcon } from 'lucide-react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShopContext } from '@/context/shop-context';
+import { UIContext } from '@/context/ui-context';
 
 export function SearchItem() {
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch } = useContext(UIContext);
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
