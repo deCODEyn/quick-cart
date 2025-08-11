@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import type { ProductType } from '@/types';
+import type { ProductType, UserType } from '@/types';
 
 export interface ApiResponse<T> {
   result?: T;
@@ -35,3 +35,4 @@ export type UseApiRequestReturn = {
 export type DeleteProductResponse = ApiResponse<void>;
 export type ListProductsResponse = ApiResponse<ProductType[]>;
 export type SingleProductResponse = ApiResponse<ProductType>;
+export type SingleUserResponse = ApiResponse<UserType>;

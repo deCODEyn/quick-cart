@@ -3,7 +3,15 @@ import type {
   CartUpdateItemType,
   CartUpdateQuantityType,
   ProductType,
+  UserRoleType,
 } from '@/types';
+
+export interface AuthContextInterface {
+  authLogin: (email: string, password: string) => Promise<boolean>;
+  authLogout: () => Promise<void>;
+  isLoading: boolean;
+  userRole: UserRoleType | null;
+}
 
 export interface ShopContextInterface {
   addToCart: ({ id, size }: CartUpdateItemType) => void;

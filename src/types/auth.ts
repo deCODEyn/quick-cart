@@ -4,5 +4,10 @@ export interface UseAuthReturn {
   userRole: UserRoleType | null;
   loading: boolean;
 }
+export type UserType = {
+  role: UserRoleType;
+  email: string;
+}
+
 
 export type UserRoleType = 'Admin' | 'User';
