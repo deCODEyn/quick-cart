@@ -1,5 +1,5 @@
 import { OrderItem, OrderStatusIndicator, Title } from '@/components';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 
 export function Orders() {
   const { products } = useShopContext();

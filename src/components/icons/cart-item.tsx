@@ -1,6 +1,6 @@
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 
 export function CartItem() {
   const { getCartItemCount } = useShopContext();

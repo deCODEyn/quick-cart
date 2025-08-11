@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react';
-import { useShopContext } from '@/context/shop-context';
+import { ProductListItem } from '@/admin/admin-components';
+import { useShopContext } from '@/context';
 import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
 import type { ProductType, SingleProductResponse } from '@/types';
-import { ProductListItem } from '../admin-components';
 
 export function ListProducts() {
   const { products, getProducts } = useShopContext();

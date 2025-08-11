@@ -8,7 +8,7 @@ import {
   ProductSizeSelector,
   RelatedProducts,
 } from '@/components';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 import type { ProductType } from '@/types';
 
 export function Product() {

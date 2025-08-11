@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { AdminNavbar, Sidebar } from '@/admin/admin-components';
-import { useAuth } from '@/hooks';
+import { useAuthContext } from '@/context';
 
 export function AdminLayout() {
-  const { userRole, loading } = useAuth();
+  const { userRole, isLoading } = useAuthContext();
 
-  if (loading) {
+  if (isLoading) {
     return <div>Carregando...</div>;
   }
 

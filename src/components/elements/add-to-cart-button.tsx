@@ -1,5 +1,5 @@
 import { Button } from '@/components';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 import { useToast } from '@/hooks';
 import type { AddCartItemType } from '@/types';
 

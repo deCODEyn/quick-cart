@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useShopContext } from '@/context/shop-context';
-import { useUIContext } from '@/context/ui-context';
+import { useShopContext, useUIContext } from '@/context';
 import type { ProductType, UseProductFilterReturn } from '@/types';
 
 export function useProductFilter(): UseProductFilterReturn {

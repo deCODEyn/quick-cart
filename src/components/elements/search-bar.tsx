@@ -1,7 +1,7 @@
 import { SearchIcon, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { Input } from '@/components';
-import { useUIContext } from '@/context/ui-context';
+import { useUIContext } from '@/context';
 
 export function SearchBar() {
   const { search, setSearch, showSearch, handleCloseSearchBar } =

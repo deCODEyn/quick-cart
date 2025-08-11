@@ -6,7 +6,7 @@ import {
   LinkButton,
   Title,
 } from '@/components';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 import type { CartDisplayItem } from '@/types';
 
 export function Cart() {

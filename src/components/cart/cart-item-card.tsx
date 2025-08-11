@@ -1,6 +1,6 @@
 import React from 'react';
 import { DisplayPrice, Image, Input, TrashItem } from '@/components';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 import type { CartItemCardType } from '@/types';
 
 export const CartItemCard = React.memo(

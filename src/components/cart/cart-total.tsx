@@ -1,7 +1,7 @@
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { CartSummaryRow, Title } from '@/components';
 import { deliveryFee } from '@/constants';
-import { ShopContext, useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 
 export function CartTotal() {
   const { getCartAmount } = useShopContext();

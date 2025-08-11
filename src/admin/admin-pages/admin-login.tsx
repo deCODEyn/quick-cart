@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@/components';
-import { useAuth, useToast } from '@/hooks';
+import { useAuthContext } from '@/context';
+import { useToast } from '@/hooks';
 
 export function AdminLogin() {
+  const { authLogin, userRole } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { authLogin } = useAuth();
   const navigate = useNavigate();
   const { showWarningToast, showSuccessToast } = useToast();
 
@@ -14,7 +15,6 @@ export function AdminLogin() {
     e.preventDefault();
     const loginSuccess = await authLogin(email, password);
     if (loginSuccess) {
-      const userRole = localStorage.getItem('userRole');
       if (userRole === 'Admin') {
         showSuccessToast('Login successful.');
         navigate('/admin');

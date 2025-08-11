@@ -1,5 +1,5 @@
 import { ProductsGrid, Title } from '@/components';
-import { useShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context';
 import type { SectionHomeType } from '@/types';
 
 export function SectionHome({
