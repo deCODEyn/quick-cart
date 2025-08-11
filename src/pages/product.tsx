@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   AddToCartButton,
@@ -8,12 +8,12 @@ import {
   ProductSizeSelector,
   RelatedProducts,
 } from '@/components';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 import type { ProductType } from '@/types';
 
 export function Product() {
   const { productId } = useParams();
-  const { products } = useContext(ShopContext);
+  const { products } = useShopContext();
   const [productData, setProductData] = useState<ProductType>();
   const [currentSize, setCurrentSize] = useState<string>('');
 

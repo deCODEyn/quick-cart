@@ -1,4 +1,10 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
 import type {
   AuthContextInterface,
@@ -58,4 +64,12 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
   const value = { userRole, isLoading, authLogin, authLogout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export const useAuthContext = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };

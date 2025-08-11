@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { DisplayPrice, Image, Input, TrashItem } from '@/components';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 import type { CartItemCardType } from '@/types';
 
 export const CartItemCard = React.memo(
   ({ item, product }: CartItemCardType) => {
-    const { updateQuantity } = useContext(ShopContext);
+    const { updateQuantity } = useShopContext();
 
     const handleQuantityChange = (
       event: React.ChangeEvent<HTMLInputElement>

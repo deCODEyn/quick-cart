@@ -1,11 +1,11 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { ShopContext } from '@/context/shop-context';
-import { UIContext } from '@/context/ui-context';
+import { useCallback, useEffect, useState } from 'react';
+import { useShopContext } from '@/context/shop-context';
+import { useUIContext } from '@/context/ui-context';
 import type { ProductType, UseProductFilterReturn } from '@/types';
 
 export function useProductFilter(): UseProductFilterReturn {
-  const { products } = useContext(ShopContext);
-  const { showSearch, search } = useContext(UIContext);
+  const { products } = useShopContext();
+  const { showSearch, search } = useUIContext();
   const [filterProducts, setFilterProducts] = useState<ProductType[]>([]);
   const [category, setCategory] = useState<string[]>([]);
   const [subCategory, setSubCategory] = useState<string[]>([]);

@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { Button } from '@/components';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 import { useToast } from '@/hooks';
 import type { AddCartItemType } from '@/types';
 
 export function AddToCartButton({ id, size, name }: AddCartItemType) {
-  const { addToCart } = useContext(ShopContext);
+  const { addToCart } = useShopContext();
   const { showSuccessToast } = useToast();
 
   const handleAddToCart = () => {

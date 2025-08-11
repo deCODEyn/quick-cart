@@ -1,12 +1,11 @@
 import { SearchIcon, X } from 'lucide-react';
-import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Input } from '@/components';
-import { UIContext } from '@/context/ui-context';
+import { useUIContext } from '@/context/ui-context';
 
 export function SearchBar() {
   const { search, setSearch, showSearch, handleCloseSearchBar } =
-    useContext(UIContext);
+    useUIContext();
   const location = useLocation();
 
   if (!(showSearch && location.pathname.includes('collection'))) {

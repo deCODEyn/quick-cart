@@ -1,34 +1,22 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useApiRequest, useShopCart } from '@/hooks';
 import { api } from '@/services/api';
 import type {
-  CartItemsType,
   ContextProviderType,
   ListProductsResponse,
   ProductType,
   ShopContextInterface,
 } from '@/types';
 
-const initialCartItems: CartItemsType = {};
-
-export const ShopContext = createContext<ShopContextInterface>({
-  addToCart: () => {
-    /* default empty function */
-  },
-  deleteFromCart: () => {
-    /* default empty function */
-  },
-  getCartAmount: () => 0,
-  getCartItemCount: () => 0,
-  getProducts: async () => {
-    /* default empty function */
-  },
-  updateQuantity: () => {
-    /* default empty function */
-  },
-  cartItems: initialCartItems,
-  products: [],
-});
+export const ShopContext = createContext<ShopContextInterface | undefined>(
+  undefined
+);
 
 export const ShopContextProvider = ({ children }: ContextProviderType) => {
   const {
@@ -67,4 +55,12 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
+};
+
+export const useShopContext = () => {
+  const context = useContext(ShopContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };

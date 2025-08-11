@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import { OrderItem, OrderStatusIndicator, Title } from '@/components';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 
 export function Orders() {
-  const { products } = useContext(ShopContext);
+  const { products } = useShopContext();
   // Implementar lógica de acesso as ordens de compras do usuário.
   // De momento informações estão estáticas com 3 itens para exemplo de como frontend irá se comportar.
 

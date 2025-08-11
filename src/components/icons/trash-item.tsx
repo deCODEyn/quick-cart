@@ -1,10 +1,9 @@
 import { Trash2 } from 'lucide-react';
-import { useContext } from 'react';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 import type { CartUpdateItemType } from '@/types';
 
 export function TrashItem({ id, size }: CartUpdateItemType) {
-  const { deleteFromCart } = useContext(ShopContext);
+  const { deleteFromCart } = useShopContext();
 
   return (
     <Trash2

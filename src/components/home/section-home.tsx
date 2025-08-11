@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import { ProductsGrid, Title } from '@/components';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 import type { SectionHomeType } from '@/types';
 
 export function SectionHome({
@@ -9,7 +8,7 @@ export function SectionHome({
   children,
   isBestSeller,
 }: SectionHomeType) {
-  const { products } = useContext(ShopContext);
+  const { products } = useShopContext();
   const filteredProducts = isBestSeller
     ? products.filter((item) => item.bestseller).slice(0, 5)
     : products.slice(0, 10);

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CartItemCard,
   CartTotal,
@@ -6,11 +6,11 @@ import {
   LinkButton,
   Title,
 } from '@/components';
-import { ShopContext } from '@/context/shop-context';
+import { useShopContext } from '@/context/shop-context';
 import type { CartDisplayItem } from '@/types';
 
 export function Cart() {
-  const { products, cartItems, getCartItemCount } = useContext(ShopContext);
+  const { products, cartItems, getCartItemCount } = useShopContext();
   const [cartData, setCartData] = useState<CartDisplayItem[]>([]);
 
   useEffect(() => {
