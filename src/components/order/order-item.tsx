@@ -20,7 +20,7 @@ export function OrderItem({ product, quantity, size }: OrderItemType) {
         <p className="mt-4">
           Date:
           <span className="ml-2 text-gray-400">
-            {useDateFormat(product.date)}
+            {useDateFormat(product.createdAt)}
           </span>
         </p>
       </div>

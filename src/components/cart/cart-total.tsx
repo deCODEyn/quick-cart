@@ -1,9 +1,10 @@
 import { useContext, useMemo } from 'react';
 import { CartSummaryRow, Title } from '@/components';
+import { deliveryFee } from '@/constants';
 import { ShopContext } from '@/context/shop-context';
 
 export function CartTotal() {
-  const { getCartAmount, deliveryFee } = useContext(ShopContext);
+  const { getCartAmount } = useContext(ShopContext);
   const subtotal = useMemo(() => getCartAmount(), [getCartAmount]);
   const total = subtotal === 0 ? 0 : subtotal + deliveryFee;
 

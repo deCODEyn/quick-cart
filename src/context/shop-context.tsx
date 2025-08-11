@@ -10,8 +10,7 @@ import type {
 const initialCartItems: CartItemsType = {};
 
 export const ShopContext = createContext<ShopContextInterface>({
-  products,
-  deliveryFee: 0,
+  products: [],
   search: '',
   setSearch: () => {
     /* default empty function */
@@ -48,11 +47,10 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
   } = useShopCart();
   const { search, setSearch, showSearch, setShowSearch, handleCloseSearchBar } =
     useSearchBar();
-  const deliveryFee = 10;
+  const [products, setProducts] = useState<ProductType[]>([]);
 
   const value = {
     products,
-    deliveryFee,
     search,
     setSearch,
     showSearch,

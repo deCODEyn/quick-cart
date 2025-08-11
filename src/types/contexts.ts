@@ -15,7 +15,6 @@ export interface ShopContextInterface {
   setShowSearch: (value: boolean) => void;
   updateQuantity: ({ id, size, quantity }: CartUpdateQuantityType) => void;
   cartItems: CartItemsType;
-  deliveryFee: number;
   products: ProductType[];
   search: string;
   showSearch: boolean;

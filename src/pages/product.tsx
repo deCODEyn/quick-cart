@@ -45,7 +45,7 @@ export function Product() {
         <ProductImageGalery product={productData} />
         <div className="flex-1">
           <ProductInfo product={productData} />
-          {productData.sizes && productData.sizes.length > 0 && (
+          {productData.sizes?.length > 0 && (
             <ProductSizeSelector
               currentSize={currentSize}
               onSelectSize={handleSelectSize}

@@ -27,7 +27,7 @@ export type ProductType = {
   _id: string;
   bestseller: boolean;
   category: string;
-  date: number;
+  createdAt: string;
   description: string;
   name: string;
   image: string[];

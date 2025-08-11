@@ -3,6 +3,8 @@ import type { FormDeliveryData, PageLinksType } from '@/types';
 
 export const currency = '$';
 
+export const deliveryFee = 10;
+
 export const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
 export const allCategories = ['Men', 'Women', 'Kids'];

@@ -1,14 +1,15 @@
 import { useCallback, useState } from 'react';
-import { products } from '@/mock/products';
 import type {
   CartItemsType,
   CartUpdateItemType,
   CartUpdateQuantityType,
+  ProductType,
   UseShopCartReturn,
 } from '@/types';
 
 export function useShopCart(): UseShopCartReturn {
   const [cartItems, setCartItems] = useState<CartItemsType>({});
+  const products: ProductType[] = [];
 
   const addToCart = useCallback(({ id, size }: CartUpdateItemType) => {
     setCartItems((prevCartItems) => {
@@ -44,7 +45,7 @@ export function useShopCart(): UseShopCartReturn {
     ({ id, size, quantity }: CartUpdateQuantityType) => {
       setCartItems((prevCartItems) => {
         const newCartItems = structuredClone(prevCartItems);
-        if (newCartItems[id] && newCartItems[id][size] !== undefined) {
+        if (newCartItems?.[id]?.[size] !== undefined) {
           if (quantity > 0) {
             newCartItems[id][size] = quantity;
           } else {

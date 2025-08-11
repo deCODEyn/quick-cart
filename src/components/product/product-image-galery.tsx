@@ -10,7 +10,7 @@ export function ProductImageGalery({ product }: ProductInfoType) {
   };
 
   useEffect(() => {
-    if (product?.image && product.image.length > 0) {
+    if (product?.image?.length > 0) {
       setCurrentImage(product.image[0]);
     }
   }, [product]);

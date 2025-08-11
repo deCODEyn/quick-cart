@@ -19,6 +19,7 @@ import {
   PlaceOrder,
   Product,
 } from '@/pages';
+
 export default function App() {
   return (
     <>
