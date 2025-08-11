@@ -34,6 +34,7 @@ export interface UseProductFormReturn {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   images: ImageFiles;
   isLoading: boolean;
+  requestError: string | null;
   productData: ProductData;
 }
 

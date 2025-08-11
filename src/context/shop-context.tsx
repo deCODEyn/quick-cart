@@ -1,8 +1,10 @@
-import { createContext } from 'react';
-import { useSearchBar, useShopCart } from '@/hooks';
-import { products } from '@/mock/products';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { useApiRequest, useSearchBar, useShopCart } from '@/hooks';
+import { api } from '@/services/api';
 import type {
   CartItemsType,
+  ListProductsResponse,
+  ProductType,
   ShopContextInterface,
   ShopContextProviderType,
 } from '@/types';
@@ -48,6 +50,20 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
   const { search, setSearch, showSearch, setShowSearch, handleCloseSearchBar } =
     useSearchBar();
   const [products, setProducts] = useState<ProductType[]>([]);
+  const { execute } = useApiRequest();
+
+  const getProducts = useCallback(async () => {
+    await execute<ProductType[]>(
+      () => api.get<ListProductsResponse>('/products'),
+      (data) => {
+        setProducts(data);
+      }
+    );
+  }, [execute]);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
 
   const value = {
     products,

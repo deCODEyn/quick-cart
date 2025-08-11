@@ -1,8 +1,48 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
+import { api } from '@/services/api';
+import type {
+  ListProductsResponse,
+  ProductType,
+  SingleProductResponse,
+} from '@/types';
 import { ProductListItem } from '../admin-components';
 
 export function ListProducts() {
   const [list, setList] = useState<ProductType[]>();
+  const { showSuccessToast } = useToast();
+  const privateRequest = usePrivateRequest();
+  const { isLoading, execute } = useApiRequest();
+
+  const fetchList = useCallback(async () => {
+    await execute<ProductType[]>(
+      () => api.get<ListProductsResponse>('/products'),
+      (products) => {
+        setList(products);
+      }
+    );
+  }, [execute]);
+
+  const deleteProduct = useCallback(
+    async (productId: string) => {
+      await execute<ProductType>(
+        () =>
+          privateRequest.delete<SingleProductResponse>(
+            `/products/${productId}`
+          ),
+        (_product, message) => {
+          showSuccessToast(message);
+          fetchList();
+        }
+      );
+    },
+    [privateRequest, showSuccessToast, fetchList, execute]
+  );
+
+  useEffect(() => {
+    fetchList();
+  }, [fetchList]);
+
   return (
     <>
       <p className="mb-2">All Products List</p>
@@ -22,7 +62,7 @@ export function ListProducts() {
               onDelete={deleteProduct}
             />
           ))}
-    </div>
+      </div>
     </>
   );
 }

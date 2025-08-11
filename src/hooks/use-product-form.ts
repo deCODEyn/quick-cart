@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useCallback, useState } from 'react';
 import type {
   ImageFiles,
@@ -6,12 +5,13 @@ import type {
   UseProductFormReturn,
 } from '@/admin/admin-types';
 import { initialImages, initialProductData } from '@/constants';
-import { usePrivateRequest, useToast } from '@/hooks';
+import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
+import type { ProductType, SingleProductResponse } from '@/types';
 
 export function useProductForm(): UseProductFormReturn {
-  const { showSuccessToast, showErrorToast } = useToast();
+  const { showSuccessToast } = useToast();
   const privateRequest = usePrivateRequest();
-  const [isLoading, setIsLoading] = useState(false);
+  const { execute, isLoading, requestError } = useApiRequest();
   const [images, setImages] = useState<ImageFiles>(initialImages);
   const [productData, setProductData] =
     useState<ProductData>(initialProductData);
@@ -89,38 +89,26 @@ export function useProductForm(): UseProductFormReturn {
   const onSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setIsLoading(true);
-      try {
-        const formData = buildFormData(productData, images);
-        const response = await privateRequest.post('/products', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        if (response.data.success) {
-          showSuccessToast(response.data.message);
+
+      const formData = buildFormData(productData, images);
+      await execute<ProductType>(
+        () =>
+          privateRequest.post<SingleProductResponse>('/products', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          }),
+        (_newProduct, message) => {
+          showSuccessToast(message);
           setImages(initialImages); // Reseta o estado
           setProductData(initialProductData); // Reseta o estado
-        } else {
-          showErrorToast(response.data.message);
         }
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          const message = error.response.data.message;
-          showErrorToast(message);
-        } else {
-          showErrorToast(
-            'An unexpected server error occurred. Please try again later.'
-          );
-        }
-      } finally {
-        setIsLoading(false);
-      }
+      );
     },
     [
+      execute,
       buildFormData,
       images,
       privateRequest,
       productData,
-      showErrorToast,
       showSuccessToast,
     ]
   );
@@ -129,6 +117,7 @@ export function useProductForm(): UseProductFormReturn {
     images,
     productData,
     isLoading,
+    requestError,
     handleInputChange,
     handleBestsellerChange,
     handleImageChange,
