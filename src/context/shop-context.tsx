@@ -32,10 +32,13 @@ export const ShopContext = createContext<ShopContextInterface>({
   updateQuantity: () => {
     /* default empty function */
   },
-  deleteFromCart() {
+  deleteFromCart: () => {
     /* default empty function */
   },
   getCartAmount: () => 0,
+  getProducts: async () => {
+    /* default empty function */
+  },
 });
 
 const ShopContextProvider = ({ children }: ShopContextProviderType) => {
@@ -78,6 +81,7 @@ const ShopContextProvider = ({ children }: ShopContextProviderType) => {
     updateQuantity,
     getCartItemCount,
     getCartAmount,
+    getProducts,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

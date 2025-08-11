@@ -1,27 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
+import { ShopContext } from '@/context/shop-context';
 import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
-import { api } from '@/services/api';
-import type {
-  ListProductsResponse,
-  ProductType,
-  SingleProductResponse,
-} from '@/types';
+import type { ProductType, SingleProductResponse } from '@/types';
 import { ProductListItem } from '../admin-components';
 
 export function ListProducts() {
-  const [list, setList] = useState<ProductType[]>();
+  const { products, getProducts } = useContext(ShopContext);
   const { showSuccessToast } = useToast();
   const privateRequest = usePrivateRequest();
   const { isLoading, execute } = useApiRequest();
-
-  const fetchList = useCallback(async () => {
-    await execute<ProductType[]>(
-      () => api.get<ListProductsResponse>('/products'),
-      (products) => {
-        setList(products);
-      }
-    );
-  }, [execute]);
 
   const deleteProduct = useCallback(
     async (productId: string) => {
@@ -32,16 +19,16 @@ export function ListProducts() {
           ),
         (_product, message) => {
           showSuccessToast(message);
-          fetchList();
+          getProducts();
         }
       );
     },
-    [privateRequest, showSuccessToast, fetchList, execute]
+    [privateRequest, showSuccessToast, getProducts, execute]
   );
 
   useEffect(() => {
-    fetchList();
-  }, [fetchList]);
+    getProducts();
+  }, [getProducts]);
 
   return (
     <>
@@ -55,7 +42,7 @@ export function ListProducts() {
           <p className="text-center font-bold">Action</p>
         </div>
         {!isLoading &&
-          list?.map((item) => (
+          products?.map((item) => (
             <ProductListItem
               item={item}
               key={item._id}

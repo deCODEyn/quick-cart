@@ -10,6 +10,7 @@ export interface ShopContextInterface {
   deleteFromCart: ({ id, size }: CartUpdateItemType) => void;
   getCartAmount: () => number;
   getCartItemCount: () => number;
+  getProducts: () => Promise<void>;
   handleCloseSearchBar: () => void;
   setSearch: (value: string) => void;
   setShowSearch: (value: boolean) => void;

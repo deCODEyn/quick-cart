@@ -42,27 +42,29 @@ export function useApiRequest(): UseApiRequestReturn {
   const [isLoading, setIsLoading] = useState(false);
   const { handleError, requestError } = useApiRequestErrorHandling();
 
-  const executeRef = useRef(async <T>(
-    requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
-    onSuccess?: (result: T, message: string) => void,
-    onFinish?: () => void
-  ): Promise<void> => {
-    setIsLoading(true);
-    try {
-      const response = await requestFn();
-      const { success, result, message } = response.data;
-      if (success && onSuccess) {
-        onSuccess(result as T, message || '');
-      }
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setIsLoading(false);
-      if (onFinish) {
-        onFinish();
+  const executeRef = useRef(
+    async <T>(
+      requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
+      onSuccess?: (result: T, message: string) => void,
+      onFinish?: () => void
+    ): Promise<void> => {
+      setIsLoading(true);
+      try {
+        const response = await requestFn();
+        const { success, result, message } = response.data;
+        if (success && onSuccess) {
+          onSuccess(result as T, message || '');
+        }
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setIsLoading(false);
+        if (onFinish) {
+          onFinish();
+        }
       }
     }
-  })
+  );
 
   return { isLoading, requestError, execute: executeRef.current };
 }
