@@ -7,7 +7,7 @@ export function usePrivateRequest(): AxiosInstance {
     const instance = axios.create({
       baseURL: api.defaults.baseURL,
       headers: {
-        ...api.defaults.headers
+        ...api.defaults.headers,
       },
       withCredentials: true,
     });

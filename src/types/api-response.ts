@@ -22,15 +22,16 @@ export interface UseApiRequestErrorHandlingReturn {
   requestError: string | null;
 }
 
-export type UseApiRequestReturn = {
+export interface UseApiRequestReturn {
   execute: <T>(
     requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
-    onSuccess?: (result: T, message: string) => void,
-    onFinish?: () => void
+    onSuccess?: (result: T, message: string, success: boolean) => void,
+    onFinish?: () => void,
+    suppressErrorToast?: boolean
   ) => Promise<void>;
   isLoading: boolean;
   requestError: string | null;
-};
+}
 
 export type DeleteProductResponse = ApiResponse<void>;
 export type ListProductsResponse = ApiResponse<ProductType[]>;

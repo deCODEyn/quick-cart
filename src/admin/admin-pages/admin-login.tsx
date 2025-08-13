@@ -2,29 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@/components';
 import { useAuthContext } from '@/context';
-import { useToast } from '@/hooks';
 
 export function AdminLogin() {
-  const { authLogin, userRole } = useAuthContext();
+  const { authLogin } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { showWarningToast, showSuccessToast } = useToast();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const loginSuccess = await authLogin(email, password);
     if (loginSuccess) {
-      if (userRole === 'Admin') {
-        showSuccessToast('Login successful.');
-        navigate('/admin');
-      } else {
-        showWarningToast(
-          'Access denied. User without administrator permission.',
-          { autoClose: 3000 }
-        );
-        navigate('/');
-      }
+      navigate('/admin', { state: { fromLogin: true } });
     }
   };
 

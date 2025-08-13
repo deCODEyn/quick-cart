@@ -1,19 +1,36 @@
 import { User } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components';
+import { useAuthContext } from '@/context';
 
 export function UserItem() {
-  return (
-    <div className="group relative">
+  const { authLogout, userRole } = useAuthContext();
+
+  if (!userRole) {
+    return (
       <Link to="/login">
         <User className="w-6 cursor-pointer" />
       </Link>
+    );
+  }
+
+  return (
+    <div className="group relative">
+      <div className="cursor-pointer">
+        <User className="w-6 cursor-pointer" />
+      </div>
       <div className="absolute right-0 hidden pt-4 group-hover:block">
         <div className="flex w-36 flex-col gap-2 rounded bg-slate-100 px-5 py-3 text-gray-500">
           <p className="cursor-pointer hover:text-black">My Profile</p>
           <Link className="cursor-pointer hover:text-black" to="/orders">
             Orders
           </Link>
-          <p className="cursor-pointer hover:text-black">Logout</p>
+          <Button
+            className="my-[-8px] cursor-pointer appearance-none justify-start border-none bg-transparent p-0 text-current text-md shadow-none hover:bg-transparent hover:text-black focus:outline-none focus-visible:ring-0"
+            onClick={authLogout}
+          >
+            Logout
+          </Button>
         </div>
       </div>
     </div>

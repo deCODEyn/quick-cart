@@ -20,38 +20,58 @@ export const AuthContext = createContext<AuthContextInterface | undefined>(
 
 export const AuthProvider = ({ children }: ContextProviderType) => {
   const privateApi = usePrivateRequest();
-  const { isLoading, execute } = useApiRequest();
-  const { showSuccessToast } = useToast();
+  const { execute } = useApiRequest();
+  const { showSuccessToast, showWarningToast } = useToast();
   const [userRole, setUserRole] = useState<UserRoleType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchUser = useCallback(async (): Promise<void> => {
     await execute<UserType>(
       () => privateApi.get<SingleUserResponse>('/user/me'),
-      (user) => setUserRole(user.role)
+      (user) => setUserRole(user.role),
+      () => {
+        /* onFinish */
+      },
+      true
     );
   }, [execute, privateApi]);
 
   useEffect(() => {
-    fetchUser();
+    const loadAuth = async () => {
+      setIsLoading(true);
+      await fetchUser();
+      setIsLoading(false);
+    };
+    loadAuth();
   }, [fetchUser]);
 
   const authLogin = useCallback(
     async (email: string, password: string): Promise<boolean> => {
-      let success = false;
-      await execute(
-        () => privateApi.post('/user/login', { email, password }),
-        () => {
-          showSuccessToast('Login successful!');
-          success = true;
-        },
-        async () => await fetchUser()
-      );
-      return success;
+      setIsLoading(true);
+      const loginSuccess = await new Promise<boolean>((resolve) => {
+        execute(
+          () => privateApi.post('/user/login', { email, password }),
+          (_, message, success) => {
+            if (success) {
+              fetchUser().then(() => {
+                resolve(true);
+              });
+            } else {
+              showWarningToast(message || 'Login failed.');
+              resolve(false);
+            }
+          }
+        );
+      });
+
+      setIsLoading(false);
+      return loginSuccess;
     },
-    [execute, fetchUser, showSuccessToast, privateApi]
+    [execute, fetchUser, privateApi, showWarningToast]
   );
 
   const authLogout = useCallback(async () => {
+    setIsLoading(true);
     await execute(
       () => privateApi.post('/user/logout'),
       () => {
@@ -59,6 +79,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
         showSuccessToast('Logged out successfully.');
       }
     );
+    setIsLoading(false);
   }, [execute, privateApi, showSuccessToast]);
 
   const value = { userRole, isLoading, authLogin, authLogout };

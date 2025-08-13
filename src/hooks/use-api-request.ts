@@ -45,18 +45,21 @@ export function useApiRequest(): UseApiRequestReturn {
   const executeRef = useRef(
     async <T>(
       requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
-      onSuccess?: (result: T, message: string) => void,
-      onFinish?: () => void
+      onSuccess?: (result: T, message: string, success: boolean) => void,
+      onFinish?: () => void,
+      suppressErrorToast = false
     ): Promise<void> => {
       setIsLoading(true);
       try {
         const response = await requestFn();
         const { success, result, message } = response.data;
         if (success && onSuccess) {
-          onSuccess(result as T, message || '');
+          onSuccess(result as T, message || '', success);
         }
       } catch (error) {
-        handleError(error);
+        if (!suppressErrorToast) {
+          handleError(error);
+        }
       } finally {
         setIsLoading(false);
         if (onFinish) {

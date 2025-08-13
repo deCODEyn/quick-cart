@@ -7,7 +7,6 @@ export interface UseAuthReturn {
 export type UserType = {
   role: UserRoleType;
   email: string;
-}
-
+};
 
 export type UserRoleType = 'Admin' | 'User';

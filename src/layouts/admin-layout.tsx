@@ -1,16 +1,34 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AdminNavbar, Sidebar } from '@/admin/admin-components';
 import { useAuthContext } from '@/context';
+import { useToast } from '@/hooks';
 
 export function AdminLayout() {
   const { userRole, isLoading } = useAuthContext();
+  const { showSuccessToast, showWarningToast } = useToast();
+  const fromLogin = useLocation().state?.fromLogin;
 
   if (isLoading) {
     return <div>Carregando...</div>;
   }
 
   if (userRole !== 'Admin') {
+    if (fromLogin) {
+      showWarningToast(
+        'Access denied. User without administrator permission.',
+        {
+          autoClose: 3000,
+        }
+      );
+      return <Navigate replace state={{ fromLogin: null }} to="/" />;
+    }
+
     return <Navigate replace to="/login/admin" />;
+  }
+
+  if (fromLogin && userRole === 'Admin') {
+    showSuccessToast('Login successful.');
+    return <Navigate replace state={{ fromLogin: null }} to="/admin" />;
   }
 
   return (
