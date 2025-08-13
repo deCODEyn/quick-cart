@@ -5,7 +5,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
+import { useApiRequest, usePrivateRequest } from '@/hooks';
+import { api } from '@/services/api';
 import type {
   AuthContextInterface,
   ContextProviderType,
@@ -21,7 +22,6 @@ export const AuthContext = createContext<AuthContextInterface | undefined>(
 export const AuthProvider = ({ children }: ContextProviderType) => {
   const privateApi = usePrivateRequest();
   const { execute } = useApiRequest();
-  const { showSuccessToast, showWarningToast } = useToast();
   const [userRole, setUserRole] = useState<UserRoleType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -51,38 +51,69 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       const loginSuccess = await new Promise<boolean>((resolve) => {
         execute(
           () => privateApi.post('/user/login', { email, password }),
-          (_, message, success) => {
+          (_result, _message, success) => {
             if (success) {
               fetchUser().then(() => {
                 resolve(true);
               });
             } else {
-              showWarningToast(message || 'Login failed.');
               resolve(false);
             }
           }
         );
       });
-
       setIsLoading(false);
+
       return loginSuccess;
     },
-    [execute, fetchUser, privateApi, showWarningToast]
+    [execute, fetchUser, privateApi]
   );
 
-  const authLogout = useCallback(async () => {
+  const authLogout = useCallback(async (): Promise<boolean> => {
     setIsLoading(true);
-    await execute(
-      () => privateApi.post('/user/logout'),
-      () => {
-        setUserRole(null);
-        showSuccessToast('Logged out successfully.');
-      }
-    );
+    const logoutSuccess = await new Promise<boolean>((resolve) => {
+      execute(
+        () => privateApi.post('/user/logout'),
+        (_result, _message, success) => {
+          if (success) {
+            setUserRole(null);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      );
+    });
     setIsLoading(false);
-  }, [execute, privateApi, showSuccessToast]);
 
-  const value = { userRole, isLoading, authLogin, authLogout };
+    return logoutSuccess;
+  }, [execute, privateApi]);
+
+  const authRegister = useCallback(
+    async (email: string, password: string, name: string): Promise<boolean> => {
+      setIsLoading(true);
+      const registerSuccess = await new Promise<boolean>((resolve) => {
+        execute(
+          () => api.post('/user/register', { name, email, password }),
+          (_result, _message, success) => {
+            if (success) {
+              fetchUser().then(() => {
+                resolve(true);
+              });
+            } else {
+              resolve(false);
+            }
+          }
+        );
+      });
+      setIsLoading(false);
+
+      return registerSuccess;
+    },
+    [execute, fetchUser]
+  );
+
+  const value = { userRole, isLoading, authLogin, authLogout, authRegister };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -2,9 +2,20 @@ import { User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components';
 import { useAuthContext } from '@/context';
+import { useToast } from '@/hooks';
 
 export function UserItem() {
   const { authLogout, userRole } = useAuthContext();
+  const { showSuccessToast, showWarningToast } = useToast();
+
+  const handleLogout = async () => {
+    const logoutSuccess = await authLogout();
+    if (logoutSuccess) {
+      showSuccessToast('Logged out successfully.');
+    } else {
+      showWarningToast('Logged out error.');
+    }
+  };
 
   if (!userRole) {
     return (
@@ -27,7 +38,7 @@ export function UserItem() {
           </Link>
           <Button
             className="my-[-8px] cursor-pointer appearance-none justify-start border-none bg-transparent p-0 text-current text-md shadow-none hover:bg-transparent hover:text-black focus:outline-none focus-visible:ring-0"
-            onClick={authLogout}
+            onClick={handleLogout}
           >
             Logout
           </Button>

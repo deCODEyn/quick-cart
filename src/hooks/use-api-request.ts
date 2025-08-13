@@ -61,11 +61,11 @@ export function useApiRequest(): UseApiRequestReturn {
           handleError(error);
         }
       } finally {
-        setIsLoading(false);
         if (onFinish) {
           onFinish();
         }
       }
+      setIsLoading(false);
     }
   );
 

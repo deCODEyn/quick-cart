@@ -1,21 +1,37 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@/components';
 import { useAuthContext } from '@/context';
+import { useToast } from '@/hooks';
 
 export function AdminLogin() {
-  const { authLogin } = useAuthContext();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { authLogin, isLoading } = useAuthContext();
+  const { showInfoToast } = useToast();
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const loginSuccess = await authLogin(email, password);
-    if (loginSuccess) {
-      navigate('/admin', { state: { fromLogin: true } });
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+
+  const onSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (await authLogin(formData.email, formData.password)) {
+        navigate('/admin', { state: { fromLogin: true } });
+      } else {
+        showInfoToast('Login failed. Please try again.');
+      }
+    },
+    [authLogin, navigate, formData, showInfoToast]
+  );
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -28,27 +44,30 @@ export function AdminLogin() {
             </p>
             <Input
               className="w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus-visible:ring-1"
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              onChange={handleChange}
               placeholder="Enter your admin e-mail"
               required
               type="email"
-              value={email}
+              value={formData.email}
             />
             <p className="mb-2 font-medium text-gray-700 text-sm">Password</p>
             <Input
               className="w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus-visible:ring-1"
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              onChange={handleChange}
               placeholder="Enter your password"
               required
               type="password"
-              value={password}
+              value={formData.password}
             />
           </div>
           <Button
             className="mt-2 w-full rounded-md bg-black px-4 py-2 text-white"
+            disabled={isLoading}
             type="submit"
           >
-            Login
+            {isLoading ? 'Logging in' : 'Login'}
           </Button>
         </form>
       </div>

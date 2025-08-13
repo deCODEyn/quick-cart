@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import { Button, Input } from '@/components';
+import { useAuthContext } from '@/context';
+import { useToast } from '@/hooks';
 
 export function Login() {
   const [isLogin, setIsLogin] = useState(true);
+  const { authLogin, authRegister } = useAuthContext();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const { showSuccessToast, showWarningToast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Lógica para login e/ou cadastro
-    //Validar no backend o usuário e guardar token de autenticação.
-    //Após isso, implementar Logout no usuário.
+    if (isLogin) {
+      const loginSuccess = await authLogin(email, password);
+    } else {
+      const registerSuccess = await authRegister(email, password, name);
+    }
   };
 
   return (
@@ -25,22 +34,28 @@ export function Login() {
       {!isLogin && (
         <Input
           className="w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0"
+          onChange={(e) => setName(e.target.value)}
           placeholder="Name"
           required
           type="text"
+          value={name}
         />
       )}
       <Input
         className="w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0"
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="E-mail"
         required
         type="email"
+        value={email}
       />
       <Input
         className="w-full rounded border border-gray-800 px-3 py-2 focus-visible:ring-0"
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
         required
         type="password"
+        value={password}
       />
 
       <div className="mt-[-8px] flex w-full justify-between text-sm">
