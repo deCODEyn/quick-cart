@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@/components';
 import { useAuthContext } from '@/context';
 import { useToast } from '@/hooks';
@@ -6,17 +7,30 @@ import { useToast } from '@/hooks';
 export function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const { authLogin, authRegister } = useAuthContext();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const { showSuccessToast, showWarningToast } = useToast();
+  const { showSuccessToast, showInfoToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    let authSuccess: boolean;
+    let successMessage: string;
+
     if (isLogin) {
-      const loginSuccess = await authLogin(email, password);
+      authSuccess = await authLogin(email, password);
+      successMessage = 'Welcome back!';
     } else {
-      const registerSuccess = await authRegister(email, password, name);
+      authSuccess = await authRegister(email, password, name);
+      successMessage = 'User registered successfully.';
+    }
+    if (authSuccess) {
+      showSuccessToast(successMessage);
+      navigate('/');
+    } else {
+      showInfoToast('An error occurred. Please try again.');
     }
   };
 

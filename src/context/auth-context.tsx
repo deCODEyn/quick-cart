@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react';
 import { useApiRequest, usePrivateRequest } from '@/hooks';
-import { api } from '@/services/api';
 import type {
   AuthContextInterface,
   ContextProviderType,
@@ -94,12 +93,14 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       setIsLoading(true);
       const registerSuccess = await new Promise<boolean>((resolve) => {
         execute(
-          () => api.post('/user/register', { name, email, password }),
+          () => privateApi.post('/user/register', { name, email, password }),
           (_result, _message, success) => {
             if (success) {
-              fetchUser().then(() => {
-                resolve(true);
-              });
+              setTimeout(() => {
+                fetchUser().then(() => {
+                  resolve(true);
+                });
+              }, 200);
             } else {
               resolve(false);
             }
@@ -110,7 +111,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
 
       return registerSuccess;
     },
-    [execute, fetchUser]
+    [execute, fetchUser, privateApi]
   );
 
   const value = { userRole, isLoading, authLogin, authLogout, authRegister };
