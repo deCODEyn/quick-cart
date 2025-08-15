@@ -26,7 +26,7 @@ export interface UseApiRequestReturn {
   execute: <T>(
     requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
     onSuccess?: (result: T, message: string, success: boolean) => void,
-    onFinish?: () => void,
+    onFinish?: (value: boolean) => void,
     suppressErrorToast?: boolean
   ) => Promise<void>;
   isLoading: boolean;

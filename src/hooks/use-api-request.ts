@@ -40,19 +40,21 @@ function useApiRequestErrorHandling(): UseApiRequestErrorHandlingReturn {
 
 export function useApiRequest(): UseApiRequestReturn {
   const [isLoading, setIsLoading] = useState(false);
+  const [requestSuccess, setrequestSuccess] = useState(false);
   const { handleError, requestError } = useApiRequestErrorHandling();
 
   const executeRef = useRef(
     async <T>(
       requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
       onSuccess?: (result: T, message: string, success: boolean) => void,
-      onFinish?: () => void,
+      onFinish?: (value: boolean) => void,
       suppressErrorToast = false
     ): Promise<void> => {
       setIsLoading(true);
       try {
         const response = await requestFn();
         const { success, result, message } = response.data;
+        setrequestSuccess(success);
         if (success && onSuccess) {
           onSuccess(result as T, message || '', success);
         }
@@ -62,7 +64,7 @@ export function useApiRequest(): UseApiRequestReturn {
         }
       } finally {
         if (onFinish) {
-          onFinish();
+          setInterval(() => onFinish(requestSuccess), 5000);
         }
       }
       setIsLoading(false);

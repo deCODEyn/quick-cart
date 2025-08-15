@@ -1,5 +1,5 @@
 import type { ImageFiles, ProductData } from '@/admin/admin-types';
-import type { FormDeliveryData, PageLinksType } from '@/types';
+import type { AuthFormData, FormDeliveryData, PageLinksType } from '@/types';
 
 export const currency = '$';
 
@@ -17,6 +17,12 @@ export const links: PageLinksType[] = [
   { label: 'about', href: '/about' },
   { label: 'contact', href: '/contact' },
 ];
+
+export const initialAuthFormData: AuthFormData = {
+  name: '',
+  email: '',
+  password: '',
+};
 
 export const initialDeliveryData: FormDeliveryData = {
   firstName: '',

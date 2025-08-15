@@ -58,7 +58,8 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
             } else {
               resolve(false);
             }
-          }
+          },
+          (requestSuccess) => resolve(requestSuccess)
         );
       });
       setIsLoading(false);
@@ -80,7 +81,8 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
           } else {
             resolve(false);
           }
-        }
+        },
+        (requestSuccess) => resolve(requestSuccess)
       );
     });
     setIsLoading(false);
@@ -96,15 +98,14 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
           () => privateApi.post('/user/register', { name, email, password }),
           (_result, _message, success) => {
             if (success) {
-              setTimeout(() => {
-                fetchUser().then(() => {
-                  resolve(true);
-                });
-              }, 200);
+              fetchUser().then(() => {
+                resolve(true);
+              });
             } else {
               resolve(false);
             }
-          }
+          },
+          (requestSuccess) => resolve(requestSuccess)
         );
       });
       setIsLoading(false);
@@ -122,7 +123,9 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error(
+      'useAuth must be used withinrequestSuccess an AuthProvider'
+    );
   }
   return context;
 };

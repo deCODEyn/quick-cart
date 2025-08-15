@@ -1,4 +1,5 @@
 export * from '@/hooks/use-api-request';
+export * from '@/hooks/use-auth-form';
 export * from '@/hooks/use-date-format';
 export * from '@/hooks/use-private-request';
 export * from '@/hooks/use-product-filter';

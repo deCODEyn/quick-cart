@@ -98,8 +98,8 @@ export function useProductForm(): UseProductFormReturn {
           }),
         (_newProduct, message) => {
           showSuccessToast(message);
-          setImages(initialImages); // Reseta o estado
-          setProductData(initialProductData); // Reseta o estado
+          setImages(initialImages);
+          setProductData(initialProductData);
         }
       );
     },
