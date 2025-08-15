@@ -1,9 +1,16 @@
 import { Pencil, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import type { ProductListItemType } from '@/admin/admin-types';
 import { Button, Image } from '@/components';
 import { currency } from '@/constants';
 
 export function ProductListItem({ item, onDelete }: ProductListItemType) {
+  const navigate = useNavigate();
+
+  const onEdit = () => {
+    navigate(`/admin/edit/${item._id}`, { state: { product: item } });
+  };
+
   return (
     <div
       className="grid grid-cols-[1fr_3fr_1fr] items-center justify-center gap-2 rounded-sm border px-2 py-1 text-sm md:grid-cols-[1fr_3fr_1fr_1fr_1fr]"
@@ -21,7 +28,10 @@ export function ProductListItem({ item, onDelete }: ProductListItemType) {
         {item.price}
       </p>
       <div className="flex max-w-20 flex-row justify-center gap-0.5">
-        <Button className="cursor-pointer border-2 border-gray-300 bg-gray-100 px-2 py-1 text-center text-current text-lg hover:bg-gray-300">
+        <Button
+          className="cursor-pointer border-2 border-gray-300 bg-gray-100 px-2 py-1 text-center text-current text-lg hover:bg-gray-300"
+          onClick={onEdit}
+        >
           <Pencil />
         </Button>
         <Button

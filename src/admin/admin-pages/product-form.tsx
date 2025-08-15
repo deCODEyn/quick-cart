@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import {
   ImageUploader,
   SelectInput,
   SizesSelector,
 } from '@/admin/admin-components';
+import type { ProductFormType } from '@/admin/admin-types';
 import { Button, Input, Textarea } from '@/components';
 import { allCategories, allSubCategories } from '@/constants';
 import { useProductForm } from '@/hooks';
 
-export function AddProducts() {
+export function ProductForm({
+  initialData,
+  isEditMode = false,
+}: ProductFormType) {
   const {
     images,
     productData,
@@ -17,18 +22,22 @@ export function AddProducts() {
     handleImageChange,
     handleSizeToggle,
     onSubmit,
-  } = useProductForm();
+  } = useProductForm(initialData, isEditMode);
+  const navigate = useNavigate();
 
   return (
     <form
       className="flex w-full flex-col items-start gap-3"
-      onSubmit={onSubmit}
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => onSubmit(e, navigate)}
     >
-      <ImageUploader handleImageChange={handleImageChange} images={images} />
+      {!isEditMode && (
+        <ImageUploader handleImageChange={handleImageChange} images={images} />
+      )}
       <div className="w-full">
         <h3 className="mb-2 text-lg">Product Name</h3>
         <Input
           className="w-full max-w-[500px] rounded-sm border border-gray-400 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
+          disabled={isEditMode}
           name="name"
           onChange={handleInputChange}
           placeholder="Type here"
@@ -96,7 +105,9 @@ export function AddProducts() {
         disabled={isLoading}
         type="submit"
       >
-        {isLoading ? 'Adding...' : 'Add Product'}
+        {isLoading
+          ? `${isEditMode ? 'Updating...' : 'Adding...'}`
+          : `${isEditMode ? 'Update Product' : 'Add Product'}`}
       </Button>
     </form>
   );

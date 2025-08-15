@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import type { AxiosResponse } from 'axios';
+import { useCallback, useEffect, useState } from 'react';
 import type {
   ImageFiles,
   ProductData,
@@ -8,13 +9,27 @@ import { initialImages, initialProductData } from '@/constants';
 import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
 import type { ProductType, SingleProductResponse } from '@/types';
 
-export function useProductForm(): UseProductFormReturn {
+export function useProductForm(
+  initialData?: ProductType,
+  isEditMode = false
+): UseProductFormReturn {
   const { showSuccessToast } = useToast();
   const privateRequest = usePrivateRequest();
   const { execute, isLoading, requestError } = useApiRequest();
   const [images, setImages] = useState<ImageFiles>(initialImages);
   const [productData, setProductData] =
     useState<ProductData>(initialProductData);
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setProductData({
+        ...initialProductData,
+        ...initialData,
+      });
+    } else {
+      setProductData(initialProductData);
+    }
+  }, [initialData, isEditMode]);
 
   const handleInputChange = useCallback(
     (
@@ -87,21 +102,45 @@ export function useProductForm(): UseProductFormReturn {
   );
 
   const onSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
+    async (
+      e: React.FormEvent<HTMLFormElement>,
+      navigate?: (to: string) => void
+    ) => {
       e.preventDefault();
 
       const formData = buildFormData(productData, images);
-      await execute<ProductType>(
-        () =>
-          privateRequest.post<SingleProductResponse>('/products', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          }),
-        (_newProduct, message) => {
-          showSuccessToast(message);
+      let request: () => Promise<AxiosResponse<SingleProductResponse>>;
+      let url = '/products';
+      const successCallback = (_newProduct: ProductType, message: string) => {
+        showSuccessToast(message);
+        if (isEditMode && navigate) {
+          navigate('/admin/list');
+        } else {
           setImages(initialImages);
           setProductData(initialProductData);
         }
-      );
+      };
+
+      if (isEditMode && initialData?._id) {
+        url = `/products/${initialData._id}`;
+        const requestBody = {
+          bestseller: productData.bestseller,
+          category: productData.category,
+          description: productData.description,
+          price: productData.price,
+          sizes: productData.sizes,
+          subCategory: productData.subCategory,
+        };
+        request = () =>
+          privateRequest.patch<SingleProductResponse>(url, requestBody);
+      } else {
+        request = () =>
+          privateRequest.post<SingleProductResponse>(url, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+      }
+
+      await execute<ProductType>(request, successCallback);
     },
     [
       execute,
@@ -110,6 +149,8 @@ export function useProductForm(): UseProductFormReturn {
       privateRequest,
       productData,
       showSuccessToast,
+      isEditMode,
+      initialData,
     ]
   );
 

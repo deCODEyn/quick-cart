@@ -8,7 +8,7 @@ export function Sidebar() {
         <SidebarItem
           icon={<CirclePlus className="h-5 w-5" />}
           label="Add Items"
-          to="/admin/add"
+          to="/admin/create"
         />
         <SidebarItem
           icon={<ClipboardCheck className="h-5 w-5" />}

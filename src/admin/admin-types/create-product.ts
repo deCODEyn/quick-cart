@@ -1,3 +1,5 @@
+import type { ProductType } from '@/types';
+
 export interface ImageUploaderTypes {
   handleImageChange: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -31,12 +33,20 @@ export interface UseProductFormReturn {
     >
   ) => void;
   handleSizeToggle: (size: string) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  onSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    navigate?: (to: string) => void
+  ) => Promise<void>;
   images: ImageFiles;
   isLoading: boolean;
   requestError: string | null;
   productData: ProductData;
 }
+
+export type ProductFormType = {
+  initialData?: ProductType;
+  isEditMode: boolean;
+};
 
 export type ImageFiles = {
   image1: File | null;
