@@ -3,9 +3,11 @@ import type { ProductType } from '@/types';
 export interface UseShopCartReturn {
   addToCart: ({ id, size }: CartUpdateItemType) => void;
   deleteFromCart: ({ id, size }: CartUpdateItemType) => void;
-  getCartAmount: () => number;
+  getCart: () => void;
+  getCartAmount: (products: ProductType[]) => number;
   getCartItemCount: () => number;
   updateQuantity: ({ id, size, quantity }: CartUpdateQuantityType) => void;
+  resetCart: () => void;
   cartItems: CartItemsType;
 }
 

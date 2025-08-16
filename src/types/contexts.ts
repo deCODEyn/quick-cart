@@ -21,7 +21,7 @@ export interface AuthContextInterface {
 export interface ShopContextInterface {
   addToCart: ({ id, size }: CartUpdateItemType) => void;
   deleteFromCart: ({ id, size }: CartUpdateItemType) => void;
-  getCartAmount: () => number;
+  getCartTotalAmount: () => number;
   getCartItemCount: () => number;
   getProducts: () => Promise<void>;
   updateQuantity: ({ id, size, quantity }: CartUpdateQuantityType) => void;

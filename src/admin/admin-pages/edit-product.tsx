@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { ProductForm } from '@/admin/admin-pages';
 import { useToast } from '@/hooks';
 import { api } from '@/services/api';
 import type { ProductType } from '@/types';
-import { ProductForm } from './product-form';
 
 export function EditProduct() {
   const passedProduct = useLocation().state.product as ProductType;

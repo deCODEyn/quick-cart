@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthButtonSelect, LoginButton, LoginForm } from '@/components';
 import { useAuthForm } from '@/hooks';
 
 export function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
+  const from = useLocation().state?.from || '/';
   const { formData, handleChange, onSubmit, isLoading } = useAuthForm({
     isLogin,
-    onSuccess: () => navigate('/'),
+    onSuccess: () => navigate(from, { replace: true }),
   });
 
   return (

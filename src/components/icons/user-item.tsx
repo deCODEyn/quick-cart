@@ -1,5 +1,5 @@
 import { User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components';
 import { useAuthContext } from '@/context';
 import { useToast } from '@/hooks';
@@ -7,11 +7,14 @@ import { useToast } from '@/hooks';
 export function UserItem() {
   const { authLogout, userRole } = useAuthContext();
   const { showSuccessToast, showWarningToast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     const logoutSuccess = await authLogout();
     if (logoutSuccess) {
       showSuccessToast('Logged out successfully.');
+      navigate('/');
     } else {
       showWarningToast('Logged out error.');
     }
@@ -19,7 +22,7 @@ export function UserItem() {
 
   if (!userRole) {
     return (
-      <Link to="/login">
+      <Link state={{ from: location.pathname }} to="/login">
         <User className="w-6 cursor-pointer" />
       </Link>
     );

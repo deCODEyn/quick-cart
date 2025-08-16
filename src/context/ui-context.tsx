@@ -24,7 +24,7 @@ export const UIContextProvider = ({ children }: ContextProviderType) => {
 export const useUIContext = () => {
   const context = useContext(UIContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useUIContext must be used within an UIContextProvider');
   }
   return context;
 };

@@ -4,8 +4,8 @@ import { deliveryFee } from '@/constants';
 import { useShopContext } from '@/context';
 
 export function CartTotal() {
-  const { getCartAmount } = useShopContext();
-  const subtotal = useMemo(() => getCartAmount(), [getCartAmount]);
+  const { getCartTotalAmount } = useShopContext();
+  const subtotal = useMemo(() => getCartTotalAmount(), [getCartTotalAmount]);
   const total = subtotal === 0 ? 0 : subtotal + deliveryFee;
 
   return (

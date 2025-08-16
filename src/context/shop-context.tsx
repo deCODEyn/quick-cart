@@ -13,19 +13,23 @@ import type {
   ProductType,
   ShopContextInterface,
 } from '@/types';
+import { useAuthContext } from './auth-context';
 
 export const ShopContext = createContext<ShopContextInterface | undefined>(
   undefined
 );
 
 export const ShopContextProvider = ({ children }: ContextProviderType) => {
+  const { userRole } = useAuthContext();
   const {
     cartItems,
     addToCart,
     deleteFromCart,
     updateQuantity,
+    getCart,
     getCartItemCount,
     getCartAmount,
+    resetCart,
   } = useShopCart();
   const [products, setProducts] = useState<ProductType[]>([]);
   const { execute } = useApiRequest();
@@ -33,9 +37,7 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
   const getProducts = useCallback(async () => {
     await execute<ProductType[]>(
       () => api.get<ListProductsResponse>('/products'),
-      (data) => {
-        setProducts(data);
-      }
+      (data) => setProducts(data)
     );
   }, [execute]);
 
@@ -43,10 +45,22 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
     getProducts();
   }, [getProducts]);
 
+  useEffect(() => {
+    if (userRole) {
+      getCart();
+    } else {
+      resetCart();
+    }
+  }, [userRole, getCart, resetCart]);
+
+  const getCartTotalAmount = useCallback(() => {
+    return getCartAmount(products);
+  }, [getCartAmount, products]);
+
   const value = {
     addToCart,
     deleteFromCart,
-    getCartAmount,
+    getCartTotalAmount,
     getCartItemCount,
     getProducts,
     updateQuantity,
@@ -60,7 +74,9 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
 export const useShopContext = () => {
   const context = useContext(ShopContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error(
+      'useShopContext must be used within an ShopContextProvider'
+    );
   }
   return context;
 };
