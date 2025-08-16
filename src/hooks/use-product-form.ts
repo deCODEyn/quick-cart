@@ -108,21 +108,10 @@ export function useProductForm(
     ) => {
       e.preventDefault();
 
-      const formData = buildFormData(productData, images);
       let request: () => Promise<AxiosResponse<SingleProductResponse>>;
-      let url = '/products';
-      const successCallback = (_newProduct: ProductType, message: string) => {
-        showSuccessToast(message);
-        if (isEditMode && navigate) {
-          navigate('/admin/list');
-        } else {
-          setImages(initialImages);
-          setProductData(initialProductData);
-        }
-      };
 
       if (isEditMode && initialData?._id) {
-        url = `/products/${initialData._id}`;
+        const url = `/products/${initialData._id}`;
         const requestBody = {
           bestseller: productData.bestseller,
           category: productData.category,
@@ -134,13 +123,26 @@ export function useProductForm(
         request = () =>
           privateRequest.patch<SingleProductResponse>(url, requestBody);
       } else {
+        const formData = buildFormData(productData, images);
+        const url = '/products';
         request = () =>
           privateRequest.post<SingleProductResponse>(url, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
       }
 
-      await execute<ProductType>(request, successCallback);
+
+
+      const { success, message } = await execute<ProductType>(request);
+      if (success) {
+        showSuccessToast(message || '');
+        if (isEditMode && navigate) {
+          navigate('/admin/list');
+        } else {
+          setImages(initialImages);
+          setProductData(initialProductData);
+        }
+      };
     },
     [
       execute,

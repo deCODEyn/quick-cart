@@ -10,11 +10,10 @@ import { useToast } from './use-toast';
 
 export function useAuthForm({
   isLogin = true,
-  isAdmin = false,
   onSuccess,
 }: UseAuthFormInterface): UseAuthFormReturn {
   const { authLogin, authRegister, isLoading } = useAuthContext();
-  const { showSuccessToast, showInfoToast } = useToast();
+  const { showSuccessToast } = useToast();
   const [formData, setFormData] = useState<AuthFormData>(initialAuthFormData);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,33 +32,31 @@ export function useAuthForm({
       let successMessage: string;
 
       if (isLogin) {
-        authSuccess = await authLogin(formData.email, formData.password);
-        successMessage = 'Welcome back!';
+        const { success, message } = await authLogin(formData.email, formData.password);
+        authSuccess = success
+        successMessage = message;
       } else {
-        authSuccess = await authRegister(
+        const { success, message } = await authRegister(
           formData.email,
           formData.password,
           formData.name ?? ''
         );
-        successMessage = 'User registered successfully.';
+        authSuccess = success
+        successMessage = message;
       }
 
       if (authSuccess) {
-        !isAdmin && showSuccessToast(successMessage);
+        showSuccessToast(successMessage);
         onSuccess();
-      } else {
-        showInfoToast('An error occurred. Please try again.');
       }
     },
     [
       isLogin,
-      isAdmin,
       formData,
       authLogin,
       authRegister,
       onSuccess,
       showSuccessToast,
-      showInfoToast,
     ]
   );
 

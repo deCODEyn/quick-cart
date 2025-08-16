@@ -12,16 +12,13 @@ export function ListProducts() {
 
   const deleteProduct = useCallback(
     async (productId: string) => {
-      await execute<ProductType>(
-        () =>
-          privateRequest.delete<SingleProductResponse>(
-            `/products/${productId}`
-          ),
-        (_product, message) => {
-          showSuccessToast(message);
-          getProducts();
-        }
+      const { success, message } = await execute<ProductType>(() =>
+        privateRequest.delete<SingleProductResponse>(`/products/${productId}`)
       );
+      if (success) {
+        showSuccessToast(message || '');
+        getProducts();
+      }
     },
     [privateRequest, showSuccessToast, getProducts, execute]
   );

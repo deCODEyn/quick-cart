@@ -35,10 +35,12 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
   const { execute } = useApiRequest();
 
   const getProducts = useCallback(async () => {
-    await execute<ProductType[]>(
-      () => api.get<ListProductsResponse>('/products'),
-      (data) => setProducts(data)
+    const { success, result } = await execute<ProductType[]>(() =>
+      api.get<ListProductsResponse>('/products')
     );
+    if (success && result) {
+      setProducts(result);
+    }
   }, [execute]);
 
   useEffect(() => {

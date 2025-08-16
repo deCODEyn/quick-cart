@@ -18,19 +18,18 @@ export interface ValidationError {
 }
 
 export interface UseApiRequestErrorHandlingReturn {
-  handleError: (err: unknown) => void;
+  handleError: (err: unknown, suppressErrorToast: boolean) => void;
   requestError: string | null;
 }
 
 export interface UseApiRequestReturn {
   execute: <T>(
     requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
-    onSuccess?: (result: T, message: string, success: boolean) => void,
-    onFinish?: (value: boolean) => void,
     suppressErrorToast?: boolean
-  ) => Promise<void>;
+  ) => Promise<{ success: boolean; result: T | null; message: string | null }>;
   isLoading: boolean;
   requestError: string | null;
+  requestSuccess: boolean;
 }
 
 export type ListCartItemsResponse = ApiResponse<CartDisplayItem[]>;

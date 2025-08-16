@@ -5,7 +5,6 @@ import { useAuthForm } from '@/hooks';
 export function AdminLogin() {
   const navigate = useNavigate();
   const { formData, handleChange, onSubmit, isLoading } = useAuthForm({
-    isAdmin: true,
     onSuccess: () => navigate('/admin', { state: { fromLogin: true } }),
   });
 

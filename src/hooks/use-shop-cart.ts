@@ -26,15 +26,14 @@ export function useShopCart(): UseShopCartReturn {
   const [cartItems, setCartItems] = useState<CartItemsType>({});
   const privateRequest = usePrivateRequest();
 
-  const getCart = useCallback(() => {
-    execute<CartDisplayItem[]>(
+  const getCart = useCallback(async () => {
+    const { success, result } = await execute<CartDisplayItem[]>(
       () => privateRequest.get<ListCartItemsResponse>('/cart'),
-      (items) => setCartItems(normalizeCartData(items)),
-      () => {
-        /* onFinish */
-      },
       true
     );
+    if (success && result) {
+      setCartItems(normalizeCartData(result));
+    }
   }, [execute, privateRequest]);
 
   const resetCart = useCallback(() => {
@@ -42,16 +41,17 @@ export function useShopCart(): UseShopCartReturn {
   }, []);
 
   const updateCart = useCallback(
-    ({ id, size, quantity }: CartUpdateQuantityType) => {
-      execute<CartDisplayItem[]>(
-        async () =>
-          await privateRequest.post<ListCartItemsResponse>('/cart', {
-            id,
-            size,
-            quantity,
-          }),
-        (items) => setCartItems(normalizeCartData(items))
+    async ({ id, size, quantity }: CartUpdateQuantityType) => {
+      const { success, result } = await execute<CartDisplayItem[]>(() =>
+        privateRequest.post<ListCartItemsResponse>('/cart', {
+          id,
+          size,
+          quantity,
+        })
       );
+      if (success && result) {
+        setCartItems(normalizeCartData(result));
+      }
     },
     [execute, privateRequest]
   );
@@ -64,24 +64,25 @@ export function useShopCart(): UseShopCartReturn {
     [cartItems, updateCart]
   );
 
-  const deleteFromCart = useCallback(
-    ({ id, size }: CartUpdateItemType) => {
-      execute<CartDisplayItem[]>(
-        async () =>
-          await privateRequest.delete<ListCartItemsResponse>(
-            `/cart/${id}/${size}`
-          ),
-        (items) => setCartItems(normalizeCartData(items))
-      );
-    },
-    [execute, privateRequest]
-  );
-
   const updateQuantity = useCallback(
     ({ id, size, quantity }: CartUpdateQuantityType) => {
       updateCart({ id, size, quantity });
     },
     [updateCart]
+  );
+
+  const deleteFromCart = useCallback(
+    async ({ id, size }: CartUpdateItemType) => {
+      const { success, result } = await execute<CartDisplayItem[]>(
+        () => privateRequest.delete<ListCartItemsResponse>(
+          `/cart/${id}/${size}`
+        )
+      );
+      if (success && result) {
+        setCartItems(normalizeCartData(result));
+      }
+    },
+    [execute, privateRequest]
   );
 
   const getCartAmount = useCallback(

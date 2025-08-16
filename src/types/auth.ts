@@ -12,7 +12,6 @@ export interface LoginFormInterface {
 
 export interface UseAuthFormInterface {
   onSuccess: () => void;
-  isAdmin?: boolean;
   isLogin?: boolean;
 }
 

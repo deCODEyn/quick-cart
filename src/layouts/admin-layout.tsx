@@ -5,7 +5,7 @@ import { useToast } from '@/hooks';
 
 export function AdminLayout() {
   const { userRole, isLoading } = useAuthContext();
-  const { showSuccessToast, showWarningToast } = useToast();
+  const { showWarningToast } = useToast();
   const fromLogin = useLocation().state?.fromLogin;
 
   if (isLoading) {
@@ -27,7 +27,6 @@ export function AdminLayout() {
   }
 
   if (fromLogin && userRole === 'Admin') {
-    showSuccessToast('Login successful.');
     return <Navigate replace state={{ fromLogin: null }} to="/admin" />;
   }
 

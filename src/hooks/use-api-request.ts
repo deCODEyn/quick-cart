@@ -14,21 +14,25 @@ function useApiRequestErrorHandling(): UseApiRequestErrorHandlingReturn {
   const [requestError, setRequestError] = useState<string | null>(null);
 
   const handleError = useCallback(
-    (error: unknown) => {
+    (error: unknown, suppressErrorToast = false) => {
       const axiosError = error as AxiosError<ApiErrorResponse>;
 
       if (axios.isAxiosError(axiosError) && axiosError.response) {
         const errorMessage =
           axiosError.response.data?.message ||
           'An unexpected API error occurred.';
-        showErrorToast(errorMessage);
+        if (!suppressErrorToast) {
+          showErrorToast(errorMessage);
+        }
         setRequestError(errorMessage);
         if (axiosError.response.data?.errors) {
           // Lógica para tratar os erros de validação
         }
       } else {
         const errorMessage = (error as Error).message;
-        showErrorToast(errorMessage);
+        if (!suppressErrorToast) {
+          showErrorToast(errorMessage);
+        }
         setRequestError(errorMessage);
       }
     },
@@ -40,36 +44,31 @@ function useApiRequestErrorHandling(): UseApiRequestErrorHandlingReturn {
 
 export function useApiRequest(): UseApiRequestReturn {
   const [isLoading, setIsLoading] = useState(false);
-  const [requestSuccess, setrequestSuccess] = useState(false);
+  const [requestSuccess, setRequestSuccess] = useState(false);
   const { handleError, requestError } = useApiRequestErrorHandling();
 
   const executeRef = useRef(
     async <T>(
       requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
-      onSuccess?: (result: T, message: string, success: boolean) => void,
-      onFinish?: (value: boolean) => void,
       suppressErrorToast = false
-    ): Promise<void> => {
+    ): Promise<{ success: boolean; result: T | null; message: string | null }> => {
       setIsLoading(true);
+      setRequestSuccess(false);
+
       try {
         const response = await requestFn();
         const { success, result, message } = response.data;
-        setrequestSuccess(success);
-        if (success && onSuccess) {
-          onSuccess(result as T, message || '', success);
-        }
+        setRequestSuccess(success);
+        return { success, result: (result as T) || null, message: message || null };
       } catch (error) {
-        if (!suppressErrorToast) {
-          handleError(error);
-        }
+        handleError(error, suppressErrorToast);
+        setRequestSuccess(false);
+        return { success: false, result: null, message: null };
       } finally {
-        if (onFinish) {
-          setInterval(() => onFinish(requestSuccess), 5000);
-        }
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
   );
 
-  return { isLoading, requestError, execute: executeRef.current };
+  return { isLoading, requestError, requestSuccess, execute: executeRef.current };
 }
