@@ -5,6 +5,9 @@ export function OrderStatusIndicator({ status }: OrderStatusIndicatorType) {
   let colorClass = '';
 
   switch (status) {
+    case 'Order Placed':
+      colorClass = 'bg-gray-300';
+      break;
     case 'Ready to ship':
       colorClass = 'bg-gray-500';
       break;

@@ -7,13 +7,16 @@ import type {
 } from '@/types';
 
 export interface AuthContextInterface {
-  authLogin: (email: string, password: string) => Promise<{ success: boolean, message: string }>;
+  authLogin: (
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; message: string }>;
   authLogout: () => Promise<boolean>;
   authRegister: (
     email: string,
     password: string,
     name: string
-  ) => Promise<{ success: boolean, message: string }>;
+  ) => Promise<{ success: boolean; message: string }>;
   isLoading: boolean;
   userRole: UserRoleType | null;
 }

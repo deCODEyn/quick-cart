@@ -131,8 +131,6 @@ export function useProductForm(
           });
       }
 
-
-
       const { success, message } = await execute<ProductType>(request);
       if (success) {
         showSuccessToast(message || '');
@@ -142,7 +140,7 @@ export function useProductForm(
           setImages(initialImages);
           setProductData(initialProductData);
         }
-      };
+      }
     },
     [
       execute,

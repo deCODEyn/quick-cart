@@ -32,8 +32,11 @@ export function useAuthForm({
       let successMessage: string;
 
       if (isLogin) {
-        const { success, message } = await authLogin(formData.email, formData.password);
-        authSuccess = success
+        const { success, message } = await authLogin(
+          formData.email,
+          formData.password
+        );
+        authSuccess = success;
         successMessage = message;
       } else {
         const { success, message } = await authRegister(
@@ -41,7 +44,7 @@ export function useAuthForm({
           formData.password,
           formData.name ?? ''
         );
-        authSuccess = success
+        authSuccess = success;
         successMessage = message;
       }
 
@@ -50,14 +53,7 @@ export function useAuthForm({
         onSuccess();
       }
     },
-    [
-      isLogin,
-      formData,
-      authLogin,
-      authRegister,
-      onSuccess,
-      showSuccessToast,
-    ]
+    [isLogin, formData, authLogin, authRegister, onSuccess, showSuccessToast]
   );
 
   return { formData, handleChange, onSubmit, isLoading };

@@ -73,10 +73,8 @@ export function useShopCart(): UseShopCartReturn {
 
   const deleteFromCart = useCallback(
     async ({ id, size }: CartUpdateItemType) => {
-      const { success, result } = await execute<CartDisplayItem[]>(
-        () => privateRequest.delete<ListCartItemsResponse>(
-          `/cart/${id}/${size}`
-        )
+      const { success, result } = await execute<CartDisplayItem[]>(() =>
+        privateRequest.delete<ListCartItemsResponse>(`/cart/${id}/${size}`)
       );
       if (success && result) {
         setCartItems(normalizeCartData(result));

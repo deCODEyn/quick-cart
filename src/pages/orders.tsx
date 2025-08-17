@@ -12,7 +12,7 @@ export function Orders() {
         <Title span="orders" title="my" />
       </div>
       <div className="border-t">
-        {products.slice(0, 4).map((item) => (
+        {products.slice(0, 3).map((item) => (
           <div
             className="flex flex-col gap-4 border-b py-4 text-gray-700 md:flex-row md:items-center md:justify-between"
             key={item._id}

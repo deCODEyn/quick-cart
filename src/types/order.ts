@@ -7,5 +7,10 @@ export type OrderItemType = {
 };
 
 export type OrderStatusIndicatorType = {
-  status: 'Ready to ship' | 'Shipped' | 'Delivered' | 'Cancelled';
+  status:
+    | 'Order Placed'
+    | 'Ready to ship'
+    | 'Shipped'
+    | 'Delivered'
+    | 'Cancelled';
 };

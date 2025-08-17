@@ -51,7 +51,11 @@ export function useApiRequest(): UseApiRequestReturn {
     async <T>(
       requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
       suppressErrorToast = false
-    ): Promise<{ success: boolean; result: T | null; message: string | null }> => {
+    ): Promise<{
+      success: boolean;
+      result: T | null;
+      message: string | null;
+    }> => {
       setIsLoading(true);
       setRequestSuccess(false);
 
@@ -59,7 +63,11 @@ export function useApiRequest(): UseApiRequestReturn {
         const response = await requestFn();
         const { success, result, message } = response.data;
         setRequestSuccess(success);
-        return { success, result: (result as T) || null, message: message || null };
+        return {
+          success,
+          result: (result as T) || null,
+          message: message || null,
+        };
       } catch (error) {
         handleError(error, suppressErrorToast);
         setRequestSuccess(false);
@@ -70,5 +78,10 @@ export function useApiRequest(): UseApiRequestReturn {
     }
   );
 
-  return { isLoading, requestError, requestSuccess, execute: executeRef.current };
+  return {
+    isLoading,
+    requestError,
+    requestSuccess,
+    execute: executeRef.current,
+  };
 }
