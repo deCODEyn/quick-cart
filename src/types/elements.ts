@@ -28,6 +28,12 @@ export type LinkButtonType = {
   className?: string;
 };
 
+export type SummaryRowType = {
+  isTotal?: boolean;
+  price: number;
+  title: string;
+};
+
 export type TitleType = {
   span: string;
   title: string;

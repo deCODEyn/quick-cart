@@ -36,12 +36,6 @@ export type CartItemsType = {
   [itemId: string]: CartItemSizeType;
 };
 
-export type CartSummaryRowType = {
-  isTotal?: boolean;
-  price: number;
-  title: string;
-};
-
 export type CartUpdateItemType = {
   id: string;
   size: string;

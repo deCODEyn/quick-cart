@@ -1,5 +1,4 @@
 import { DisplayPrice, Image } from '@/components';
-import { useDateFormat } from '@/hooks';
 import type { OrderItemType } from '@/types';
 
 export function OrderItem({ product, quantity, size }: OrderItemType) {
@@ -8,21 +7,15 @@ export function OrderItem({ product, quantity, size }: OrderItemType) {
       <Image
         alt={`imagem de ${product.name}`}
         className="w-16 sm:w-20"
-        src={product.image[0]}
+        src={product.image}
       />
-      <div>
+      <div className="w-3/4">
         <p className="font-medium sm:text-base">{product.name}</p>
-        <div className="mt-2 flex items-center gap-3 text-base text-gray-700">
-          <DisplayPrice price={product.price} />
+        <div className="mt-2 flex items-center gap-3 text-gray-700 text-sm sm:text-base">
+          <DisplayPrice price={product.price * quantity} />
           <p>Quantity: {quantity}</p>
           <p>Size: {size}</p>
         </div>
-        <p className="mt-4">
-          Date:
-          <span className="ml-2 text-gray-400">
-            {useDateFormat(product.createdAt)}
-          </span>
-        </p>
       </div>
     </div>
   );

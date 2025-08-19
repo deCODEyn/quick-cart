@@ -1,5 +1,10 @@
 import type { AxiosResponse } from 'axios';
-import type { CartDisplayItem, ProductType, UserType } from '@/types';
+import type {
+  CartDisplayItem,
+  OrderType,
+  ProductType,
+  UserType,
+} from '@/types';
 
 export interface ApiResponse<T> {
   result?: T;
@@ -34,6 +39,7 @@ export interface UseApiRequestReturn {
 
 export type ListCartItemsResponse = ApiResponse<CartDisplayItem[]>;
 export type ListProductsResponse = ApiResponse<ProductType[]>;
+export type ListOrdersResponse = ApiResponse<OrderType[]>;
 
 export type SingleProductResponse = ApiResponse<ProductType>;
 export type SingleUserResponse = ApiResponse<UserType>;

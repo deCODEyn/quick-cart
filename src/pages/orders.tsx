@@ -1,27 +1,46 @@
-import { OrderItem, OrderStatusIndicator, Title } from '@/components';
-import { useShopContext } from '@/context';
+import { useCallback, useEffect, useState } from 'react';
+import { OrderCard, Title } from '@/components';
+import { useApiRequest, usePrivateRequest } from '@/hooks';
+import type { ListOrdersResponse, OrderType } from '@/types';
 
 export function Orders() {
-  const { products } = useShopContext();
-  // Implementar lógica de acesso as ordens de compras do usuário.
-  // De momento informações estão estáticas com 3 itens para exemplo de como frontend irá se comportar.
+  const { execute } = useApiRequest();
+  const privateApi = usePrivateRequest();
+  const [orders, setOrders] = useState<OrderType[] | null>(null);
+
+  const getOrders = useCallback(async () => {
+    const { success, result } = await execute<OrderType[]>(() =>
+      privateApi.get<ListOrdersResponse>('/orders')
+    );
+    if (success && result) {
+      setOrders(result.reverse());
+    }
+  }, [execute, privateApi]);
+
+  useEffect(() => {
+    getOrders();
+  }, [getOrders]);
+
+  if (!orders) {
+    return (
+      <div className="border-gray-500 border-t pt-16">Loading orders...</div>
+    );
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="border-gray-500 border-t pt-16">No orders found.</div>
+    );
+  }
 
   return (
-    <div className="border-t pt-16">
+    <div className="border-gray-500 border-t pt-16">
       <div className="text-2xl">
         <Title span="orders" title="my" />
       </div>
-      <div className="border-t">
-        {products.slice(0, 3).map((item) => (
-          <div
-            className="flex flex-col gap-4 border-b py-4 text-gray-700 md:flex-row md:items-center md:justify-between"
-            key={item._id}
-          >
-            <OrderItem product={item} quantity={1} size="M" />
-            <OrderStatusIndicator status="Delivered" />
-          </div>
-        ))}
-      </div>
+      {orders.map((order) => (
+        <OrderCard key={order._id} order={order} />
+      ))}
     </div>
   );
 }

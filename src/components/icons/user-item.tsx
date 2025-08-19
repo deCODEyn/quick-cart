@@ -40,7 +40,7 @@ export function UserItem() {
             Orders
           </Link>
           <Button
-            className="my-[-8px] cursor-pointer appearance-none justify-start border-none bg-transparent p-0 text-current text-md shadow-none hover:bg-transparent hover:text-black focus:outline-none focus-visible:ring-0"
+            className="my-[-8px] cursor-pointer appearance-none justify-start border-none bg-transparent p-0 text-base text-current shadow-none hover:bg-transparent hover:text-black focus:outline-none focus-visible:ring-0"
             onClick={handleLogout}
           >
             Logout

@@ -7,15 +7,13 @@ export const CartItemCard = React.memo(
   ({ item, product }: CartItemCardType) => {
     const { updateQuantity } = useShopContext();
 
-    const handleQuantityChange = (
-      event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      event.target.value === ''
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.target.value === ''
         ? null
         : updateQuantity({
             id: item.id,
             size: item.size,
-            quantity: Number(event.target.value),
+            quantity: Number(e.target.value),
           });
     };
 
