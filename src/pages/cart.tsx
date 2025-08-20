@@ -33,9 +33,9 @@ export function Cart() {
 
   return getCartItemCount() !== 0 ? (
     <div className="border-t pt-14">
-      <div className="mb-3 text-2xl">
+      <h2 className="mb-3 text-3xl">
         <Title span="cart" title="your" />
-      </div>
+      </h2>
       <div className="border-b-2">
         {cartData.map((item) => {
           const productData = products.find(

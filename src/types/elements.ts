@@ -23,9 +23,9 @@ export type DisplayPriceType = {
 };
 
 export type LinkButtonType = {
+  className?: string;
   href: string;
   label: string;
-  className?: string;
 };
 
 export type LoadingDataType = {
@@ -39,6 +39,7 @@ export type SummaryRowType = {
 };
 
 export type TitleType = {
+  as?: React.ElementType;
   span: string;
   title: string;
 };

@@ -35,9 +35,9 @@ export function Orders() {
 
   return (
     <div className="border-t pt-14">
-      <div className="text-2xl">
+      <h2 className="text-2xl">
         <Title span="orders" title="my" />
-      </div>
+      </h2>
       {orders.map((order) => (
         <OrderCard key={order._id} order={order} />
       ))}

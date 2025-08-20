@@ -19,9 +19,9 @@ export function PlaceOrder() {
   return (
     <div className="flex min-h-[80vh] flex-col justify-between gap-4 border-t pt-5 sm:flex-row sm:pt-14">
       <div className="flex w-full flex-col gap-4 sm:max-w-[480px]">
-        <div className="my-3 text-xl sm:text-2xl">
+        <h2 className="my-3 text-xl sm:text-2xl">
           <Title span="information" title="delivery" />
-        </div>
+        </h2>
         <FormDelivery onSubmit={handleDeliverySubmit} />
       </div>
       <div className="mt-8">
@@ -29,7 +29,9 @@ export function PlaceOrder() {
           <CartTotal />
         </div>
         <div className="mt-12">
-          <Title span="method" title="payment" />
+          <h4 className="text-base">
+            <Title as="h4" span="method" title="payment" />
+          </h4>
           <div className="flex flex-col gap-3 lg:flex-row">
             <PaymentMethodButton
               currentMethod={method}

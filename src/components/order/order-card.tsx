@@ -3,6 +3,7 @@ import {
   OrderItem,
   OrderStatusIndicator,
   OrderTotal,
+  Title,
 } from '@/components';
 import { useDateFormat } from '@/hooks';
 import type { OrderCardType } from '@/types';
@@ -20,9 +21,13 @@ export function OrderCard({ order }: OrderCardType) {
   return (
     <div className="my-5 rounded-lg border border-gray-400 p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
-        <p className="font-bold text-gray-800">
-          Pedido #{order._id.substring(0, 8)}
-        </p>
+        <h4 className="font-bold text-gray-800">
+          <Title
+            as="h4"
+            span={`#${order._id.substring(0, 10)}`}
+            title="pedido:"
+          />
+        </h4>
         <div className="flex items-center gap-5">
           <p className="mx-0 text-gray-500 text-xs md:mx-5 md:text-base">
             Date:

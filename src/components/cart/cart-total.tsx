@@ -10,9 +10,9 @@ export function CartTotal() {
 
   return (
     <div className="w-full">
-      <div className="text-2xl">
-        <Title span="totals" title="cart" />
-      </div>
+      <h3 className="text-2xl">
+        <Title as="h3" span="totals" title="cart" />
+      </h3>
       <div className="mt-2 flex flex-col text-sm">
         <SummaryRow price={subtotal} title="Subtotal" />
         <SummaryRow price={deliveryFee} title="Shipping Fee" />

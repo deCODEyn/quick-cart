@@ -11,7 +11,7 @@ export function OrderItem({ product, quantity, size }: OrderItemType) {
       />
       <div className="w-3/4">
         <p className="font-medium sm:text-base">{product.name}</p>
-        <div className="mt-2 flex items-center gap-3 text-gray-700 text-sm sm:text-base">
+        <div className="mt-2 flex items-center gap-12 text-gray-700 text-sm sm:text-base">
           <DisplayPrice price={product.price * quantity} />
           <p>Quantity: {quantity}</p>
           <p>Size: {size}</p>

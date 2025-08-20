@@ -15,9 +15,9 @@ export function SectionHome({
 
   return (
     <div className="my-10">
-      <div className="pt-8 pb-4 text-center text-3xl">
+      <h2 className="pt-8 pb-4 text-center text-3xl">
         <Title span={span} title={title} />
-      </div>
+      </h2>
       {children}
       <ProductsGrid products={filteredProducts} />
     </div>

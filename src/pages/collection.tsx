@@ -21,8 +21,10 @@ export function Collection() {
         selectedSubCategories={selectedSubCategories}
       />
       <div className="flex-1">
-        <div className="mb-4 flex items-center justify-between text-base md:text-2xl">
-          <Title span="collections" title="all" />
+        <div className="mb-4 flex items-center justify-between ">
+          <h2 className="mx-2 text-xl md:text-2xl">
+            <Title span="collections" title="all" />
+          </h2>
           <SortSelect
             currentSortType={currentSortType}
             onSortChange={handleSortChange}

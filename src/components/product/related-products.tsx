@@ -27,9 +27,9 @@ export function RelatedProducts({
 
   return (
     <div className="my-24">
-      <div className="py-2 text-center text-3xl">
-        <Title span="products" title="related" />
-      </div>
+      <h3 className="mb-5 py-2 text-center text-2xl">
+        <Title as="h3" span="products" title="related" />
+      </h3>
       <ProductsGrid products={related} />
     </div>
   );

@@ -4,9 +4,9 @@ import { FeatureCard, Image, NewsletterBox, Title } from '@/components';
 export function About() {
   return (
     <div>
-      <div className="border-t pt-8 text-center text-3xl">
+      <h2 className="border-t pt-8 text-center text-3xl">
         <Title span="us" title="about" />
-      </div>
+      </h2>
       <div className="my-10 flex flex-col gap-16 md:flex-row">
         <Image
           alt="Generic image for About Us session"
@@ -33,9 +33,9 @@ export function About() {
           </p>
         </div>
       </div>
-      <div className="py-4 text-2xl">
-        <Title span="choose us" title="why" />
-      </div>
+      <h3 className="py-4 text-2xl">
+        <Title as="h3" span="choose us" title="why" />
+      </h3>
       <div className="mb-20 flex flex-col gap-1 text-sm md:flex-row">
         <FeatureCard
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet esse
