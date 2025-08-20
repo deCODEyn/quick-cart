@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Image } from '@/components';
+import { Image, LoadingData } from '@/components';
 import type { ProductInfoType } from '@/types';
 
 export function ProductImageGalery({ product }: ProductInfoType) {
@@ -36,9 +36,7 @@ export function ProductImageGalery({ product }: ProductInfoType) {
             src={currentImage}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-500">
-            <p>Loading image...</p>
-          </div>
+          <LoadingData data="image" />
         )}
       </div>
     </div>

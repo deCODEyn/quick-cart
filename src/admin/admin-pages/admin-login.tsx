@@ -16,11 +16,7 @@ export function AdminLogin() {
         </h1>
         <form className="mt-10" onSubmit={onSubmit}>
           <div className="mb-3 flex min-w-72 flex-col gap-2.5">
-            <LoginForm
-              formData={formData}
-              handleChange={handleChange}
-              isLogin={true}
-            />
+            <LoginForm formData={formData} handleChange={handleChange} />
           </div>
           <LoginButton
             className="mt-2 w-full rounded-md bg-black px-4 py-2 text-white"

@@ -1,10 +1,21 @@
-import { OrderItem, OrderStatusIndicator } from '@/components';
+import {
+  Button,
+  OrderItem,
+  OrderStatusIndicator,
+  OrderTotal,
+} from '@/components';
 import { useDateFormat } from '@/hooks';
 import type { OrderCardType } from '@/types';
-import { OrderTotal } from './order-total';
 
 export function OrderCard({ order }: OrderCardType) {
   const formattedDate = useDateFormat(order.createdAt);
+  const canEdit =
+    order.status === 'Order Placed' || order.status === 'Ready to ship';
+
+  const handleEditClick = () => {
+    // Lógica para navegação para a página de edição ou para abrir um modal
+    // Por exemplo: history.push(`/edit-order/${order._id}`);
+  };
 
   return (
     <div className="my-5 rounded-lg border border-gray-400 p-5 shadow-sm">
@@ -36,6 +47,14 @@ export function OrderCard({ order }: OrderCardType) {
       <hr className="mx-10 my-4 border-gray-300" />
       <div className="flex justify-end">
         <OrderTotal amount={order.amount} deliveryFee={order.deliveryFee} />
+        {canEdit && (
+          <Button
+            className="m-4 justify-self-center rounded-lg border border-gray-400 bg-gray-200 px-4 py-2 text-gray-600 text-sm hover:bg-gray-100"
+            onClick={handleEditClick}
+          >
+            Edit Address
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { useAuthContext } from '@/context';
 import { useApiRequest, useShopCart } from '@/hooks';
 import { api } from '@/services/api';
 import type {
@@ -13,7 +14,6 @@ import type {
   ProductType,
   ShopContextInterface,
 } from '@/types';
-import { useAuthContext } from './auth-context';
 
 export const ShopContext = createContext<ShopContextInterface | undefined>(
   undefined
@@ -30,6 +30,7 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
     getCartItemCount,
     getCartAmount,
     resetCart,
+    clearCart,
   } = useShopCart();
   const [products, setProducts] = useState<ProductType[]>([]);
   const { execute } = useApiRequest();
@@ -68,6 +69,7 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
     updateQuantity,
     cartItems,
     products,
+    clearCart,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

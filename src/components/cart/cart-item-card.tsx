@@ -38,13 +38,15 @@ export const CartItemCard = React.memo(
           </div>
         </div>
         <Input
-          className="max-w-10 border px-1 py-1 sm:max-w-20 sm:px-2"
+          className="max-w-[60px] border border-gray-300 px-2 py-1 focus:bg-transparent focus-visible:ring-0"
           min={1}
           onChange={handleQuantityChange}
           type="number"
           value={item.quantity}
         />
-        <TrashItem id={item.id} size={item.size} />
+        <div className="justify-self-center">
+          <TrashItem id={item.id} size={item.size} />
+        </div>
       </div>
     );
   }

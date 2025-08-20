@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useApiRequest, usePrivateRequest } from '@/hooks';
 import type {
   CartDisplayItem,
   CartItemsType,
@@ -8,8 +9,6 @@ import type {
   ProductType,
   UseShopCartReturn,
 } from '@/types';
-import { useApiRequest } from './use-api-request';
-import { usePrivateRequest } from './use-private-request';
 
 const normalizeCartData = (items: CartDisplayItem[]): CartItemsType => {
   return items.reduce((organizedCart, item) => {
@@ -83,6 +82,15 @@ export function useShopCart(): UseShopCartReturn {
     [execute, privateRequest]
   );
 
+  const clearCart = useCallback(async () => {
+    const { success } = await execute<CartDisplayItem[]>(() =>
+      privateRequest.delete<ListCartItemsResponse>('/cart')
+    );
+    if (success) {
+      resetCart();
+    }
+  }, [execute, privateRequest, resetCart]);
+
   const getCartAmount = useCallback(
     (products: ProductType[]) => {
       return Object.entries(cartItems).reduce((totalAmount, [id, sizes]) => {
@@ -125,5 +133,6 @@ export function useShopCart(): UseShopCartReturn {
     getCartItemCount,
     updateQuantity,
     resetCart,
+    clearCart,
   };
 }

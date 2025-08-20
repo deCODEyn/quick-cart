@@ -28,6 +28,10 @@ export type LinkButtonType = {
   className?: string;
 };
 
+export type LoadingDataType = {
+  data: string;
+};
+
 export type SummaryRowType = {
   isTotal?: boolean;
   price: number;

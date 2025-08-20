@@ -2,7 +2,7 @@ import { Hero, NewsletterBox, OurPolicy, SectionHome } from '@/components';
 
 export function Home() {
   return (
-    <div>
+    <div className="pt-5">
       <Hero />
       <SectionHome isBestSeller={true} span="sellers" title="best">
         <p className="m-auto mb-5 w-3/4 text-gray-600 text-xs md:text-base">

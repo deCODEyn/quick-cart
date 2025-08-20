@@ -7,8 +7,9 @@ export function TrashItem({ id, size }: CartUpdateItemType) {
 
   return (
     <Trash2
-      className="mr-4 w-4 cursor-pointer sm:w-5"
+      className="cursor-pointer"
       onClick={() => deleteFromCart({ id, size })}
+      size={28}
     />
   );
 }

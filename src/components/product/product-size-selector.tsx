@@ -12,7 +12,7 @@ export function ProductSizeSelector({
       <div className="flex gap-2">
         {sizes.map((item) => (
           <Button
-            className={`h-10 cursor-pointer border-2 border-gray-400 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-300 ${item === currentSize ? 'border-orange-600 bg-orange-100' : ''}`}
+            className={`h-10 w-10 cursor-pointer border-2 px-4 py-2 text-gray-700 ${item === currentSize ? 'border-orange-600 bg-orange-100 hover:bg-orange-300' : 'border-gray-400 bg-gray-100 hover:bg-gray-300'}`}
             key={item}
             onClick={() => onSelectSize(item)}
             type="button"

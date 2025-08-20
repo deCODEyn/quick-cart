@@ -1,4 +1,4 @@
-import type { MinimizeAddressType } from './address';
+import type { MinimizeAddressType } from '@/types';
 
 export type OrderCardType = {
   order: OrderType;
@@ -25,7 +25,7 @@ export type OrderStatusEnunType =
 export type OrderTotalType = {
   amount: number;
   deliveryFee: number;
-}
+};
 
 export type OrderType = {
   _id: string;

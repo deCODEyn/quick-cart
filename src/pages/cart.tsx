@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Button,
   CartItemCard,
   CartTotal,
   EmptyCart,
@@ -10,7 +11,7 @@ import { useShopContext } from '@/context';
 import type { CartDisplayItem } from '@/types';
 
 export function Cart() {
-  const { products, cartItems, getCartItemCount } = useShopContext();
+  const { products, cartItems, getCartItemCount, clearCart } = useShopContext();
   const [cartData, setCartData] = useState<CartDisplayItem[]>([]);
 
   useEffect(() => {
@@ -25,6 +26,10 @@ export function Cart() {
     );
     setCartData(transformedCartData);
   }, [cartItems]);
+
+  const handleClearCart = () => {
+    clearCart();
+  };
 
   return getCartItemCount() !== 0 ? (
     <div className="border-t pt-14">
@@ -49,7 +54,13 @@ export function Cart() {
       <div className="my-20 flex justify-end">
         <div className="w-full sm:w-[450px]">
           <CartTotal />
-          <div className="w-full pt-10 text-end">
+          <div className="mt-8 flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-4">
+            <Button
+              className="mt-4 h-12 cursor-pointer rounded border border-red-500 px-8 py-3 font-medium text-red-500 uppercase hover:bg-red-50 active:bg-red-100 sm:mt-0"
+              onClick={handleClearCart}
+            >
+              clear cart
+            </Button>
             <LinkButton href="/place-order" label="proceed to checkout" />
           </div>
         </div>

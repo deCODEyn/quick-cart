@@ -40,7 +40,7 @@ export function Product() {
   }, []);
 
   return productData ? (
-    <div className="border-t-2 pt-10 opacity-100 transition-opacity duration-500 ease-in">
+    <div className="border-t pt-10 opacity-100 transition-opacity duration-500 ease-in">
       <div className="flex flex-col gap-12 md:flex-row md:gap-12">
         <ProductImageGalery product={productData} />
         <div className="flex-1">

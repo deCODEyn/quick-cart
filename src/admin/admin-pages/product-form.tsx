@@ -101,7 +101,7 @@ export function ProductForm({
         </label>
       </div>
       <Button
-        className="mt-4 h-10 w-36 cursor-pointer bg-black py-3 text-white uppercase active:bg-gray-400"
+        className="mt-4 h-12 w-36 cursor-pointer rounded bg-black py-3 text-white uppercase hover:bg-gray-700 active:bg-gray-600"
         disabled={isLoading}
         type="submit"
       >
