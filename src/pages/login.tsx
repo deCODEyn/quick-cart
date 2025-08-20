@@ -9,7 +9,8 @@ export function Login() {
   const from = useLocation().state?.from || '/';
   const { formData, handleChange, onSubmit, isLoading } = useAuthForm({
     isLogin,
-    onSuccess: () => navigate(from, { replace: true }),
+    onSuccess: () =>
+      navigate(from === '/login' ? '/' : from, { replace: true }),
   });
 
   return (
@@ -19,9 +20,9 @@ export function Login() {
         onSubmit={onSubmit}
       >
         <div className="mt-10 mb-2 inline-flex items-center gap-2">
-          <p className="prata-regular text-3xl">
+          <h1 className="prata-regular text-3xl">
             {isLogin ? 'Login' : 'Sign Up'}
-          </p>
+          </h1>
           <hr className="h-[1.5px] w-8 border-none bg-gray-800" />
         </div>
         <LoginForm

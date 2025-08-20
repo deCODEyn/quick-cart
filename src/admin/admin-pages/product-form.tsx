@@ -31,7 +31,13 @@ export function ProductForm({
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => onSubmit(e, navigate)}
     >
       {!isEditMode && (
-        <ImageUploader handleImageChange={handleImageChange} images={images} />
+        <>
+          <h1 className="mb-4 font-bold text-2xl">Add new product</h1>
+          <ImageUploader
+            handleImageChange={handleImageChange}
+            images={images}
+          />
+        </>
       )}
       <div className="w-full">
         <h3 className="mb-2 text-lg">Product Name</h3>

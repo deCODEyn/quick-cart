@@ -22,9 +22,9 @@ export function Collection() {
       />
       <div className="flex-1">
         <div className="mb-4 flex items-center justify-between ">
-          <h2 className="mx-2 text-xl md:text-2xl">
-            <Title span="collections" title="all" />
-          </h2>
+          <h1 className="mx-2 text-xl md:text-2xl">
+            <Title as="h1" span="collections" title="all" />
+          </h1>
           <SortSelect
             currentSortType={currentSortType}
             onSortChange={handleSortChange}

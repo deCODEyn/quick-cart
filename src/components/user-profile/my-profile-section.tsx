@@ -34,9 +34,9 @@ export function MyProfileSection() {
         </div>
       </div>
       <div className="flex w-full flex-1 flex-col items-center md:w-2/3">
-        <h2 className="text-3xl md:text-left">
-          <Title span="profile" title="my" />
-        </h2>
+        <h1 className="text-3xl md:text-left">
+          <Title as="h1" span="profile" title="my" />
+        </h1>
         <p className="text-base text-gray-500">
           Welcome to
           <span className="mx-1 font-bold">QuickCart E-commerce!</span>

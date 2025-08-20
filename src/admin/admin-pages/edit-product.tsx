@@ -34,7 +34,7 @@ export function EditProduct() {
 
   return (
     <div className="p-4">
-      <h1 className="mb-4 font-bold text-2xl">Edit Product: {product.name}</h1>
+      <h1 className="mb-4 font-bold text-2xl">Edit Product</h1>
       <ProductForm initialData={product} isEditMode={true} />
     </div>
   );

@@ -6,9 +6,9 @@ export function Contact() {
 
   return (
     <div>
-      <h2 className="border-t pt-10 text-center text-2xl">
-        <Title span="us" title="contact" />
-      </h2>
+      <h1 className="border-t pt-10 text-center text-2xl">
+        <Title as="h1" span="us" title="contact" />
+      </h1>
       <div className="my-10 mb-28 flex flex-col justify-center gap-10 md:flex-row">
         <Image
           alt="Generic image for Contact Us session"

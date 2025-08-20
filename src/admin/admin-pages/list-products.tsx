@@ -29,7 +29,7 @@ export function ListProducts() {
 
   return (
     <>
-      <p className="mb-2">All Products List</p>
+      <h1 className="mb-4 font-bold text-2xl">All Products List</h1>
       <div className="flex flex-col gap-2">
         <div className="hidden grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center rounded-sm border bg-gray-100 px-2 py-1 text-sm md:grid">
           <p className="font-bold">Image</p>

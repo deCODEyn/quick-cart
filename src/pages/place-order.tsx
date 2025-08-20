@@ -19,9 +19,9 @@ export function PlaceOrder() {
   return (
     <div className="flex min-h-[80vh] flex-col justify-between gap-4 border-t pt-5 sm:flex-row sm:pt-14">
       <div className="flex w-full flex-col gap-4 sm:max-w-[480px]">
-        <h2 className="my-3 text-xl sm:text-2xl">
-          <Title span="information" title="delivery" />
-        </h2>
+        <h1 className="my-3 text-xl sm:text-2xl">
+          <Title as="h1" span="information" title="delivery" />
+        </h1>
         <FormDelivery onSubmit={handleDeliverySubmit} />
       </div>
       <div className="mt-8">

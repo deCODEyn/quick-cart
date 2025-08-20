@@ -1,10 +1,15 @@
-import { CartItem, MobileMenu, SearchItem, UserItem } from '@/components';
+import {
+  CartItem,
+  MobileMenu,
+  ProfileUserItem,
+  SearchItem,
+} from '@/components';
 
 export function NavbarItems() {
   return (
     <div className="flex items-center gap-6">
       <SearchItem />
-      <UserItem />
+      <ProfileUserItem />
       <CartItem />
       <MobileMenu />
     </div>
