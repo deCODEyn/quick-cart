@@ -20,6 +20,7 @@ import {
   PlaceOrder,
   Product,
 } from '@/pages';
+import { UserProfile } from './pages/user-profile';
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
           <Route element={<Orders />} path="orders" />
           <Route element={<PlaceOrder />} path="place-order" />
           <Route element={<Product />} path="product/:productId" />
+          <Route element={<UserProfile />} path="profile" />
         </Route>
 
         <Route element={<AdminLogin />} path="/login/admin" />
