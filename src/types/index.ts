@@ -13,3 +13,4 @@ export * from '@/types/navbar';
 export * from '@/types/order';
 export * from '@/types/place-order';
 export * from '@/types/products';
+export * from '@/types/profile';

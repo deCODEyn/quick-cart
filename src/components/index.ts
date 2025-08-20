@@ -51,3 +51,8 @@ export * from '@/components/product/related-products';
 export * from '@/components/ui/button';
 export * from '@/components/ui/input';
 export * from '@/components/ui/textarea';
+export * from '@/components/user-profile/information-profile-section';
+export * from '@/components/user-profile/latest-orders-section';
+export * from '@/components/user-profile/my-profile-section';
+export * from '@/components/user-profile/profile-info-item';
+export * from '@/components/user-profile/user-profile-addresses';
