@@ -19,8 +19,8 @@ import {
   Orders,
   PlaceOrder,
   Product,
+  UserProfile,
 } from '@/pages';
-import { UserProfile } from './pages/user-profile';
 
 export default function App() {
   return (

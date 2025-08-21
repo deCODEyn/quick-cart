@@ -22,6 +22,7 @@ export const initialAuthFormData: AuthFormData = {
   name: '',
   email: '',
   password: '',
+  passwordValidate: '',
 };
 
 export const initialDeliveryData: FormDeliveryData = {

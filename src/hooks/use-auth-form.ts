@@ -1,19 +1,19 @@
 import { useCallback, useState } from 'react';
 import { initialAuthFormData } from '@/constants';
 import { useAuthContext } from '@/context';
+import { useToast } from '@/hooks';
 import type {
   AuthFormData,
   UseAuthFormInterface,
   UseAuthFormReturn,
 } from '@/types';
-import { useToast } from './use-toast';
 
 export function useAuthForm({
   isLogin = true,
   onSuccess,
 }: UseAuthFormInterface): UseAuthFormReturn {
   const { authLogin, authRegister, isLoading } = useAuthContext();
-  const { showSuccessToast } = useToast();
+  const { showSuccessToast, showWarningToast } = useToast();
   const [formData, setFormData] = useState<AuthFormData>(initialAuthFormData);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +36,19 @@ export function useAuthForm({
         authSuccess = success;
         successMessage = message;
       } else {
+        if (formData.password !== formData.passwordValidate) {
+          authSuccess = false;
+          showWarningToast('Passwords do not match.');
+          return;
+        }
+        if (!formData.name) {
+          showWarningToast('Username is required.');
+          return;
+        }
         const { success, message } = await authRegister(
           formData.email,
           formData.password,
-          formData.name ?? ''
+          formData.name
         );
         authSuccess = success;
         successMessage = message;
@@ -48,9 +57,18 @@ export function useAuthForm({
       if (authSuccess) {
         showSuccessToast(successMessage);
         onSuccess();
+        return;
       }
     },
-    [isLogin, formData, authLogin, authRegister, onSuccess, showSuccessToast]
+    [
+      isLogin,
+      formData,
+      authLogin,
+      authRegister,
+      onSuccess,
+      showSuccessToast,
+      showWarningToast,
+    ]
   );
 
   return { formData, handleChange, onSubmit, isLoading };

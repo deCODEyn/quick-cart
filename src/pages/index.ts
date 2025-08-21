@@ -7,3 +7,4 @@ export * from '@/pages/login';
 export * from '@/pages/orders';
 export * from '@/pages/place-order';
 export * from '@/pages/product';
+export * from '@/pages/user-profile';

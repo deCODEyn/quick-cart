@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
 
   const fetchUser = useCallback(async (): Promise<void> => {
     const { result, success } = await execute<UserType>(
-      () => privateApi.get<SingleUserResponse>('/user/me'),
+      () => privateApi.get<SingleUserResponse>('/users/me'),
       true
     );
     if (success && result) {
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       password: string
     ): Promise<{ success: boolean; message: string }> => {
       const { success, message } = await execute(() =>
-        privateApi.post('/user/login', { email, password })
+        privateApi.post('/users/login', { email, password })
       );
       if (success) {
         fetchUser();
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
   );
 
   const authLogout = useCallback(async (): Promise<boolean> => {
-    const { success } = await execute(() => privateApi.post('/user/logout'));
+    const { success } = await execute(() => privateApi.post('/users/logout'));
     if (success) {
       setUserRole(null);
     }
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       name: string
     ): Promise<{ success: boolean; message: string }> => {
       const { success, message } = await execute(() =>
-        privateApi.post('/user/register', { name, email, password })
+        privateApi.post('/users/register', { name, email, password })
       );
       if (success) {
         fetchUser();
