@@ -28,10 +28,9 @@ export function UserProfileAddresses() {
             <div className="mb-2 flex items-center justify-between">
               <span className="font-medium text-lg">{addr.type}</span>
               <Button
-                className="cursor-pointer"
+                className="cursor-pointer appearance-none bg-transparent text-gray-900 shadow-none hover:bg-transparent hover:text-gray-500 active:text-gray-400"
                 onClick={handleAddressEdit}
                 size="icon"
-                variant="ghost"
               >
                 <Pencil className="size-4" />
               </Button>
@@ -47,12 +46,14 @@ export function UserProfileAddresses() {
           </div>
         ))}
       </div>
-      <Button
-        className="mt-6 flex cursor-pointer items-center gap-2 justify-self-center"
-        onClick={handleAddAddress}
-      >
-        <Plus className="size-4" /> Add Address
-      </Button>
+      <div className="mt-6 flex items-center justify-center gap-2">
+        <Button
+          className="h-8 cursor-pointer rounded border border-gray-600 bg-gray-300 px-2 py-1 text-gray-900 text-xs uppercase hover:bg-gray-400 active:bg-gray-300"
+          onClick={handleAddAddress}
+        >
+          <Plus className="size-4" /> Add Address
+        </Button>
+      </div>
     </div>
   );
 }

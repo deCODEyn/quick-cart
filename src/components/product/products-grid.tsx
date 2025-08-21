@@ -7,7 +7,7 @@ export function ProductsGrid({ products }: ArrayProductsType) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 gap-y-6 md:grid-cols-4 lg:grid-cols-5">
+    <div className="grid grid-cols-2 gap-4 gap-y-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {products?.map((item) => (
         <ProductItem
           id={item._id}
