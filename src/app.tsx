@@ -47,7 +47,7 @@ export default function App() {
           <Route element={<AdminHome />} index />
           <Route element={<ProductForm isEditMode={false} />} path="create" />
           <Route element={<ListProducts />} path="list" />
-          <Route element={<EditProduct />} path="edit/:productId" />
+          <Route element={<EditProduct />} path="edit" />
           <Route element={<ManageOrders />} path="orders" />
         </Route>
       </Routes>

@@ -8,7 +8,7 @@ export function ProductListItem({ item, onDelete }: ProductListItemType) {
   const navigate = useNavigate();
 
   const onEdit = () => {
-    navigate(`/admin/edit/${item._id}`, { state: { product: item } });
+    navigate('/admin/edit', { state: { product: item } });
   };
 
   return (

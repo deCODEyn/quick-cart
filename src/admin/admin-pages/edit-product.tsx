@@ -1,32 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ProductForm } from '@/admin/admin-pages';
 import { LoadingData } from '@/components';
-import { useToast } from '@/hooks';
-import { api } from '@/services/api';
 import type { ProductType } from '@/types';
 
 export function EditProduct() {
-  const passedProduct = useLocation().state.product as ProductType;
-  const { showErrorToast } = useToast();
-  const { id } = useParams();
-  const [product, setProduct] = useState<ProductType | null>(passedProduct);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!product && id) {
-      const fetchProduct = async () => {
-        try {
-          const response = await api.get<ProductType>(`/products/${id}`);
-          setProduct(response.data);
-        } catch (_error) {
-          showErrorToast('Failed to fetch product');
-          navigate('/admin/list');
-        }
-      };
-      fetchProduct();
-    }
-  }, [id, navigate, showErrorToast, product]);
+  const product = useLocation().state.product as ProductType;
 
   if (!product) {
     return <LoadingData data="product data" />;

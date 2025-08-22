@@ -4,6 +4,7 @@ import type {
   CartUpdateQuantityType,
   ProductType,
   UserRoleType,
+  UserType,
 } from '@/types';
 
 export interface AuthContextInterface {
@@ -17,7 +18,8 @@ export interface AuthContextInterface {
     password: string,
     name: string
   ) => Promise<{ success: boolean; message: string }>;
-  isLoading: boolean;
+  isAuthReady: boolean;
+  user: UserType | null;
   userRole: UserRoleType | null;
 }
 
