@@ -6,12 +6,12 @@ import type { AddCartItemType } from '@/types';
 
 export function AddToCartButton({ id, size, name }: AddCartItemType) {
   const { addToCart } = useShopContext();
-  const { userRole } = useAuthContext();
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
   const { showSuccessToast } = useToast();
 
-  const isLoggedIn = !!userRole;
+  const isLoggedIn = !!user;
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {

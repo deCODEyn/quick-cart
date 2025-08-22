@@ -1,15 +1,16 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AdminNavbar, Sidebar } from '@/admin/admin-components';
+import { LoadingData } from '@/components';
 import { useAuthContext } from '@/context';
 import { useToast } from '@/hooks';
 
 export function AdminLayout() {
-  const { userRole, isLoading } = useAuthContext();
+  const { userRole, isAuthReady } = useAuthContext();
   const { showWarningToast } = useToast();
   const fromLogin = useLocation().state?.fromLogin;
 
-  if (isLoading) {
-    return <div>Carregando...</div>;
+  if (!isAuthReady) {
+    return <LoadingData data="user data" />;
   }
 
   if (userRole !== 'Admin') {

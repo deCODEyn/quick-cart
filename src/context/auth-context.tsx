@@ -20,8 +20,10 @@ export const AuthContext = createContext<AuthContextInterface | undefined>(
 
 export const AuthProvider = ({ children }: ContextProviderType) => {
   const privateApi = usePrivateRequest();
-  const { execute, isLoading } = useApiRequest();
+  const { execute } = useApiRequest();
   const [userRole, setUserRole] = useState<UserRoleType | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
+  const [isAuthReady, setIsAuthReady] = useState(false);
 
   const fetchUser = useCallback(async (): Promise<void> => {
     const { result, success } = await execute<UserType>(
@@ -29,14 +31,20 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       true
     );
     if (success && result) {
+      setUser(result);
       setUserRole(result.role);
     } else {
+      setUser(null);
       setUserRole(null);
     }
   }, [execute, privateApi]);
 
   useEffect(() => {
-    fetchUser();
+    const initAuth = async () => {
+      await fetchUser();
+      setIsAuthReady(true);
+    };
+    initAuth();
   }, [fetchUser]);
 
   const authLogin = useCallback(
@@ -58,6 +66,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
   const authLogout = useCallback(async (): Promise<boolean> => {
     const { success } = await execute(() => privateApi.post('/users/logout'));
     if (success) {
+      setUser(null);
       setUserRole(null);
     }
     return success;
@@ -80,7 +89,14 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
     [execute, fetchUser, privateApi]
   );
 
-  const value = { userRole, isLoading, authLogin, authLogout, authRegister };
+  const value = {
+    user,
+    userRole,
+    isAuthReady,
+    authLogin,
+    authLogout,
+    authRegister,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

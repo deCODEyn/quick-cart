@@ -56,3 +56,4 @@ export * from '@/components/user-profile/latest-orders-section';
 export * from '@/components/user-profile/my-profile-section';
 export * from '@/components/user-profile/profile-info-item';
 export * from '@/components/user-profile/user-profile-addresses';
+export * from '@/components/user-profile/user-profile-image';
