@@ -23,6 +23,7 @@ export type DisplayPriceType = {
 };
 
 export type LinkButtonType = {
+  children?: React.ReactNode;
   className?: string;
   href: string;
   label: string;
