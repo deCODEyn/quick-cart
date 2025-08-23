@@ -13,7 +13,7 @@ export function ProductListItem({ item, onDelete }: ProductListItemType) {
 
   return (
     <div
-      className="grid grid-cols-[1fr_3fr_1fr] items-center justify-center gap-2 rounded-sm border px-2 py-1 text-sm md:grid-cols-[1fr_3fr_1fr_1fr_1fr]"
+      className="grid grid-cols-[1fr_3fr_1fr] items-center justify-center gap-2 rounded-sm border border-gray-300 px-2 py-1 text-sm md:grid-cols-[1fr_3fr_1fr_1fr_1fr]"
       key={item._id}
     >
       <Image
@@ -29,16 +29,16 @@ export function ProductListItem({ item, onDelete }: ProductListItemType) {
       </p>
       <div className="flex max-w-20 flex-row justify-center gap-0.5">
         <Button
-          className="cursor-pointer border-2 border-gray-300 bg-gray-100 px-2 py-1 text-center text-current text-lg hover:bg-gray-300"
+          className="h-8 w-8 cursor-pointer border-2 border-gray-300 bg-gray-100 px-2 py-1 text-center text-current text-lg hover:bg-gray-300"
           onClick={onEdit}
         >
-          <Pencil />
+          <Pencil className="size-4" />
         </Button>
         <Button
-          className="cursor-pointer border-2 border-gray-300 bg-gray-100 px-2 py-1 text-center text-current text-lg hover:bg-gray-300"
+          className="h-8 w-8 cursor-pointer border-2 border-gray-300 bg-gray-100 px-2 py-1 text-center text-current text-lg hover:bg-gray-300"
           onClick={() => onDelete(item._id)}
         >
-          <X />
+          <X className="size-4" />
         </Button>
       </div>
     </div>

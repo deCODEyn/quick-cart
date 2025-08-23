@@ -1,5 +1,5 @@
 import type { SizesSelectorType } from '@/admin/admin-types';
-import { Button } from '@/components';
+import { Button, Label } from '@/components';
 import { sizes } from '@/constants';
 
 export function SizesSelector({
@@ -8,7 +8,7 @@ export function SizesSelector({
 }: SizesSelectorType) {
   return (
     <div>
-      <h3 className="mb-2 text-lg">Product Sizes</h3>
+      <Label className="mb-2 text-lg">Product Sizes</Label>
       <div className="flex">
         {sizes.map((size) => (
           <Button

@@ -1,5 +1,6 @@
 import type { SelectInputType } from '@/admin/admin-types';
 import {
+  Label,
   Select,
   SelectContent,
   SelectItem,
@@ -12,12 +13,13 @@ export function SelectInput({
   value,
   options,
   onChange,
+  className,
 }: SelectInputType) {
   const placeholderText = `${label}`;
 
   return (
     <div>
-      <h3 className="mb-2 text-lg">{label}</h3>
+      <Label className={`${className} font-medium text-lg`}>{label}</Label>
       <Select onValueChange={onChange} value={value}>
         <SelectTrigger className="h-10 w-full rounded border border-gray-500 px-2 text-gray-900 text-sm">
           <SelectValue placeholder={placeholderText} />

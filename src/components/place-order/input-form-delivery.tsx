@@ -1,4 +1,4 @@
-import { Input } from '@/components';
+import { Input, Label } from '@/components';
 import type { InputFormInterface } from '@/types';
 
 export function InputForm({
@@ -12,12 +12,12 @@ export function InputForm({
   return (
     <div className="flex flex-1 flex-col">
       {label && (
-        <label
+        <Label
           className="mb-1 font-medium text-gray-700 text-sm"
           htmlFor={name}
         >
           {label}
-        </label>
+        </Label>
       )}
       <Input
         className="w-full rounded border-2 border-gray-300 px-3.5 py-1.5 focus:outline-none focus-visible:border-gray-500 focus-visible:ring-0"

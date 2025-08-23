@@ -34,6 +34,16 @@ export type LoginButtonType = {
   isLogin?: boolean;
 };
 
+export type SocialMediaType = {
+  instagram?: string | undefined;
+  facebook?: string | undefined;
+  X?: string | undefined;
+  linkedIn?: string | undefined;
+  whatsApp?: string | undefined;
+}
+
+export type UserRoleType = 'Admin' | 'User';
+
 export type UserType = {
   email: string;
   role: UserRoleType;
@@ -44,16 +54,6 @@ export type UserType = {
   cpf?: string | undefined;
   rg?: string | undefined;
   phoneNumber?: string | undefined;
-  socialMedia?:
-    | {
-        instagram?: string | undefined;
-        facebook?: string | undefined;
-        X?: string | undefined;
-        linkedIn?: string | undefined;
-        whatsApp?: string | undefined;
-      }
-    | undefined;
+  socialMedia?: SocialMediaType | undefined;
   profileImage?: string | undefined;
 };
-
-export type UserRoleType = 'Admin' | 'User';

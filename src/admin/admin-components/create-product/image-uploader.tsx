@@ -1,6 +1,6 @@
 import { ImageUp } from 'lucide-react';
 import type { ImageFiles, ImageUploaderTypes } from '@/admin/admin-types';
-import { Image, Input } from '@/components';
+import { Image, Input, Label } from '@/components';
 
 export function ImageUploader({
   images,
@@ -8,13 +8,13 @@ export function ImageUploader({
 }: ImageUploaderTypes) {
   return (
     <div>
-      <h3 className="mb-2 text-lg">Upload Images</h3>
+      <Label className="mb-2 text-lg">Upload Images</Label>
       <div className="flex gap-5">
         {Object.keys(images).map((imageKey) => {
           const file = images[imageKey as keyof ImageFiles];
           const key = imageKey as keyof ImageFiles;
           return (
-            <label htmlFor={key} key={key}>
+            <Label htmlFor={key} key={key}>
               {file ? (
                 <Image
                   alt={`${key} preview!`}
@@ -31,7 +31,7 @@ export function ImageUploader({
                 required={key === 'image1'}
                 type="file"
               />
-            </label>
+            </Label>
           );
         })}
       </div>
