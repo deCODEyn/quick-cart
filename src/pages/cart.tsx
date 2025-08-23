@@ -54,14 +54,18 @@ export function Cart() {
       <div className="my-20 flex justify-end">
         <div className="w-full sm:w-[450px]">
           <CartTotal />
-          <div className="mt-8 flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-4">
+          <div className="mt-8 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <Button
-              className="mt-4 h-12 cursor-pointer rounded border border-red-500 px-8 py-3 font-medium text-red-500 uppercase hover:bg-red-50 active:bg-red-100 sm:mt-0"
+              className="h-10 cursor-pointer rounded border border-red-500 px-10 py-4 text-red-500 uppercase hover:bg-red-100 active:bg-red-200"
               onClick={handleClearCart}
             >
               clear cart
             </Button>
-            <LinkButton href="/place-order" label="proceed to checkout" />
+            <LinkButton
+              className="w-full"
+              href="/place-order"
+              label="proceed to checkout"
+            />
           </div>
         </div>
       </div>

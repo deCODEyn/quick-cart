@@ -6,10 +6,10 @@ export function OrderStatusIndicator({ status }: OrderStatusIndicatorType) {
 
   switch (status) {
     case 'Order Placed':
-      colorClass = 'bg-gray-300';
+      colorClass = 'bg-gray-500';
       break;
     case 'Ready to ship':
-      colorClass = 'bg-teal-500';
+      colorClass = 'bg-yellow-500';
       break;
     case 'Shipped':
       colorClass = 'bg-blue-500';
@@ -25,13 +25,13 @@ export function OrderStatusIndicator({ status }: OrderStatusIndicatorType) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="flex items-center gap-2">
+    <div className="flex flex-col items-end gap-2">
+      <div className="flex items-center gap-1">
         <p className={`h-2.5 min-w-2.5 rounded-full ${colorClass}`} />
-        <p className="text-sm md:text-base">{status}</p>
+        <p className="text-xs md:text-base">{status}</p>
       </div>
       <Button
-        className="cursor-pointer rounded-sm border border-gray-400 bg-gray-100 px-4 py-2 font-medium text-current text-sm hover:bg-gray-300 active:bg-gray-200"
+        className="h-8 cursor-pointer rounded border border-gray-600 bg-gray-300 px-2 py-1 text-[0.7rem] text-gray-900 uppercase hover:bg-gray-400 active:bg-gray-200"
         type="button"
       >
         Track Order

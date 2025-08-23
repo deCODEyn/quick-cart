@@ -40,7 +40,7 @@ export function NewsletterBox() {
           value={email}
         />
         <Button
-          className="h-10 cursor-pointer rounded bg-black px-10 py-4 text-white text-xs uppercase hover:bg-gray-700 active:bg-gray-600"
+          className="h-10 cursor-pointer rounded bg-black px-10 py-4 text-white text-xs uppercase hover:bg-gray-700 active:bg-gray-500"
           type="submit"
         >
           subscribe

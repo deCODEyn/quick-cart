@@ -24,7 +24,7 @@ export function AddToCartButton({ id, size, name }: AddCartItemType) {
 
   return (
     <Button
-      className="h-11 cursor-pointer rounded bg-black px-8 py-3 text-sm text-white uppercase active:bg-gray-700 disabled:cursor-default disabled:bg-gray-600"
+      className="h-10 cursor-pointer rounded bg-black px-10 py-4 text-sm text-white uppercase hover:bg-gray-700 active:bg-gray-500 disabled:cursor-not-allowed disabled:bg-gray-500"
       disabled={!size}
       onClick={handleAddToCart}
       type="button"

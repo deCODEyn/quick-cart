@@ -21,7 +21,7 @@ export function OrderCard({ order }: OrderCardType) {
   return (
     <div className="my-5 rounded-lg border border-gray-400 p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
-        <h4 className="font-bold text-gray-800">
+        <h4 className="font-bold text-xs md:text-base">
           <Title
             as="h4"
             span={`#${order._id.substring(0, 10)}`}
@@ -29,7 +29,7 @@ export function OrderCard({ order }: OrderCardType) {
           />
         </h4>
         <div className="flex items-center gap-5">
-          <p className="mx-0 text-gray-500 text-xs md:mx-5 md:text-base">
+          <p className="mx-5 text-gray-500 text-xs md:mx-5 md:text-base">
             Date:
             <span className="ml-1 font-medium text-gray-700">
               {formattedDate}
@@ -54,7 +54,7 @@ export function OrderCard({ order }: OrderCardType) {
         <OrderTotal amount={order.amount} deliveryFee={order.deliveryFee} />
         {canEdit && (
           <Button
-            className="m-4 justify-self-center rounded-lg border border-gray-400 bg-gray-200 px-4 py-2 text-gray-600 text-sm hover:bg-gray-100"
+            className="m-4 h-8 cursor-pointer justify-self-center rounded border border-gray-600 bg-gray-300 px-2 py-1 text-gray-900 text-sm hover:bg-gray-400 active:bg-gray-200"
             onClick={handleEditClick}
           >
             Edit Address
