@@ -1,5 +1,6 @@
 import type { AxiosResponse } from 'axios';
 import type {
+  AddressType,
   CartDisplayItem,
   OrderType,
   ProductType,
@@ -37,6 +38,7 @@ export interface UseApiRequestReturn {
   requestSuccess: boolean;
 }
 
+export type ListAddressesResponse = ApiResponse<AddressType[]>;
 export type ListCartItemsResponse = ApiResponse<CartDisplayItem[]>;
 export type ListProductsResponse = ApiResponse<ProductType[]>;
 export type ListOrdersResponse = ApiResponse<OrderType[]>;

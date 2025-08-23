@@ -9,7 +9,7 @@ export function useProfileData() {
   const { fetchUser } = useAuthContext();
 
   const setProfileImage = useCallback(
-    async (croppedBlob: Blob) => {
+    async (croppedBlob: Blob): Promise<boolean> => {
       const { success } = await execute(() =>
         privateApi.patch(
           'users/profile-image',
@@ -19,7 +19,9 @@ export function useProfileData() {
       );
       if (success) {
         await fetchUser();
+        return success
       }
+      return false
     },
     [execute, privateApi, fetchUser]
   );

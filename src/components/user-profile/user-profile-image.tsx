@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { assets } from '@/assets';
 import { Button, Image, ImageEditModal, Input } from '@/components';
 import { useAuthContext } from '@/context';
-import { useProfileData } from '@/hooks/use-profile-data';
+import { useProfileData, useToast } from '@/hooks';
 
 export function UserProfileImage() {
   const { user } = useAuthContext();
@@ -11,6 +11,7 @@ export function UserProfileImage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const setProfileImage = useProfileData();
+  const { showSuccessToast } = useToast();
 
   const handleProfileImage = () => {
     fileInputRef.current?.click();
@@ -24,8 +25,10 @@ export function UserProfileImage() {
     }
   };
 
-  const handleSaveImage = (croppedBlob: Blob) => {
-    setProfileImage(croppedBlob);
+  const handleSaveImage = async (croppedBlob: Blob) => {
+    if (await setProfileImage(croppedBlob)) {
+      showSuccessToast('Image uploaded successfully');
+    }
     handleCloseModal();
   };
 
