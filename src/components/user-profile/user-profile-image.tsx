@@ -1,42 +1,27 @@
 import { Pencil } from 'lucide-react';
-import { useRef, useState } from 'react';
 import { assets } from '@/assets';
 import { Button, Image, ImageEditModal, Input } from '@/components';
 import { useAuthContext } from '@/context';
-import { useProfileData, useToast } from '@/hooks';
+import { useHandleProfileImage, useProfileData, useToast } from '@/hooks';
 
 export function UserProfileImage() {
   const { user } = useAuthContext();
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const setProfileImage = useProfileData();
   const { showSuccessToast } = useToast();
+  const {
+    fileInputRef,
+    isModalOpen,
+    selectedImage,
+    handleOpenFileInput,
+    handleImageChange,
+    handleCloseModal,
+  } = useHandleProfileImage();
 
-  const handleProfileImage = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
-      setIsModalOpen(true);
-    }
-  };
-
-  const handleSaveImage = async (croppedBlob: Blob) => {
-    if (await setProfileImage(croppedBlob)) {
-      showSuccessToast('Image uploaded successfully');
-    }
+  const handleSave = async (croppedBlob: Blob) => {
+    const success = await setProfileImage(croppedBlob);
     handleCloseModal();
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+    if (success) {
+      showSuccessToast('Image uploaded successfully');
     }
   };
 
@@ -57,7 +42,7 @@ export function UserProfileImage() {
         />
         <Button
           className="absolute right-4 bottom-2 h-6 w-14 cursor-pointer rounded border border-gray-600 bg-gray-300 px-2 py-1 text-[0.6rem] text-gray-900 uppercase hover:bg-gray-400 active:bg-gray-200"
-          onClick={handleProfileImage}
+          onClick={handleOpenFileInput}
         >
           <Pencil className="size-4" />
           edit
@@ -67,7 +52,7 @@ export function UserProfileImage() {
         <ImageEditModal
           imageUrl={selectedImage}
           onClose={handleCloseModal}
-          onSave={handleSaveImage}
+          onSave={handleSave}
         />
       )}
     </>

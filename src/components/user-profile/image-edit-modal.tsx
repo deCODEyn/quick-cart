@@ -1,33 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { Button } from '@/components';
+import { useClickOutside } from '@/hooks';
+import type { ImageEditModalInterface } from '@/types';
 
 export function ImageEditModal({
   imageUrl,
   onClose,
   onSave,
-}: {
-  imageUrl: string;
-  onClose: () => void;
-  onSave: (blob: Blob) => void;
-}) {
+}: ImageEditModalInterface) {
   const editorRef = useRef<AvatarEditor | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
-        onClose();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [onClose]);
+  useClickOutside(modalRef, onClose);
 
   const handleSave = () => {
     if (editorRef.current) {
@@ -35,7 +20,6 @@ export function ImageEditModal({
       canvas.toBlob((blob) => {
         if (blob) {
           onSave(blob);
-          onClose();
         }
       });
     }
@@ -63,7 +47,7 @@ export function ImageEditModal({
           <AvatarEditor
             border={2}
             borderRadius={150}
-            color={[47, 52, 61, 0.5]}
+            color={[40, 50, 60, 0.5]}
             height={300}
             image={imageUrl}
             ref={editorRef}
@@ -72,7 +56,7 @@ export function ImageEditModal({
         </div>
         <div className="flex justify-end border-gray-400 border-t p-4">
           <Button
-            className="w-full rounded-md bg-green-600 p-4 font-medium text-md text-white hover:bg-green-700 active:bg-green-500"
+            className="w-full cursor-pointer rounded-md bg-green-600 p-4 font-medium text-md text-white hover:bg-green-700 active:bg-green-500"
             onClick={handleSave}
           >
             Set new profile image
