@@ -14,9 +14,8 @@ export interface SizesSelectorType {
 }
 
 export interface SelectInputType {
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
   label: string;
-  name: string;
   options: string[];
   value: string;
 }

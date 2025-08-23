@@ -28,7 +28,7 @@ export function ImageEditModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-brightness-50">
       <div
-        className="relative w-full max-w-sm rounded-md border border-gray-400 bg-gray-800 shadow-xl"
+        className="relative w-full max-w-md rounded-md border border-gray-400 bg-gray-800 shadow-xl"
         ref={modalRef}
       >
         <div className="flex items-center justify-between border-gray-400 border-b p-4">
@@ -43,15 +43,16 @@ export function ImageEditModal({
             X
           </Button>
         </div>
-        <div className="m-5 flex items-center justify-center bg-gray-800 p-2">
+        <div className="m-auto flex items-center justify-center bg-gray-800 p-5">
           <AvatarEditor
             border={2}
-            borderRadius={150}
+            borderRadius={200}
+            className="h-full w-full"
             color={[40, 50, 60, 0.5]}
-            height={300}
+            height={400}
             image={imageUrl}
             ref={editorRef}
-            width={300}
+            width={400}
           />
         </div>
         <div className="flex justify-end border-gray-400 border-t p-4">

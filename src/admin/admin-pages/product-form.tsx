@@ -1,11 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  ImageUploader,
-  SelectInput,
-  SizesSelector,
-} from '@/admin/admin-components';
+import { ImageUploader, SizesSelector } from '@/admin/admin-components';
 import type { ProductFormType } from '@/admin/admin-types';
-import { Button, Input, Textarea } from '@/components';
+import { Button, Input, SelectInput, Textarea } from '@/components';
 import { allCategories, allSubCategories } from '@/constants';
 import { useProductForm } from '@/hooks';
 
@@ -24,6 +20,15 @@ export function ProductForm({
     onSubmit,
   } = useProductForm(initialData, isEditMode);
   const navigate = useNavigate();
+
+  const handleSelectChange = (name: string, value: string) => {
+    handleInputChange({
+      target: {
+        name,
+        value,
+      },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
 
   return (
     <form
@@ -66,15 +71,13 @@ export function ProductForm({
       <div className="flex w-full flex-col gap-2 sm:flex-row md:gap-8">
         <SelectInput
           label="Product category"
-          name="category"
-          onChange={handleInputChange}
+          onChange={(value: string) => handleSelectChange('category', value)}
           options={allCategories}
           value={productData.category}
         />
         <SelectInput
           label="Product subcategory"
-          name="subCategory"
-          onChange={handleInputChange}
+          onChange={(value: string) => handleSelectChange('subCategory', value)}
           options={allSubCategories}
           value={productData.subCategory}
         />

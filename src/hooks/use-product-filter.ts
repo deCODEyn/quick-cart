@@ -8,7 +8,7 @@ export function useProductFilter(): UseProductFilterReturn {
   const [filterProducts, setFilterProducts] = useState<ProductType[]>([]);
   const [category, setCategory] = useState<string[]>([]);
   const [subCategory, setSubCategory] = useState<string[]>([]);
-  const [sortType, setSortType] = useState<string>('relevant');
+  const [sortType, setSortType] = useState<string>('Relevant');
 
   const toggleFilter = useCallback(
     (
@@ -49,10 +49,10 @@ export function useProductFilter(): UseProductFilterReturn {
       );
     }
     switch (sortType) {
-      case 'low-high':
+      case 'Low-high':
         setFilterProducts(productsCopy.sort((a, b) => a.price - b.price));
         break;
-      case 'high-low':
+      case 'High-low':
         setFilterProducts(productsCopy.sort((a, b) => b.price - a.price));
         break;
       default:

@@ -6,7 +6,7 @@ import { useHandleProfileImage, useProfileData, useToast } from '@/hooks';
 
 export function UserProfileImage() {
   const { user } = useAuthContext();
-  const setProfileImage = useProfileData();
+  const { setProfileImage } = useProfileData();
   const { showSuccessToast } = useToast();
   const {
     fileInputRef,

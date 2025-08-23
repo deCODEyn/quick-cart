@@ -21,10 +21,10 @@ export function useProfileData() {
         await fetchUser();
         return success
       }
-      return false
+      return success;
     },
     [execute, privateApi, fetchUser]
   );
 
-  return setProfileImage;
+  return { setProfileImage };
 }

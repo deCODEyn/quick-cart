@@ -1,4 +1,5 @@
-import { FilterSection, ProductsGrid, SortSelect, Title } from '@/components';
+import { FilterSection, ProductsGrid, SelectInput, Title } from '@/components';
+import { sortOptions } from '@/constants';
 import { useProductFilter } from '@/hooks';
 
 export function Collection() {
@@ -25,9 +26,11 @@ export function Collection() {
           <h1 className="mx-2 text-xl md:text-2xl">
             <Title as="h1" span="collections" title="all" />
           </h1>
-          <SortSelect
-            currentSortType={currentSortType}
-            onSortChange={handleSortChange}
+          <SelectInput
+            label="Sort by"
+            onChange={handleSortChange}
+            options={sortOptions}
+            value={currentSortType}
           />
         </div>
         <ProductsGrid products={filteredAndSortedProducts} />

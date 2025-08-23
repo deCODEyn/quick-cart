@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type { UseHandleImageReturn } from '@/types';
 
 export function useHandleProfileImage(): UseHandleImageReturn {
@@ -6,26 +6,25 @@ export function useHandleProfileImage(): UseHandleImageReturn {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-
-  const handleOpenFileInput = () => {
+  const handleOpenFileInput = useCallback(() => {
     fileInputRef.current?.click();
-  };
+  }, []);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
       setIsModalOpen(true);
     }
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedImage(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-  };
+  }, []);
 
   return {
     fileInputRef,

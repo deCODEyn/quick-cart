@@ -7,6 +7,8 @@ export const deliveryFee = 10;
 
 export const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
+export const sortOptions = ['Relevant', 'Low-high', 'High-low'];
+
 export const allCategories = ['Men', 'Women', 'Kids'];
 
 export const allSubCategories = ['Topwear', 'Bottomwear', 'Winterwear'];
