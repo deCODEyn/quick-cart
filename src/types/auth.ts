@@ -19,7 +19,6 @@ export interface UseAuthFormReturn {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   formData: AuthFormData;
-  isLoading: boolean;
 }
 
 export type AuthFormData = {
@@ -46,14 +45,14 @@ export type UserType = {
   rg?: string | undefined;
   phoneNumber?: string | undefined;
   socialMedia?:
-  | {
-    instagram?: string | undefined;
-    facebook?: string | undefined;
-    X?: string | undefined;
-    linkedIn?: string | undefined;
-    whatsApp?: string | undefined;
-  }
-  | undefined;
+    | {
+        instagram?: string | undefined;
+        facebook?: string | undefined;
+        X?: string | undefined;
+        linkedIn?: string | undefined;
+        whatsApp?: string | undefined;
+      }
+    | undefined;
   profileImage?: string | undefined;
 };
 

@@ -18,6 +18,7 @@ export interface AuthContextInterface {
     password: string,
     name: string
   ) => Promise<{ success: boolean; message: string }>;
+  fetchUser: () => Promise<void>;
   isAuthReady: boolean;
   user: UserType | null;
   userRole: UserRoleType | null;

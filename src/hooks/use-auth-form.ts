@@ -12,7 +12,7 @@ export function useAuthForm({
   isLogin = true,
   onSuccess,
 }: UseAuthFormInterface): UseAuthFormReturn {
-  const { authLogin, authRegister, isLoading } = useAuthContext();
+  const { authLogin, authRegister } = useAuthContext();
   const { showSuccessToast, showWarningToast } = useToast();
   const [formData, setFormData] = useState<AuthFormData>(initialAuthFormData);
 
@@ -71,5 +71,5 @@ export function useAuthForm({
     ]
   );
 
-  return { formData, handleChange, onSubmit, isLoading };
+  return { formData, handleChange, onSubmit };
 }

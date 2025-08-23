@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { LoginButton, LoginForm } from '@/components';
-import { useAuthForm } from '@/hooks';
+import { useApiRequest, useAuthForm } from '@/hooks';
 
 export function AdminLogin() {
   const navigate = useNavigate();
-  const { formData, handleChange, onSubmit, isLoading } = useAuthForm({
+  const { formData, handleChange, onSubmit } = useAuthForm({
     onSuccess: () => navigate('/admin', { state: { fromLogin: true } }),
   });
+  const { isLoading } = useApiRequest();
 
   return (
     <div className="flex min-h-screen items-center justify-center">

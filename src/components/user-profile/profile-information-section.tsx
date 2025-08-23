@@ -6,8 +6,8 @@ import {
   FaWhatsapp,
   FaXTwitter,
 } from 'react-icons/fa6';
+import { ProfileInfoItem } from '@/components';
 import { useAuthContext } from '@/context';
-import { ProfileInfoItem } from './profile-info-item';
 
 export function ProfileInformatioSection() {
   const { user } = useAuthContext();

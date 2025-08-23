@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthButtonSelect, LoginButton, LoginForm } from '@/components';
-import { useAuthForm } from '@/hooks';
+import { useApiRequest, useAuthForm } from '@/hooks';
 
 export function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
   const from = useLocation().state?.from || '/';
-  const { formData, handleChange, onSubmit, isLoading } = useAuthForm({
+  const { formData, handleChange, onSubmit } = useAuthForm({
     isLogin,
     onSuccess: () =>
       navigate(from === '/login' ? '/' : from, { replace: true }),
   });
+  const { isLoading } = useApiRequest();
 
   return (
     <div className="border-t">
