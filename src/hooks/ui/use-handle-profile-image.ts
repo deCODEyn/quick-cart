@@ -10,13 +10,16 @@ export function useHandleProfileImage(): UseHandleImageReturn {
     fileInputRef.current?.click();
   }, []);
 
-  const handleImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
-      setIsModalOpen(true);
-    }
-  }, []);
+  const handleImageChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setSelectedImage(URL.createObjectURL(file));
+        setIsModalOpen(true);
+      }
+    },
+    []
+  );
 
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);

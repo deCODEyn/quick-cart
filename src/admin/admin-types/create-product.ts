@@ -39,7 +39,6 @@ export interface UseProductFormReturn {
   ) => Promise<void>;
   images: ImageFiles;
   isLoading: boolean;
-  requestError: string | null;
   productData: ProductData;
 }
 

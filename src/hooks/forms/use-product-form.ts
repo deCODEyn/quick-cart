@@ -1,4 +1,3 @@
-import type { AxiosResponse } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import type {
   ImageFiles,
@@ -6,16 +5,15 @@ import type {
   UseProductFormReturn,
 } from '@/admin/admin-types';
 import { initialImages, initialProductData } from '@/constants';
-import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
-import type { ProductType, SingleProductResponse } from '@/types';
+import { useProductData, useToast } from '@/hooks';
+import type { ProductType } from '@/types';
 
 export function useProductForm(
   initialData?: ProductType,
   isEditMode = false
 ): UseProductFormReturn {
+  const { createProduct, updateProduct, isLoading } = useProductData();
   const { showSuccessToast } = useToast();
-  const privateRequest = usePrivateRequest();
-  const { execute, isLoading, requestError } = useApiRequest();
   const [images, setImages] = useState<ImageFiles>(initialImages);
   const [productData, setProductData] =
     useState<ProductData>(initialProductData);
@@ -107,31 +105,21 @@ export function useProductForm(
       navigate?: (to: string) => void
     ) => {
       e.preventDefault();
-
-      let request: () => Promise<AxiosResponse<SingleProductResponse>>;
-
+      let success: boolean;
+      let message: string | undefined;
       if (isEditMode && initialData?._id) {
-        const url = `/products/${initialData._id}`;
-        const requestBody = {
+        ({ success, message } = await updateProduct(initialData._id, {
           bestseller: productData.bestseller,
           category: productData.category,
           description: productData.description,
           price: productData.price,
           sizes: productData.sizes,
           subCategory: productData.subCategory,
-        };
-        request = () =>
-          privateRequest.patch<SingleProductResponse>(url, requestBody);
+        }));
       } else {
         const formData = buildFormData(productData, images);
-        const url = '/products';
-        request = () =>
-          privateRequest.post<SingleProductResponse>(url, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          });
+        ({ success, message } = await createProduct(formData));
       }
-
-      const { success, message } = await execute<ProductType>(request);
       if (success) {
         showSuccessToast(message || '');
         if (isEditMode && navigate) {
@@ -143,10 +131,10 @@ export function useProductForm(
       }
     },
     [
-      execute,
       buildFormData,
+      updateProduct,
+      createProduct,
       images,
-      privateRequest,
       productData,
       showSuccessToast,
       isEditMode,
@@ -158,7 +146,6 @@ export function useProductForm(
     images,
     productData,
     isLoading,
-    requestError,
     handleInputChange,
     handleBestsellerChange,
     handleImageChange,

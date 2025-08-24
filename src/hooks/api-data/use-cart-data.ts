@@ -7,7 +7,7 @@ import type {
   CartUpdateQuantityType,
   ListCartItemsResponse,
   ProductType,
-  UseShopCartReturn,
+  UseCartDataReturn,
 } from '@/types';
 
 const normalizeCartData = (items: CartDisplayItem[]): CartItemsType => {
@@ -20,10 +20,10 @@ const normalizeCartData = (items: CartDisplayItem[]): CartItemsType => {
   }, {} as CartItemsType);
 };
 
-export function useCartData(): UseShopCartReturn {
+export function useCartData(): UseCartDataReturn {
+  const privateRequest = usePrivateRequest();
   const { execute } = useApiRequest();
   const [cartItems, setCartItems] = useState<CartItemsType>({});
-  const privateRequest = usePrivateRequest();
 
   const getCart = useCallback(async () => {
     const { success, result } = await execute<CartDisplayItem[]>(

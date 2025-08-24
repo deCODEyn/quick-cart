@@ -3,7 +3,7 @@ import type { SocialMediaType } from '@/types';
 
 export interface EditSocialMediaInterface {
   onChange: (name: string, value: string) => void;
-  socialMedia: SocialMediaType
+  socialMedia: SocialMediaType;
 }
 
 export interface ImageEditModalInterface {
@@ -18,12 +18,12 @@ export interface ValidatePasswordModalInterface {
 }
 
 export interface UseHandleImageReturn {
-  handleCloseModal: () => void
-  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleOpenFileInput: () => void
-  fileInputRef: React.RefObject<HTMLInputElement | null>
-  isModalOpen: boolean
-  selectedImage: string | null
+  handleCloseModal: () => void;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOpenFileInput: () => void;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
+  isModalOpen: boolean;
+  selectedImage: string | null;
 }
 
 export type ProfileInfoItemType = {

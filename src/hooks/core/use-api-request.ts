@@ -9,24 +9,42 @@ import type {
   UseApiRequestReturn,
 } from '@/types';
 
+function formatValidationErrors(
+  errors: { field: string; message: string }[]
+): string {
+  let formattedMessage = 'Validation Errors:\n';
+  for (const error of errors) {
+    formattedMessage += `Field: ${error.field} - ${error.message}\n`;
+  }
+
+  return formattedMessage;
+}
+
 function useApiRequestErrorHandling(): UseApiRequestErrorHandlingReturn {
   const { showErrorToast } = useToast();
   const [requestError, setRequestError] = useState<string | null>(null);
 
   const handleError = useCallback(
     (error: unknown, suppressErrorToast = false) => {
+      if (suppressErrorToast) {
+        return;
+      }
       const axiosError = error as AxiosError<ApiErrorResponse>;
-
       if (axios.isAxiosError(axiosError) && axiosError.response) {
-        const errorMessage =
-          axiosError.response.data?.message ||
-          'An unexpected API error occurred.';
-        if (!suppressErrorToast) {
+        const apiErrors = axiosError.response.data?.errors;
+        if (apiErrors && apiErrors.length > 0) {
+          const formattedErrorMessage = formatValidationErrors(apiErrors);
+          showErrorToast(formattedErrorMessage, { autoClose: 5000 });
+          const errorMessage =
+            'Validation Error. Please check the fields below.';
+          setRequestError(errorMessage);
+        } else {
+          const errorMessage =
+            axiosError.response.data?.message ||
+            'An unexpected API error occurred.';
+
           showErrorToast(errorMessage);
-        }
-        setRequestError(errorMessage);
-        if (axiosError.response.data?.errors) {
-          // Lógica para tratar os erros de validação
+          setRequestError(errorMessage);
         }
       } else {
         const errorMessage = (error as Error).message;
@@ -44,34 +62,20 @@ function useApiRequestErrorHandling(): UseApiRequestErrorHandlingReturn {
 
 export function useApiRequest(): UseApiRequestReturn {
   const [isLoading, setIsLoading] = useState(false);
-  const [requestSuccess, setRequestSuccess] = useState(false);
   const { handleError, requestError } = useApiRequestErrorHandling();
 
   const executeRef = useRef(
     async <T>(
       requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
       suppressErrorToast = false
-    ): Promise<{
-      success: boolean;
-      result: T | null;
-      message: string | null;
-    }> => {
+    ): Promise<ApiResponse<T>> => {
       setIsLoading(true);
-      setRequestSuccess(false);
-
       try {
         const response = await requestFn();
-        const { success, result, message } = response.data;
-        setRequestSuccess(success);
-        return {
-          success,
-          result: (result as T) || null,
-          message: message || null,
-        };
+        return response.data;
       } catch (error) {
         handleError(error, suppressErrorToast);
-        setRequestSuccess(false);
-        return { success: false, result: null, message: null };
+        return { success: false, result: undefined, message: undefined };
       } finally {
         setIsLoading(false);
       }
@@ -81,7 +85,6 @@ export function useApiRequest(): UseApiRequestReturn {
   return {
     isLoading,
     requestError,
-    requestSuccess,
     execute: executeRef.current,
   };
 }

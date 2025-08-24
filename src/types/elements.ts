@@ -27,7 +27,7 @@ export type LinkButtonType = {
   className?: string;
   href: string;
   label: string;
-  state?: { from: string; }
+  state?: { from: string };
 };
 
 export type LoadingDataType = {

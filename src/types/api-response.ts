@@ -32,10 +32,9 @@ export interface UseApiRequestReturn {
   execute: <T>(
     requestFn: () => Promise<AxiosResponse<ApiResponse<T>>>,
     suppressErrorToast?: boolean
-  ) => Promise<{ success: boolean; result: T | null; message: string | null }>;
+  ) => Promise<ApiResponse<T>>;
   isLoading: boolean;
   requestError: string | null;
-  requestSuccess: boolean;
 }
 
 export type ListAddressesResponse = ApiResponse<AddressType[]>;

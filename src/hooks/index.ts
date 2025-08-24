@@ -1,5 +1,6 @@
 export * from '@/hooks/api-data/use-address-data';
 export * from '@/hooks/api-data/use-cart-data';
+export * from '@/hooks/api-data/use-product-data';
 export * from '@/hooks/api-data/use-profile-data';
 export * from '@/hooks/core/use-api-request';
 export * from '@/hooks/core/use-date-format';

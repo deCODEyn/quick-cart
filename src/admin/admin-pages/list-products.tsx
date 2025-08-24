@@ -1,26 +1,22 @@
 import { useCallback, useEffect } from 'react';
 import { ProductListItem } from '@/admin/admin-components';
 import { useShopContext } from '@/context';
-import { useApiRequest, usePrivateRequest, useToast } from '@/hooks';
-import type { ProductType, SingleProductResponse } from '@/types';
+import { useProductData, useToast } from '@/hooks';
 
 export function ListProducts() {
   const { products, getProducts } = useShopContext();
   const { showSuccessToast } = useToast();
-  const privateRequest = usePrivateRequest();
-  const { isLoading, execute } = useApiRequest();
+  const { deleteProduct, isLoading } = useProductData();
 
-  const deleteProduct = useCallback(
+  const handleDelete = useCallback(
     async (productId: string) => {
-      const { success, message } = await execute<ProductType>(() =>
-        privateRequest.delete<SingleProductResponse>(`/products/${productId}`)
-      );
+      const { success, message } = await deleteProduct(productId);
       if (success) {
         showSuccessToast(message || '');
         getProducts();
       }
     },
-    [privateRequest, showSuccessToast, getProducts, execute]
+    [deleteProduct, showSuccessToast, getProducts]
   );
 
   useEffect(() => {
@@ -43,7 +39,7 @@ export function ListProducts() {
             <ProductListItem
               item={item}
               key={item._id}
-              onDelete={deleteProduct}
+              onDelete={handleDelete}
             />
           ))}
       </div>

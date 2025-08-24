@@ -40,7 +40,7 @@ export type SocialMediaType = {
   X?: string | undefined;
   linkedIn?: string | undefined;
   whatsApp?: string | undefined;
-}
+};
 
 export type UserRoleType = 'Admin' | 'User';
 

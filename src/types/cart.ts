@@ -1,6 +1,6 @@
 import type { ProductType } from '@/types';
 
-export interface UseShopCartReturn {
+export interface UseCartDataReturn {
   addToCart: ({ id, size }: CartUpdateItemType) => void;
   clearCart: () => void;
   deleteFromCart: ({ id, size }: CartUpdateItemType) => void;

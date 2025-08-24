@@ -6,11 +6,9 @@ import {
   useState,
 } from 'react';
 import { useAuthContext } from '@/context';
-import { useApiRequest, useCartData } from '@/hooks';
-import { api } from '@/services/api';
+import { useCartData, useProductData } from '@/hooks';
 import type {
   ContextProviderType,
-  ListProductsResponse,
   ProductType,
   ShopContextInterface,
 } from '@/types';
@@ -33,16 +31,14 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
     clearCart,
   } = useCartData();
   const [products, setProducts] = useState<ProductType[]>([]);
-  const { execute } = useApiRequest();
+  const { listProducts } = useProductData();
 
   const getProducts = useCallback(async () => {
-    const { success, result } = await execute<ProductType[]>(() =>
-      api.get<ListProductsResponse>('/products')
-    );
+    const { success, result } = await listProducts();
     if (success && result) {
       setProducts(result);
     }
-  }, [execute]);
+  }, [listProducts]);
 
   useEffect(() => {
     getProducts();

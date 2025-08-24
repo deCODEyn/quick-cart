@@ -1,7 +1,21 @@
+import type { ProductData } from '@/admin/admin-types';
+import type { ListProductsResponse, SingleProductResponse } from '@/types';
+
 export interface ProductSizeSelectorInterface {
   onSelectSize: (size: string) => void;
   currentSize: string;
   sizes: string[];
+}
+export interface UseProductDataReturn {
+  createProduct: (formData: FormData) => Promise<SingleProductResponse>;
+  deleteProduct: (productId: string) => Promise<SingleProductResponse>;
+  getProduct: (productId: string) => Promise<SingleProductResponse>;
+  listProducts: () => Promise<ListProductsResponse>;
+  updateProduct: (
+    productId: string,
+    data: Partial<ProductData>
+  ) => Promise<SingleProductResponse>;
+  isLoading: boolean;
 }
 
 export type ArrayProductsType = {
