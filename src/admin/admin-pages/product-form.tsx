@@ -3,7 +3,7 @@ import { ImageUploader, SizesSelector } from '@/admin/admin-components';
 import type { ProductFormType } from '@/admin/admin-types';
 import { Button, Input, Label, SelectInput, Textarea } from '@/components';
 import { allCategories, allSubCategories } from '@/constants';
-import { useProductForm } from '@/hooks';
+import { useProductForm, useToast } from '@/hooks';
 
 export function ProductForm({
   initialData,
@@ -14,12 +14,12 @@ export function ProductForm({
     productData,
     isLoading,
     handleInputChange,
-    handleBestsellerChange,
     handleImageChange,
     handleSizeToggle,
     onSubmit,
   } = useProductForm(initialData, isEditMode);
   const navigate = useNavigate();
+  const { showSuccessToast } = useToast();
 
   const handleSelectChange = (name: string, value: string) => {
     handleInputChange({
@@ -30,10 +30,20 @@ export function ProductForm({
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const result = await onSubmit(e);
+    if (result.success) {
+      showSuccessToast(result.message);
+      if (isEditMode) {
+        navigate('/admin/list');
+      }
+    }
+  };
+
   return (
     <form
       className="flex w-full flex-col items-start gap-3"
-      onSubmit={(e: React.FormEvent<HTMLFormElement>) => onSubmit(e, navigate)}
+      onSubmit={handleSubmit}
     >
       {!isEditMode && (
         <>
@@ -69,20 +79,28 @@ export function ProductForm({
         />
       </div>
       <div className="flex w-full flex-col gap-2 sm:flex-row md:gap-8">
-        <SelectInput
-          className="mb-2"
-          label="Product category"
-          onChange={(value: string) => handleSelectChange('category', value)}
-          options={allCategories}
-          value={productData.category}
-        />
-        <SelectInput
-          className="mb-2"
-          label="Product subcategory"
-          onChange={(value: string) => handleSelectChange('subCategory', value)}
-          options={allSubCategories}
-          value={productData.subCategory}
-        />
+        {(isEditMode && initialData) || !isEditMode ? (
+          <>
+            <SelectInput
+              className="mb-2"
+              label="Product category"
+              onChange={(value: string) =>
+                handleSelectChange('category', value)
+              }
+              options={allCategories}
+              value={productData.category}
+            />
+            <SelectInput
+              className="mb-2"
+              label="Product subcategory"
+              onChange={(value: string) =>
+                handleSelectChange('subCategory', value)
+              }
+              options={allSubCategories}
+              value={productData.subCategory}
+            />
+          </>
+        ) : null}
         <div>
           <Label className="mb-2 text-lg">Product Price</Label>
           <Input
@@ -95,6 +113,7 @@ export function ProductForm({
           />
         </div>
       </div>
+
       <SizesSelector
         handleSizeToggle={handleSizeToggle}
         selectedSizes={productData.sizes}
@@ -104,7 +123,8 @@ export function ProductForm({
           checked={productData.bestseller}
           className="h-6 w-3.5"
           id="bestseller"
-          onChange={handleBestsellerChange}
+          name="bestseller"
+          onChange={handleInputChange}
           type="checkbox"
         />
         <Label className="cursor-pointer text-md" htmlFor="bestseller">

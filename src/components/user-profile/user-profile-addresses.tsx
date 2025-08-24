@@ -5,8 +5,8 @@ import { useAddressData } from '@/hooks';
 import type { AddressType } from '@/types';
 
 export function UserProfileAddresses() {
-  const getUserAddresses = useAddressData();
-  const [addresses, setAddresses] = useState<AddressType[]>([]);
+  const { getUserAddresses } = useAddressData();
+  const [addresses, setAddresses] = useState<AddressType[] | undefined>();
 
   const handleAddAddress = () => {
     //Lógica para icionar novo endereço.
@@ -15,7 +15,7 @@ export function UserProfileAddresses() {
   };
 
   const fetchAddresses = useCallback(async () => {
-    setAddresses(await getUserAddresses());
+    setAddresses((await getUserAddresses()).result);
   }, [getUserAddresses]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function UserProfileAddresses() {
         <Title as="h3" span="addresses" title="registered" />
       </h3>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {addresses.map((address) => (
+        {addresses?.map((address) => (
           <AddressCard address={address} key={address._id} />
         ))}
       </div>

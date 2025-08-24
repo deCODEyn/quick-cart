@@ -31,7 +31,7 @@ export function useProductData(): UseProductDataReturn {
       data: Partial<ProductData>
     ): Promise<SingleProductResponse> => {
       return await execute<ProductType>(() =>
-        privateRequest.post<SingleProductResponse>(
+        privateRequest.patch<SingleProductResponse>(
           `/products/${productId}`,
           data
         )

@@ -22,7 +22,6 @@ export interface SelectInputType {
 }
 
 export interface UseProductFormReturn {
-  handleBestsellerChange: () => void;
   handleImageChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     imageKey: keyof ImageFiles
@@ -34,9 +33,8 @@ export interface UseProductFormReturn {
   ) => void;
   handleSizeToggle: (size: string) => void;
   onSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
-    navigate?: (to: string) => void
-  ) => Promise<void>;
+    e: React.FormEvent<HTMLFormElement>
+  ) => Promise<{ success: boolean; message: string }>;
   images: ImageFiles;
   isLoading: boolean;
   productData: ProductData;

@@ -1,33 +1,29 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type {
   ImageFiles,
   ProductData,
   UseProductFormReturn,
 } from '@/admin/admin-types';
 import { initialImages, initialProductData } from '@/constants';
-import { useProductData, useToast } from '@/hooks';
+import { useProductData } from '@/hooks';
 import type { ProductType } from '@/types';
 
 export function useProductForm(
   initialData?: ProductType,
   isEditMode = false
 ): UseProductFormReturn {
-  const { createProduct, updateProduct, isLoading } = useProductData();
-  const { showSuccessToast } = useToast();
-  const [images, setImages] = useState<ImageFiles>(initialImages);
-  const [productData, setProductData] =
-    useState<ProductData>(initialProductData);
-
-  useEffect(() => {
+  const startProductData = () => {
     if (isEditMode && initialData) {
-      setProductData({
-        ...initialProductData,
+      return {
         ...initialData,
-      });
-    } else {
-      setProductData(initialProductData);
+        bestseller: !!initialData.bestseller,
+      };
     }
-  }, [initialData, isEditMode]);
+    return initialProductData;
+  };
+  const { createProduct, updateProduct, isLoading } = useProductData();
+  const [images, setImages] = useState<ImageFiles>(initialImages);
+  const [productData, setProductData] = useState<ProductData>(startProductData);
 
   const handleInputChange = useCallback(
     (
@@ -35,21 +31,16 @@ export function useProductForm(
         HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
       >
     ) => {
-      const { name, value } = e.target;
+      const { name, value, type } = e.target;
+      const newValue =
+        type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
       setProductData((prev) => ({
         ...prev,
-        [name]: name === 'price' ? Number(value) : value,
+        [name]: name === 'price' ? Number(newValue) : newValue,
       }));
     },
     []
   );
-
-  const handleBestsellerChange = useCallback(() => {
-    setProductData((prev) => ({
-      ...prev,
-      bestseller: !prev.bestseller,
-    }));
-  }, []);
 
   const handleImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, imageKey: keyof ImageFiles) => {
@@ -101,9 +92,8 @@ export function useProductForm(
 
   const onSubmit = useCallback(
     async (
-      e: React.FormEvent<HTMLFormElement>,
-      navigate?: (to: string) => void
-    ) => {
+      e: React.FormEvent<HTMLFormElement>
+    ): Promise<{ success: boolean; message: string }> => {
       e.preventDefault();
       let success: boolean;
       let message: string | undefined;
@@ -121,14 +111,11 @@ export function useProductForm(
         ({ success, message } = await createProduct(formData));
       }
       if (success) {
-        showSuccessToast(message || '');
-        if (isEditMode && navigate) {
-          navigate('/admin/list');
-        } else {
-          setImages(initialImages);
-          setProductData(initialProductData);
-        }
+        setImages(initialImages);
+        setProductData(initialProductData);
+        return { success: true, message: message || 'Operation successful' };
       }
+      return { success: false, message: 'Operation failed' };
     },
     [
       buildFormData,
@@ -136,7 +123,6 @@ export function useProductForm(
       createProduct,
       images,
       productData,
-      showSuccessToast,
       isEditMode,
       initialData,
     ]
@@ -147,7 +133,6 @@ export function useProductForm(
     productData,
     isLoading,
     handleInputChange,
-    handleBestsellerChange,
     handleImageChange,
     handleSizeToggle,
     onSubmit,

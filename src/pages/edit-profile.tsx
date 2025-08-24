@@ -17,6 +17,8 @@ export function EditProfile() {
   const { user, isAuthReady } = useAuthContext();
   const [userData, setUserData] = useState<UserType>({} as UserType);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const alreadyHaveCpf = !!user?.cpf;
+  const alreadyHaveRg = !!user?.rg;
   const inputClass =
     'w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0';
 
@@ -133,7 +135,7 @@ export function EditProfile() {
                 <Label htmlFor="cpf">CPF</Label>
                 <Input
                   className={inputClass}
-                  disabled={!!userData.cpf}
+                  disabled={alreadyHaveCpf}
                   id="cpf"
                   name="cpf"
                   onChange={handleInputChange}
@@ -144,7 +146,7 @@ export function EditProfile() {
                 <Label htmlFor="rg">RG</Label>
                 <Input
                   className={inputClass}
-                  disabled={!!userData.rg}
+                  disabled={alreadyHaveRg}
                   id="rg"
                   name="rg"
                   onChange={handleInputChange}
