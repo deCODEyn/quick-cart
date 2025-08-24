@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
+import { useApiRequest, usePrivateRequest } from '@/hooks';
 import type { AddressType, ListAddressesResponse } from '@/types';
-import { useApiRequest } from './use-api-request';
-import { usePrivateRequest } from './use-private-request';
 
 export function useAddressData() {
   const { execute } = useApiRequest();
@@ -17,5 +16,5 @@ export function useAddressData() {
     return [];
   }, [execute, privateApi]);
 
-  return getUserAddresses
+  return getUserAddresses;
 }

@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
-import { Button, Title, UserAddressCard } from '@/components';
+import { AddressCard, Button, Title } from '@/components';
 import { useAddressData } from '@/hooks';
 import type { AddressType } from '@/types';
 
@@ -29,7 +29,7 @@ export function UserProfileAddresses() {
       </h3>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {addresses.map((address) => (
-          <UserAddressCard address={address} key={address._id} />
+          <AddressCard address={address} key={address._id} />
         ))}
       </div>
       <div className="mt-6 flex items-center justify-center gap-2">

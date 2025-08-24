@@ -1,5 +1,5 @@
 import type { IconType } from 'react-icons/lib';
-import type { SocialMediaType } from './auth';
+import type { SocialMediaType } from '@/types';
 
 export interface EditSocialMediaInterface {
   onChange: (name: string, value: string) => void;

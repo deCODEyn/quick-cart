@@ -10,7 +10,6 @@ export function ValidatePasswordModal({
   const [password, setPassword] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
-
   useClickOutside(modalRef, onClose);
 
   useEffect(() => {

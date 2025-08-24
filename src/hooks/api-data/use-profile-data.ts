@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useAuthContext } from '@/context';
-import { useApiRequest } from './use-api-request';
-import { usePrivateRequest } from './use-private-request';
+import { useApiRequest, usePrivateRequest } from '@/hooks';
 
 export function useProfileData() {
   const { execute } = useApiRequest();
@@ -19,7 +18,7 @@ export function useProfileData() {
       );
       if (success) {
         await fetchUser();
-        return success
+        return success;
       }
       return success;
     },

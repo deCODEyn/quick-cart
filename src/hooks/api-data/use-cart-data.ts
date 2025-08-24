@@ -20,7 +20,7 @@ const normalizeCartData = (items: CartDisplayItem[]): CartItemsType => {
   }, {} as CartItemsType);
 };
 
-export function useShopCart(): UseShopCartReturn {
+export function useCartData(): UseShopCartReturn {
   const { execute } = useApiRequest();
   const [cartItems, setCartItems] = useState<CartItemsType>({});
   const privateRequest = usePrivateRequest();

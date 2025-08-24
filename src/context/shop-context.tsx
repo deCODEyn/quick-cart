@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 import { useAuthContext } from '@/context';
-import { useApiRequest, useShopCart } from '@/hooks';
+import { useApiRequest, useCartData } from '@/hooks';
 import { api } from '@/services/api';
 import type {
   ContextProviderType,
@@ -31,7 +31,7 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
     getCartAmount,
     resetCart,
     clearCart,
-  } = useShopCart();
+  } = useCartData();
   const [products, setProducts] = useState<ProductType[]>([]);
   const { execute } = useApiRequest();
 

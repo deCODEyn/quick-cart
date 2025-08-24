@@ -2,7 +2,7 @@ import { Pencil } from 'lucide-react';
 import { Button } from '@/components';
 import type { AddressCardType } from '@/types';
 
-export function UserAddressCard({ address }: AddressCardType) {
+export function AddressCard({ address }: AddressCardType) {
   const handleAddressEdit = () => {
     //Lógica para editar endereço.
     // biome-ignore lint/suspicious/noConsole: dev
