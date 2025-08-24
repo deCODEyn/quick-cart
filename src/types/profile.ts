@@ -1,9 +1,20 @@
 import type { IconType } from 'react-icons/lib';
+import type { SocialMediaType } from './auth';
+
+export interface EditSocialMediaInterface {
+  onChange: (name: string, value: string) => void;
+  socialMedia: SocialMediaType
+}
 
 export interface ImageEditModalInterface {
   onClose: () => void;
   onSave: (blob: Blob) => Promise<void>;
   imageUrl: string;
+}
+
+export interface ValidatePasswordModalInterface {
+  onClose: () => void;
+  onConfirm: (password: string) => void;
 }
 
 export interface UseHandleImageReturn {

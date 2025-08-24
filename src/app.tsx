@@ -14,6 +14,7 @@ import {
   Cart,
   Collection,
   Contact,
+  EditProfile,
   Home,
   Login,
   Orders,
@@ -39,6 +40,7 @@ export default function App() {
           <Route element={<PlaceOrder />} path="place-order" />
           <Route element={<Product />} path="product/:productId" />
           <Route element={<UserProfile />} path="profile" />
+          <Route element={<EditProfile />} path="profile/edit" />
         </Route>
 
         <Route element={<AdminLogin />} path="/login/admin" />

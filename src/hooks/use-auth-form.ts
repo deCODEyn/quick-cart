@@ -24,10 +24,8 @@ export function useAuthForm({
   const onSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
       let authSuccess: boolean;
       let successMessage: string;
-
       if (isLogin) {
         const { success, message } = await authLogin(
           formData.email,
@@ -53,7 +51,6 @@ export function useAuthForm({
         authSuccess = success;
         successMessage = message;
       }
-
       if (authSuccess) {
         showSuccessToast(successMessage);
         onSuccess();

@@ -2,6 +2,7 @@ export * from '@/pages/about';
 export * from '@/pages/cart';
 export * from '@/pages/collection';
 export * from '@/pages/contact';
+export * from '@/pages/edit-profile';
 export * from '@/pages/home';
 export * from '@/pages/login';
 export * from '@/pages/orders';
