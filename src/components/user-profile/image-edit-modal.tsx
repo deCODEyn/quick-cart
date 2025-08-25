@@ -8,10 +8,10 @@ export function ImageEditModal({
   imageUrl,
   onClose,
   onSave,
+  isLoading,
 }: ImageEditModalInterface) {
   const editorRef = useRef<AvatarEditor | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
-
   useClickOutside(modalRef, onClose);
 
   const handleSave = () => {
@@ -57,7 +57,8 @@ export function ImageEditModal({
         </div>
         <div className="flex justify-end border-gray-400 border-t p-4">
           <Button
-            className="w-full cursor-pointer rounded-md bg-green-600 p-4 font-medium text-md text-white hover:bg-green-700 active:bg-green-500"
+            className="w-full cursor-pointer rounded-md bg-green-600 p-4 font-medium text-md text-white hover:bg-green-700 active:bg-green-500 disabled:bg-gray-500"
+            disabled={isLoading}
             onClick={handleSave}
           >
             Set new profile image

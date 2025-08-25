@@ -5,11 +5,10 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useApiRequest, usePrivateRequest } from '@/hooks';
+import { useUserData } from '@/hooks';
 import type {
   AuthContextInterface,
   ContextProviderType,
-  SingleUserResponse,
   UserRoleType,
   UserType,
 } from '@/types';
@@ -19,17 +18,13 @@ export const AuthContext = createContext<AuthContextInterface | undefined>(
 );
 
 export const AuthProvider = ({ children }: ContextProviderType) => {
-  const privateApi = usePrivateRequest();
-  const { execute } = useApiRequest();
+  const { getMe, userLogin, userLogout, userRegister } = useUserData();
   const [userRole, setUserRole] = useState<UserRoleType | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
 
   const fetchUser = useCallback(async (): Promise<void> => {
-    const { result, success } = await execute<UserType>(
-      () => privateApi.get<SingleUserResponse>('/users/me'),
-      true
-    );
+    const { result, success } = await getMe();
     if (success && result) {
       setUser(result);
       setUserRole(result.role);
@@ -37,7 +32,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       setUser(null);
       setUserRole(null);
     }
-  }, [execute, privateApi]);
+  }, [getMe]);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -52,25 +47,23 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       email: string,
       password: string
     ): Promise<{ success: boolean; message: string }> => {
-      const { success, message } = await execute(() =>
-        privateApi.post('/users/login', { email, password })
-      );
+      const { success, message } = await userLogin(email, password);
       if (success) {
         fetchUser();
       }
       return { success, message: message || '' };
     },
-    [execute, fetchUser, privateApi]
+    [userLogin, fetchUser]
   );
 
   const authLogout = useCallback(async (): Promise<boolean> => {
-    const { success } = await execute(() => privateApi.post('/users/logout'));
+    const { success } = await userLogout();
     if (success) {
       setUser(null);
       setUserRole(null);
     }
     return success;
-  }, [execute, privateApi]);
+  }, [userLogout]);
 
   const authRegister = useCallback(
     async (
@@ -78,15 +71,13 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
       password: string,
       name: string
     ): Promise<{ success: boolean; message: string }> => {
-      const { success, message } = await execute(() =>
-        privateApi.post('/users/register', { name, email, password })
-      );
+      const { success, message } = await userRegister(email, password, name);
       if (success) {
         fetchUser();
       }
       return { success, message: message || '' };
     },
-    [execute, fetchUser, privateApi]
+    [userRegister, fetchUser]
   );
 
   const value = {

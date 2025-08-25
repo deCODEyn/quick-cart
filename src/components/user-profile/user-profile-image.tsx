@@ -2,11 +2,11 @@ import { Pencil } from 'lucide-react';
 import { assets } from '@/assets';
 import { Button, Image, ImageEditModal, Input } from '@/components';
 import { useAuthContext } from '@/context';
-import { useHandleProfileImage, useProfileData, useToast } from '@/hooks';
+import { useHandleProfileImage, useToast, useUserData } from '@/hooks';
 
 export function UserProfileImage() {
-  const { user } = useAuthContext();
-  const { setProfileImage } = useProfileData();
+  const { user, fetchUser } = useAuthContext();
+  const { setProfileImage, isLoading } = useUserData();
   const { showSuccessToast } = useToast();
   const {
     fileInputRef,
@@ -18,10 +18,11 @@ export function UserProfileImage() {
   } = useHandleProfileImage();
 
   const handleSave = async (croppedBlob: Blob) => {
-    const success = await setProfileImage(croppedBlob);
+    const { success, message } = await setProfileImage(croppedBlob);
     handleCloseModal();
     if (success) {
-      showSuccessToast('Image uploaded successfully');
+      await fetchUser();
+      showSuccessToast(message || 'Image uploaded successfully');
     }
   };
 
@@ -49,6 +50,7 @@ export function UserProfileImage() {
       {isModalOpen && selectedImage && (
         <ImageEditModal
           imageUrl={selectedImage}
+          isLoading={isLoading}
           onClose={handleCloseModal}
           onSave={handleSave}
         />

@@ -3,7 +3,7 @@ import { useApiRequest, usePrivateRequest } from '@/hooks';
 import type { AddressType, ListAddressesResponse } from '@/types';
 
 export function useAddressData() {
-  const { execute } = useApiRequest();
+  const { execute, isLoading } = useApiRequest();
   const privateApi = usePrivateRequest();
 
   const getUserAddresses =
@@ -13,5 +13,5 @@ export function useAddressData() {
       );
     }, [execute, privateApi]);
 
-  return { getUserAddresses };
+  return { getUserAddresses, isLoading };
 }

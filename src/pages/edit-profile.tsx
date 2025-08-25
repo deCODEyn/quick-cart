@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   EditSocialMedia,
@@ -11,61 +12,37 @@ import {
   ValidatePasswordModal,
 } from '@/components';
 import { useAuthContext } from '@/context';
-import type { UserType } from '@/types';
+import { useProfileForm, useToast } from '@/hooks';
 
 export function EditProfile() {
-  const { user, isAuthReady } = useAuthContext();
-  const [userData, setUserData] = useState<UserType>({} as UserType);
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const alreadyHaveCpf = !!user?.cpf;
-  const alreadyHaveRg = !!user?.rg;
+  const { user, isAuthReady, fetchUser } = useAuthContext();
+  const {
+    userData,
+    handleInputChange,
+    handleSocialInputChange,
+    handleSubmit,
+    handleSave,
+    isCpfLocked,
+    isRgLocked,
+    showPasswordModal,
+    setShowPasswordModal,
+  } = useProfileForm(user);
+  const navigate = useNavigate();
+  const { showSuccessToast, showErrorToast } = useToast();
   const inputClass =
     'w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0';
 
-  useEffect(() => {
-    if (user) {
-      setUserData(user);
-    }
-  }, [user]);
-
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setUserData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+  const handleSaveProfile = useCallback(
+    async (password: string) => {
+      const { success, message } = await handleSave(password);
+      if (success) {
+        await fetchUser();
+        showSuccessToast(message || '');
+        navigate('/profile');
+      }
+      showErrorToast(message || '');
     },
-    []
-  );
-
-  const handleSocialInputChange = useCallback((name: string, value: string) => {
-    setUserData((prev) => ({
-      ...prev,
-      socialMedia: {
-        ...prev.socialMedia,
-        [name]: value,
-      },
-    }));
-  }, []);
-
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setShowPasswordModal(true);
-  }, []);
-
-  const handleSave = useCallback(
-    (password: string) => {
-      // biome-ignore lint/suspicious/noConsole: <dev>
-      console.log(
-        'Senha informada:',
-        password,
-        ' --- Dados a serem enviados:',
-        userData
-      );
-      setShowPasswordModal(false);
-    },
-    [userData]
+    [handleSave, fetchUser, showSuccessToast, showErrorToast, navigate]
   );
 
   if (!isAuthReady) {
@@ -135,7 +112,7 @@ export function EditProfile() {
                 <Label htmlFor="cpf">CPF</Label>
                 <Input
                   className={inputClass}
-                  disabled={alreadyHaveCpf}
+                  disabled={isCpfLocked}
                   id="cpf"
                   name="cpf"
                   onChange={handleInputChange}
@@ -146,7 +123,7 @@ export function EditProfile() {
                 <Label htmlFor="rg">RG</Label>
                 <Input
                   className={inputClass}
-                  disabled={alreadyHaveRg}
+                  disabled={isRgLocked}
                   id="rg"
                   name="rg"
                   onChange={handleInputChange}
@@ -176,7 +153,7 @@ export function EditProfile() {
                 name="email"
                 onChange={handleInputChange}
                 type="email"
-                value={userData.email}
+                value={userData.email || ''}
               />
             </div>
           </div>
@@ -197,7 +174,7 @@ export function EditProfile() {
         {showPasswordModal && (
           <ValidatePasswordModal
             onClose={() => setShowPasswordModal(false)}
-            onConfirm={handleSave}
+            onConfirm={handleSaveProfile}
           />
         )}
       </div>

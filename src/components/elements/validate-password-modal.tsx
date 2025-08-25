@@ -37,13 +37,13 @@ export function ValidatePasswordModal({
         />
         <div className="mt-5 flex justify-end gap-2">
           <Button
-            className="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+            className="cursor-pointer rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             onClick={onClose}
           >
             Cancel
           </Button>
           <Button
-            className="rounded bg-gray-900 px-4 py-2 text-white hover:bg-gray-700"
+            className="cursor-pointer rounded bg-gray-900 px-4 py-2 text-white hover:bg-gray-700"
             disabled={!password.trim()}
             onClick={() => onConfirm(password)}
           >
