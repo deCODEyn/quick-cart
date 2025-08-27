@@ -1,5 +1,5 @@
 export interface FormDeliveryInterface {
-  onSubmit: (formData: FormDeliveryData) => void;
+  onSubmit: (formData: FormDeliveryFormData) => void;
 }
 
 export interface InputFormInterface {
@@ -20,7 +20,7 @@ export interface PaymentMethodButtonInterface {
   method: 'stripe' | 'razorpay' | 'cod';
 }
 
-export type FormDeliveryData = {
+export type FormDeliveryFormData = {
   city: string;
   country: string;
   email: string;

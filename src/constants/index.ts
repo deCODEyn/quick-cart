@@ -1,5 +1,10 @@
-import type { ImageFiles, ProductData } from '@/admin/admin-types';
-import type { AuthFormData, FormDeliveryData, PageLinksType } from '@/types';
+import type { ImageFiles, ProductFormData } from '@/admin/admin-types';
+import type {
+  AuthFormData,
+  ChangePasswordFormData,
+  FormDeliveryFormData,
+  PageLinksType,
+} from '@/types';
 
 export const currency = '$';
 
@@ -27,7 +32,12 @@ export const initialAuthFormData: AuthFormData = {
   passwordValidate: '',
 };
 
-export const initialDeliveryData: FormDeliveryData = {
+export const initialChangePasswordFormData: ChangePasswordFormData = {
+  password: '',
+  passwordValidate: '',
+};
+
+export const initialDeliveryFormData: FormDeliveryFormData = {
   firstName: '',
   lastName: '',
   email: '',
@@ -40,7 +50,7 @@ export const initialDeliveryData: FormDeliveryData = {
   phone: '',
 };
 
-export const initialProductData: ProductData = {
+export const initialProductFormData: ProductFormData = {
   name: '',
   description: '',
   price: '',

@@ -14,6 +14,7 @@ export * from '@/components/elements/link-button';
 export * from '@/components/elements/loading-data';
 export * from '@/components/elements/newsletter-box';
 export * from '@/components/elements/no-user-found';
+export * from '@/components/elements/password-inputs';
 export * from '@/components/elements/search-bar';
 export * from '@/components/elements/select-input';
 export * from '@/components/elements/summary-row';

@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import type {
   ImageFiles,
-  ProductData,
+  ProductFormData,
   UseProductFormReturn,
 } from '@/admin/admin-types';
-import { initialImages, initialProductData } from '@/constants';
+import { initialImages, initialProductFormData } from '@/constants';
 import { useProductData } from '@/hooks';
 import type { ProductType } from '@/types';
 
@@ -19,11 +19,12 @@ export function useProductForm(
         bestseller: !!initialData.bestseller,
       };
     }
-    return initialProductData;
+    return initialProductFormData;
   };
   const { createProduct, updateProduct, isLoading } = useProductData();
   const [images, setImages] = useState<ImageFiles>(initialImages);
-  const [productData, setProductData] = useState<ProductData>(startProductData);
+  const [productData, setProductData] =
+    useState<ProductFormData>(startProductData);
 
   const handleInputChange = useCallback(
     (
@@ -69,7 +70,7 @@ export function useProductForm(
   }, []);
 
   const buildFormData = useCallback(
-    (data: ProductData, imagesFile: ImageFiles): FormData => {
+    (data: ProductFormData, imagesFile: ImageFiles): FormData => {
       const formData = new FormData();
       formData.append('name', data.name);
       formData.append('description', data.description);
@@ -112,7 +113,7 @@ export function useProductForm(
       }
       if (success) {
         setImages(initialImages);
-        setProductData(initialProductData);
+        setProductData(initialProductFormData);
         return { success: true, message: message || 'Operation successful' };
       }
       return { success: false, message: 'Operation failed' };

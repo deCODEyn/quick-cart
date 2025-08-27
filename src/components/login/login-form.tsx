@@ -1,4 +1,4 @@
-import { Input } from '@/components';
+import { Input, PasswordInputs } from '@/components';
 import type { LoginFormInterface } from '@/types';
 
 export function LoginForm({
@@ -32,26 +32,12 @@ export function LoginForm({
         type="email"
         value={formData.email}
       />
-      <Input
+      <PasswordInputs
         className={inputClass}
-        name="password"
-        onChange={handleChange}
-        placeholder={'Enter a password'}
-        required
-        type="password"
-        value={formData.password}
+        formData={formData}
+        handleChange={handleChange}
+        needConfirm={!isLogin}
       />
-      {!isLogin && (
-        <Input
-          className={inputClass}
-          name="passwordValidate"
-          onChange={handleChange}
-          placeholder={'Confirm Password'}
-          required
-          type="password"
-          value={formData.passwordValidate}
-        />
-      )}
     </>
   );
 }

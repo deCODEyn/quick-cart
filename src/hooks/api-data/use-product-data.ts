@@ -17,9 +17,13 @@ export function useProductData(): UseProductDataReturn {
   const createProduct = useCallback(
     async (formData: FormData): Promise<SingleProductResponse> => {
       return await execute<ProductType>(() =>
-        privateRequest.post<SingleProductResponse>('/products', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        })
+        privateRequest.post<SingleProductResponse>(
+          '/products/admin',
+          formData,
+          {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          }
+        )
       );
     },
     [execute, privateRequest]
@@ -32,7 +36,7 @@ export function useProductData(): UseProductDataReturn {
     ): Promise<SingleProductResponse> => {
       return await execute<ProductType>(() =>
         privateRequest.patch<SingleProductResponse>(
-          `/products/${productId}`,
+          `/products/admin/${productId}`,
           data
         )
       );
@@ -43,7 +47,9 @@ export function useProductData(): UseProductDataReturn {
   const deleteProduct = useCallback(
     async (productId: string): Promise<SingleProductResponse> => {
       return await execute<ProductType>(() =>
-        privateRequest.delete<SingleProductResponse>(`/products/${productId}`)
+        privateRequest.delete<SingleProductResponse>(
+          `/products/admin/${productId}`
+        )
       );
     },
     [privateRequest, execute]

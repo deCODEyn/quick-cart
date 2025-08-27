@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useApiRequest, usePrivateRequest } from '@/hooks';
-import type { SingleUserResponse, UserType } from '@/types';
+import type { SingleUserResponse, UserType, UseUseDataReturn } from '@/types';
 
-export function useUserData() {
+export function useUserData(): UseUseDataReturn {
   const { execute, isLoading } = useApiRequest();
   const privateApi = usePrivateRequest();
 
@@ -59,9 +59,31 @@ export function useUserData() {
   );
 
   const updateProfile = useCallback(
-    async (userData: UserType): Promise<SingleUserResponse> => {
+    async (
+      userData: UserType,
+      currentPassword: string
+    ): Promise<SingleUserResponse> => {
+      const requestData = {
+        ...userData,
+        currentPassword,
+      };
       return await execute<UserType>(() =>
-        privateApi.patch<SingleUserResponse>('/users/profile', userData)
+        privateApi.patch<SingleUserResponse>('/users/profile', requestData)
+      );
+    },
+    [execute, privateApi]
+  );
+
+  const changePassword = useCallback(
+    async (
+      currentPassword: string,
+      newPassword: string
+    ): Promise<SingleUserResponse> => {
+      return await execute<UserType>(() =>
+        privateApi.patch<SingleUserResponse>('/users/profile/password', {
+          currentPassword,
+          newPassword,
+        })
       );
     },
     [execute, privateApi]
@@ -74,6 +96,7 @@ export function useUserData() {
     userLogin,
     userLogout,
     userRegister,
+    changePassword,
     isLoading,
   };
 }

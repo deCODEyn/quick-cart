@@ -37,7 +37,7 @@ export interface UseProductFormReturn {
   ) => Promise<{ success: boolean; message: string }>;
   images: ImageFiles;
   isLoading: boolean;
-  productData: ProductData;
+  productData: ProductFormData;
 }
 
 export type ProductFormType = {
@@ -52,7 +52,7 @@ export type ImageFiles = {
   image4: File | null;
 };
 
-export type ProductData = {
+export type ProductFormData = {
   bestseller: boolean;
   category: string;
   description: string;

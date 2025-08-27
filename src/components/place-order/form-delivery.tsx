@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Button, InputForm } from '@/components';
-import { initialDeliveryData } from '@/constants';
-import type { FormDeliveryData, FormDeliveryInterface } from '@/types';
+import { initialDeliveryFormData } from '@/constants';
+import type { FormDeliveryFormData, FormDeliveryInterface } from '@/types';
 
 export function FormDelivery({ onSubmit }: FormDeliveryInterface) {
-  const [formData, setFormData] =
-    useState<FormDeliveryData>(initialDeliveryData);
+  const [formData, setFormData] = useState<FormDeliveryFormData>(
+    initialDeliveryFormData
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

@@ -28,21 +28,21 @@ export function EditProfile() {
     setShowPasswordModal,
   } = useProfileForm(user);
   const navigate = useNavigate();
-  const { showSuccessToast, showErrorToast } = useToast();
+  const { showSuccessToast } = useToast();
   const inputClass =
     'w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0';
 
   const handleSaveProfile = useCallback(
     async (password: string) => {
-      const { success, message } = await handleSave(password);
+      const { success, message } = await handleSave(password, 'profile');
       if (success) {
         await fetchUser();
         showSuccessToast(message || '');
         navigate('/profile');
+        return;
       }
-      showErrorToast(message || '');
     },
-    [handleSave, fetchUser, showSuccessToast, showErrorToast, navigate]
+    [handleSave, fetchUser, showSuccessToast, navigate]
   );
 
   if (!isAuthReady) {

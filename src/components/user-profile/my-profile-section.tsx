@@ -1,6 +1,6 @@
 import { Lock, LogOut, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Title, UserProfileImage } from '@/components';
+import { Button, LinkButton, Title, UserProfileImage } from '@/components';
 import { useAuthContext } from '@/context';
 import { useToast } from '@/hooks';
 
@@ -17,12 +17,6 @@ export function MyProfileSection() {
     } else {
       showWarningToast('Logged out error.');
     }
-  };
-
-  const handleChangePass = () => {
-    //Lógica para alteração de senha.
-    // biome-ignore lint/suspicious/noConsole: dev
-    console.log('CHANGE PASS');
   };
 
   return (
@@ -42,14 +36,14 @@ export function MyProfileSection() {
         <p className="my-2 flex items-center gap-2 text-center text-gray-600">
           <Mail size={16} /> {user?.email}
         </p>
-        <div className="mt-6 flex w-full flex-row justify-end gap-6">
-          <Button
+        <div className="mt-6 flex w-full flex-row justify-end gap-4">
+          <LinkButton
             className="h-5 cursor-pointer rounded border border-gray-600 bg-gray-300 px-2 py-1 text-[0.6rem] text-gray-900 uppercase hover:bg-gray-400 active:bg-gray-200"
-            onClick={handleChangePass}
+            href="/profile/change-password"
+            label="change pass"
           >
             <Lock className="size-4" />
-            change pass
-          </Button>
+          </LinkButton>
           <Button
             className="h-5 cursor-pointer rounded border border-red-600 bg-red-300 px-2 py-1 text-[0.6rem] text-gray-900 uppercase hover:bg-red-400 active:bg-red-200"
             onClick={handleLogout}

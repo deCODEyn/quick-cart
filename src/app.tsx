@@ -12,6 +12,7 @@ import { AdminLayout, PublicLayout, ScrollToTop } from '@/layouts';
 import {
   About,
   Cart,
+  ChangePassword,
   Collection,
   Contact,
   EditProfile,
@@ -41,6 +42,7 @@ export default function App() {
           <Route element={<Product />} path="product/:productId" />
           <Route element={<UserProfile />} path="profile" />
           <Route element={<EditProfile />} path="profile/edit" />
+          <Route element={<ChangePassword />} path="profile/change-password" />
         </Route>
 
         <Route element={<AdminLogin />} path="/login/admin" />

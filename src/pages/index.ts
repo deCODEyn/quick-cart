@@ -1,5 +1,6 @@
 export * from '@/pages/about';
 export * from '@/pages/cart';
+export * from '@/pages/change-password';
 export * from '@/pages/collection';
 export * from '@/pages/contact';
 export * from '@/pages/edit-profile';

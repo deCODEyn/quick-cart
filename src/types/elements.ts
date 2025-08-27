@@ -10,6 +10,18 @@ export interface ImageInterface
   width?: number | string;
 }
 
+export interface PasswordInputsInterface {
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className: string;
+  formData: ChangePasswordFormData;
+  needConfirm: boolean;
+}
+
+export interface ValidatePasswordModalInterface {
+  onClose: () => void;
+  onConfirm: (password: string) => void;
+}
+
 export interface UseSearchBarReturn {
   handleCloseSearchBar: () => void;
   setSearch: (value: string) => void;
@@ -32,6 +44,11 @@ export type LinkButtonType = {
 
 export type LoadingDataType = {
   data: string;
+};
+
+export type ChangePasswordFormData = {
+  password: string;
+  passwordValidate?: string;
 };
 
 export type SummaryRowType = {

@@ -1,5 +1,10 @@
 import type { IconType } from 'react-icons/lib';
-import type { SocialMediaType, UserType } from '@/types';
+import type {
+  ChangePasswordFormData,
+  SingleUserResponse,
+  SocialMediaType,
+  UserType,
+} from '@/types';
 
 export interface EditSocialMediaInterface {
   onChange: (name: string, value: string) => void;
@@ -13,11 +18,6 @@ export interface ImageEditModalInterface {
   imageUrl: string;
 }
 
-export interface ValidatePasswordModalInterface {
-  onClose: () => void;
-  onConfirm: (password: string) => void;
-}
-
 export interface UseHandleImageReturn {
   handleCloseModal: () => void;
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -29,16 +29,43 @@ export interface UseHandleImageReturn {
 
 export interface UseProfileFormReturn {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSave: (
-    password: string
-  ) => Promise<{ success: boolean; message: string | undefined }>;
+    currentPassword: string,
+    action: 'profile' | 'password'
+  ) => Promise<{
+    success: boolean;
+    message: string | undefined;
+  }>;
   handleSocialInputChange: (name: string, value: string) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   setShowPasswordModal: (show: boolean) => void;
   isCpfLocked: boolean;
   isRgLocked: boolean;
+  passwordData: ChangePasswordFormData;
   showPasswordModal: boolean;
   userData: UserType;
+}
+
+export interface UseUseDataReturn {
+  changePassword: (
+    currentPassword: string,
+    newPassword: string
+  ) => Promise<SingleUserResponse>;
+  getMe: () => Promise<SingleUserResponse>;
+  setProfileImage: (croppedBlob: Blob) => Promise<SingleUserResponse>;
+  updateProfile: (
+    userData: UserType,
+    currentPassword: string
+  ) => Promise<SingleUserResponse>;
+  userLogin: (email: string, password: string) => Promise<SingleUserResponse>;
+  userLogout: () => Promise<SingleUserResponse>;
+  userRegister: (
+    email: string,
+    password: string,
+    name: string
+  ) => Promise<SingleUserResponse>;
+  isLoading: boolean;
 }
 
 export type ProfileInfoItemType = {
