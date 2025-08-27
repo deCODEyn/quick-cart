@@ -1,12 +1,13 @@
 import { Pencil } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components';
 import type { AddressCardType } from '@/types';
 
 export function AddressCard({ address }: AddressCardType) {
+  const navigate = useNavigate();
+
   const handleAddressEdit = () => {
-    //Lógica para editar endereço.
-    // biome-ignore lint/suspicious/noConsole: dev
-    console.log('EDIT ADDRESS');
+    navigate('/address/edit', { state: { address } });
   };
 
   return (
@@ -25,10 +26,15 @@ export function AddressCard({ address }: AddressCardType) {
         {address.street}, {address.houseNumber}
       </p>
       <p className="text-gray-600">
-        {address.neighborhood}, {address.city} - {address.state}
+        {address.neighborhood !== ''
+          ? address.neighborhood
+          : 'No registered neighborhood'}
+      </p>
+      <p className="text-gray-600">
+        {address.city} - {address.state}
       </p>
       <p className="text-gray-600">{address.zipCode}</p>
-      <p className="text-right text-gray-600">{address.country}</p>
+      <p className="text-end text-gray-600">{address.country}</p>
     </div>
   );
 }

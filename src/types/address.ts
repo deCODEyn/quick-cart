@@ -2,6 +2,24 @@ export type AddressCardType = {
   address: AddressType;
 };
 
+export type AddressFormData = {
+  city: string;
+  country: string;
+  houseNumber: string;
+  state: string;
+  street: string;
+  type: AddressTypeEnum;
+  zipCode: string;
+  complement?: string | undefined;
+  neighborhood?: string | undefined;
+  reference?: string | undefined;
+};
+
+export type AddressFormType = {
+  initialData?: AddressType;
+  isEditMode: boolean;
+};
+
 export type AddressType = {
   _id: string;
   city: string;

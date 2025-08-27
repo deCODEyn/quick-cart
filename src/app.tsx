@@ -11,10 +11,12 @@ import {
 import { AdminLayout, PublicLayout, ScrollToTop } from '@/layouts';
 import {
   About,
+  AddAddress,
   Cart,
   ChangePassword,
   Collection,
   Contact,
+  EditAddress,
   EditProfile,
   Home,
   Login,
@@ -42,6 +44,8 @@ export default function App() {
           <Route element={<Product />} path="product/:productId" />
           <Route element={<UserProfile />} path="profile" />
           <Route element={<EditProfile />} path="profile/edit" />
+          <Route element={<AddAddress />} path="address/add" />
+          <Route element={<EditAddress />} path="address/edit" />
           <Route element={<ChangePassword />} path="profile/change-password" />
         </Route>
 

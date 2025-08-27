@@ -1,5 +1,6 @@
 import type { ImageFiles, ProductFormData } from '@/admin/admin-types';
 import type {
+  AddressFormData,
   AuthFormData,
   ChangePasswordFormData,
   FormDeliveryFormData,
@@ -25,6 +26,20 @@ export const links: PageLinksType[] = [
   { label: 'about', href: '/about' },
   { label: 'contact', href: '/contact' },
 ];
+
+//INITIAL FORM DATA
+export const initialAddressFormData: AddressFormData = {
+  city: '',
+  country: '',
+  houseNumber: '',
+  state: '',
+  street: '',
+  type: 'Other',
+  zipCode: '',
+  complement: '',
+  neighborhood: '',
+  reference: '',
+};
 
 export const initialAuthFormData: AuthFormData = {
   name: '',

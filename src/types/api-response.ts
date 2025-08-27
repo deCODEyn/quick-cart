@@ -42,5 +42,6 @@ export type ListCartItemsResponse = ApiResponse<CartDisplayItem[]>;
 export type ListProductsResponse = ApiResponse<ProductType[]>;
 export type ListOrdersResponse = ApiResponse<OrderType[]>;
 
+export type SingleAddressResponse = ApiResponse<AddressType>;
 export type SingleProductResponse = ApiResponse<ProductType>;
 export type SingleUserResponse = ApiResponse<UserType>;

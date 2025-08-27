@@ -1,5 +1,6 @@
 export * from '@/components/about/feature-card';
 export * from '@/components/address/address-card';
+export * from '@/components/address/address-form';
 export * from '@/components/cart/add-to-cart-button';
 export * from '@/components/cart/cart-item-card';
 export * from '@/components/cart/cart-total';

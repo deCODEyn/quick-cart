@@ -5,6 +5,7 @@ export * from '@/hooks/api-data/use-user-data';
 export * from '@/hooks/core/use-api-request';
 export * from '@/hooks/core/use-date-format';
 export * from '@/hooks/core/use-private-request';
+export * from '@/hooks/forms/use-address-form';
 export * from '@/hooks/forms/use-auth-form';
 export * from '@/hooks/forms/use-product-form';
 export * from '@/hooks/forms/use-profile-form';
