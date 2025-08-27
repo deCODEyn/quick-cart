@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { ProductForm } from '@/admin/admin-pages';
+import { ProductForm } from '@/admin/admin-components';
 import { LoadingData } from '@/components';
 import type { ProductType } from '@/types';
 

@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import type { ProductData } from '@/admin/admin-types';
+import type { ProductFormData } from '@/admin/admin-types';
+import { useApiRequest, usePrivateRequest } from '@/hooks';
 import { api } from '@/services/api';
 import type {
   ListProductsResponse,
@@ -7,8 +8,6 @@ import type {
   SingleProductResponse,
   UseProductDataReturn,
 } from '@/types';
-import { useApiRequest } from '../core/use-api-request';
-import { usePrivateRequest } from '../core/use-private-request';
 
 export function useProductData(): UseProductDataReturn {
   const privateRequest = usePrivateRequest();
@@ -32,7 +31,7 @@ export function useProductData(): UseProductDataReturn {
   const updateProduct = useCallback(
     async (
       productId: string,
-      data: Partial<ProductData>
+      data: Partial<ProductFormData>
     ): Promise<SingleProductResponse> => {
       return await execute<ProductType>(() =>
         privateRequest.patch<SingleProductResponse>(

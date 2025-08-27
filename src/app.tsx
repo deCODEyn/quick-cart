@@ -3,10 +3,10 @@ import { ToastContainer } from 'react-toastify';
 import {
   AdminHome,
   AdminLogin,
+  CreateProduct,
   EditProduct,
   ListProducts,
   ManageOrders,
-  ProductForm,
 } from '@/admin/admin-pages';
 import { AdminLayout, PublicLayout, ScrollToTop } from '@/layouts';
 import {
@@ -49,7 +49,7 @@ export default function App() {
 
         <Route element={<AdminLayout />} path="/admin">
           <Route element={<AdminHome />} index />
-          <Route element={<ProductForm isEditMode={false} />} path="create" />
+          <Route element={<CreateProduct />} path="create" />
           <Route element={<ListProducts />} path="list" />
           <Route element={<EditProduct />} path="edit" />
           <Route element={<ManageOrders />} path="orders" />

@@ -1,4 +1,4 @@
-import type { ProductData } from '@/admin/admin-types';
+import type { ProductFormData } from '@/admin/admin-types';
 import type { ListProductsResponse, SingleProductResponse } from '@/types';
 
 export interface ProductSizeSelectorInterface {
@@ -13,7 +13,7 @@ export interface UseProductDataReturn {
   listProducts: () => Promise<ListProductsResponse>;
   updateProduct: (
     productId: string,
-    data: Partial<ProductData>
+    data: Partial<ProductFormData>
   ) => Promise<SingleProductResponse>;
   isLoading: boolean;
 }

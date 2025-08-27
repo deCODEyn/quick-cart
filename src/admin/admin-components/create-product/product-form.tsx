@@ -46,13 +46,7 @@ export function ProductForm({
       onSubmit={handleSubmit}
     >
       {!isEditMode && (
-        <>
-          <h1 className="mb-4 font-bold text-2xl">Add new product</h1>
-          <ImageUploader
-            handleImageChange={handleImageChange}
-            images={images}
-          />
-        </>
+        <ImageUploader handleImageChange={handleImageChange} images={images} />
       )}
       <div className="w-full">
         <Label className="mb-2 text-lg">Product Name</Label>

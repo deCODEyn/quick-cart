@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { initialChangePasswordFormData } from '@/constants';
+import { useUserData } from '@/hooks';
 import type {
   ChangePasswordFormData,
   UseProfileFormReturn,
   UserType,
 } from '@/types';
-import { useUserData } from '../api-data/use-user-data';
 
 export function useProfileForm(user: UserType | null): UseProfileFormReturn {
   const { updateProfile, changePassword } = useUserData();

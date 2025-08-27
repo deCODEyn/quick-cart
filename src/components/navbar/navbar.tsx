@@ -16,7 +16,7 @@ export function Navbar() {
       </ul>
       {userRole === 'Admin' ? (
         <Link
-          className="appearance-none rounded-full border-2 px-2 py-1 text-gray-400 hover:bg-gray-100"
+          className="appearance-none rounded-full border-2 px-1 py-1 text-gray-400 text-xs hover:bg-gray-100 md:px-2 md:text-base"
           to="/admin"
         >
           Admin Panel

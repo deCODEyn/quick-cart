@@ -6,18 +6,19 @@ import type {
   PageLinksType,
 } from '@/types';
 
-export const currency = '$';
+//STORE CONTROL
+export const allCategories = ['Men', 'Women', 'Kids'];
+export const allSubCategories = ['Topwear', 'Bottomwear', 'Winterwear'];
 
+export const currency = '$';
 export const deliveryFee = 10;
 
 export const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-
 export const sortOptions = ['Relevant', 'Low-high', 'High-low'];
 
-export const allCategories = ['Men', 'Women', 'Kids'];
+export const addressTypes = ['Home', 'Work', 'Other'];
 
-export const allSubCategories = ['Topwear', 'Bottomwear', 'Winterwear'];
-
+//NAVIGATION
 export const links: PageLinksType[] = [
   { label: 'home', href: '/' },
   { label: 'collection', href: '/collection' },

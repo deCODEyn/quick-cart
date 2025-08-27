@@ -16,7 +16,6 @@ export function useProductForm(
     if (isEditMode && initialData) {
       return {
         ...initialData,
-        bestseller: !!initialData.bestseller,
       };
     }
     return initialProductFormData;
