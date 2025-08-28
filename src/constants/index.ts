@@ -2,7 +2,6 @@ import type { ImageFiles, ProductFormData } from '@/admin/admin-types';
 import type {
   AddressFormData,
   AuthFormData,
-  ChangePasswordFormData,
   FormDeliveryFormData,
   PageLinksType,
 } from '@/types';
@@ -48,7 +47,7 @@ export const initialAuthFormData: AuthFormData = {
   passwordValidate: '',
 };
 
-export const initialChangePasswordFormData: ChangePasswordFormData = {
+export const initialChangePasswordFormData = {
   password: '',
   passwordValidate: '',
 };

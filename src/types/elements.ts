@@ -1,3 +1,6 @@
+import type { FieldErrors, UseFormRegister } from 'react-hook-form';
+import type { ChangePasswordType } from '@/schemas';
+
 export interface ImageInterface
   extends React.ImgHTMLAttributes<HTMLImageElement> {
   alt: string;
@@ -8,13 +11,6 @@ export interface ImageInterface
   sizes?: string;
   src: string;
   width?: number | string;
-}
-
-export interface PasswordInputsInterface {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  className: string;
-  formData: ChangePasswordFormData;
-  needConfirm: boolean;
 }
 
 export interface ValidatePasswordModalInterface {
@@ -46,9 +42,11 @@ export type LoadingDataType = {
   data: string;
 };
 
-export type ChangePasswordFormData = {
-  password: string;
-  passwordValidate?: string;
+export type PasswordInputsType = {
+  className: string;
+  errors: FieldErrors<ChangePasswordType>;
+  needConfirm: boolean;
+  register: UseFormRegister<ChangePasswordType>;
 };
 
 export type SummaryRowType = {

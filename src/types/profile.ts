@@ -1,10 +1,5 @@
 import type { IconType } from 'react-icons/lib';
-import type {
-  ChangePasswordFormData,
-  SingleUserResponse,
-  SocialMediaType,
-  UserType,
-} from '@/types';
+import type { SingleUserResponse, SocialMediaType, UserType } from '@/types';
 
 export interface EditSocialMediaInterface {
   onChange: (name: string, value: string) => void;
@@ -29,11 +24,11 @@ export interface UseHandleImageReturn {
 
 export interface UseProfileFormReturn {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSave: (
-    currentPassword: string,
-    action: 'profile' | 'password'
-  ) => Promise<{
+  handlePasswordChange: (data: {
+    password: string;
+    passwordValidate: string;
+  }) => void;
+  handleSave: (currentPassword: string) => Promise<{
     success: boolean;
     message: string | undefined;
   }>;
@@ -42,7 +37,6 @@ export interface UseProfileFormReturn {
   setShowPasswordModal: (show: boolean) => void;
   isCpfLocked: boolean;
   isRgLocked: boolean;
-  passwordData: ChangePasswordFormData;
   showPasswordModal: boolean;
   userData: UserType;
 }

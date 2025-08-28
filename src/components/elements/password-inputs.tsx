@@ -1,33 +1,45 @@
-import { Input } from '@/components';
-import type { PasswordInputsInterface } from '@/types';
+import { Input, Label } from '@/components';
+import type { PasswordInputsType } from '@/types';
 
 export function PasswordInputs({
   needConfirm = false,
-  formData,
-  handleChange,
   className,
-}: PasswordInputsInterface) {
+  register,
+  errors,
+}: PasswordInputsType) {
   return (
     <>
-      <Input
-        className={className}
-        name="password"
-        onChange={handleChange}
-        placeholder="Enter a password"
-        required
-        type="password"
-        value={formData.password}
-      />
-      {needConfirm && (
+      <div className="w-full">
+        <Label htmlFor="password">Password</Label>
         <Input
           className={className}
-          name="passwordValidate"
-          onChange={handleChange}
-          placeholder="Confirm password"
-          required
+          id="password"
+          placeholder="New Password"
           type="password"
-          value={formData.passwordValidate}
+          {...register('password')}
+          aria-invalid={!!errors.password}
         />
+        {errors.password && (
+          <p className="mt-1 text-red-500 text-sm">{errors.password.message}</p>
+        )}
+      </div>
+      {needConfirm && (
+        <div className="w-full">
+          <Label htmlFor="passwordValidate">Confirm Password</Label>
+          <Input
+            className={className}
+            id="passwordValidate"
+            placeholder="Confirm Password"
+            type="password"
+            {...register('passwordValidate')}
+            aria-invalid={!!errors.passwordValidate}
+          />
+          {errors.passwordValidate && (
+            <p className="mt-1 text-red-500 text-sm">
+              {errors.passwordValidate.message}
+            </p>
+          )}
+        </div>
       )}
     </>
   );

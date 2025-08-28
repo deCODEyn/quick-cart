@@ -34,7 +34,7 @@ export function EditProfile() {
 
   const handleSaveProfile = useCallback(
     async (password: string) => {
-      const { success, message } = await handleSave(password, 'profile');
+      const { success, message } = await handleSave(password);
       if (success) {
         await fetchUser();
         showSuccessToast(message || '');
