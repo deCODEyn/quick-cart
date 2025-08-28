@@ -23,9 +23,9 @@ export function LatestOrdersSection() {
       <div className="grid grid-cols-2 gap-4 gap-y-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {ordersItems?.map((order, index) => (
           <ProductItem
-            id={order._id}
+            id={order.id}
             image={order.image}
-            key={`${order._id} - ${index}`}
+            key={`${order.id} - ${index}`}
             name={order.name}
             price={order.price}
           />

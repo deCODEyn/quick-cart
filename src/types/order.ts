@@ -40,7 +40,7 @@ export type OrderType = {
 };
 
 export type OrderUnitProduct = {
-  _id: string;
+  id: string;
   name: string;
   price: number;
   image: string;

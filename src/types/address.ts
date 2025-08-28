@@ -14,7 +14,7 @@ export interface UseAddressDataReturn {
 
 export type AddressCardType = {
   address: AddressType;
-  allowToEdit: boolean;
+  allowToEdit?: boolean;
 };
 
 export type AddressFormData = {
