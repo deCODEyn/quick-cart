@@ -9,7 +9,7 @@ export function ProductItem({ id, image, name, price }: ProductItemType) {
         <Image
           alt={`Product image of the ${name}`}
           className="transition ease-in-out hover:scale-110"
-          src={image[0]}
+          src={image}
         />
       </div>
       <p className="h-12 pt-3 pb-1 text-sm lg:h-8">{name}</p>

@@ -10,7 +10,7 @@ export function EditAddress() {
   }
 
   return (
-    <div className="p-4">
+    <div className="border-t p-4 pt-12">
       <h1 className="mb-4 font-bold text-2xl">
         <Title as="h1" span="address" title="edit" />
       </h1>

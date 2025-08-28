@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components';
 import type { AddressCardType } from '@/types';
 
-export function AddressCard({ address }: AddressCardType) {
+export function AddressCard({ address, allowToEdit = true }: AddressCardType) {
   const navigate = useNavigate();
 
   const handleAddressEdit = () => {
@@ -14,13 +14,15 @@ export function AddressCard({ address }: AddressCardType) {
     <div className="rounded-md border border-gray-300 bg-gray-100 p-4 shadow-sm">
       <div className="mb-2 flex items-center justify-between">
         <span className="font-medium text-lg">{address.type}</span>
-        <Button
-          className="cursor-pointer appearance-none bg-transparent text-gray-900 shadow-none hover:bg-transparent hover:text-gray-500 active:text-gray-400"
-          onClick={handleAddressEdit}
-          size="icon"
-        >
-          <Pencil className="size-4" />
-        </Button>
+        {allowToEdit && (
+          <Button
+            className="cursor-pointer appearance-none bg-transparent text-gray-900 shadow-none hover:bg-transparent hover:text-gray-500 active:text-gray-400"
+            onClick={handleAddressEdit}
+            size="icon"
+          >
+            <Pencil className="size-4" />
+          </Button>
+        )}
       </div>
       <p className="text-gray-600">
         {address.street}, {address.houseNumber}

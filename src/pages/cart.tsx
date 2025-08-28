@@ -61,11 +61,7 @@ export function Cart() {
             >
               clear cart
             </Button>
-            <LinkButton
-              className="w-full"
-              href="/place-order"
-              label="proceed to checkout"
-            />
+            <LinkButton href="/place-order" label="proceed to checkout" />
           </div>
         </div>
       </div>

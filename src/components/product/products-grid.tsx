@@ -11,7 +11,7 @@ export function ProductsGrid({ products }: ArrayProductsType) {
       {products?.map((item) => (
         <ProductItem
           id={item._id}
-          image={item.image}
+          image={item.image[0]}
           key={item._id}
           name={item.name}
           price={item.price}

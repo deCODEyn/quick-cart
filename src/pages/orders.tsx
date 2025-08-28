@@ -1,21 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
-import { LoadingData, OrderCard, Title } from '@/components';
-import { useApiRequest, usePrivateRequest } from '@/hooks';
-import type { ListOrdersResponse, OrderType } from '@/types';
+import { LinkButton, LoadingData, OrderCard, Title } from '@/components';
+import { useOrdersData } from '@/hooks';
+import type { OrderType } from '@/types';
 
 export function Orders() {
-  const { execute } = useApiRequest();
-  const privateApi = usePrivateRequest();
+  const { listOrders } = useOrdersData();
   const [orders, setOrders] = useState<OrderType[] | null>(null);
 
   const getOrders = useCallback(async () => {
-    const { success, result } = await execute<OrderType[]>(() =>
-      privateApi.get<ListOrdersResponse>('/orders')
-    );
+    const { result, success } = await listOrders();
     if (success && result) {
       setOrders(result.reverse());
     }
-  }, [execute, privateApi]);
+  }, [listOrders]);
 
   useEffect(() => {
     getOrders();
@@ -29,6 +26,7 @@ export function Orders() {
     return (
       <div className="flex h-[50vh] flex-col items-center justify-center font-semibold text-2xl text-gray-500">
         No orders found.
+        <LinkButton href="/collection" label="go shopping!" />
       </div>
     );
   }

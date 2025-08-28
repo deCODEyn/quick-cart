@@ -5,9 +5,10 @@ import type {
   AddressType,
   ListAddressesResponse,
   SingleAddressResponse,
+  UseAddressDataReturn,
 } from '@/types';
 
-export function useAddressData() {
+export function useAddressData(): UseAddressDataReturn {
   const { execute, isLoading } = useApiRequest();
   const privateApi = usePrivateRequest();
 

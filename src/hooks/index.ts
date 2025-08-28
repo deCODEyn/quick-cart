@@ -1,5 +1,6 @@
 export * from '@/hooks/api-data/use-address-data';
 export * from '@/hooks/api-data/use-cart-data';
+export * from '@/hooks/api-data/use-orders-data';
 export * from '@/hooks/api-data/use-product-data';
 export * from '@/hooks/api-data/use-user-data';
 export * from '@/hooks/core/use-api-request';
@@ -10,6 +11,7 @@ export * from '@/hooks/forms/use-auth-form';
 export * from '@/hooks/forms/use-product-form';
 export * from '@/hooks/forms/use-profile-form';
 export * from '@/hooks/ui/use-click-outside';
+export * from '@/hooks/ui/use-filter-latest-orders';
 export * from '@/hooks/ui/use-handle-profile-image';
 export * from '@/hooks/ui/use-product-filter';
 export * from '@/hooks/ui/use-search-bar';

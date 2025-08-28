@@ -32,7 +32,7 @@ export type ProductInfoType = {
 
 export type ProductItemType = {
   id: string;
-  image: string[];
+  image: string;
   name: string;
   price: number;
 };

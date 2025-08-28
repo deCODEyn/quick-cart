@@ -43,7 +43,6 @@ export * from '@/components/order/order-card';
 export * from '@/components/order/order-item';
 export * from '@/components/order/order-status-inticator';
 export * from '@/components/order/order-total';
-export * from '@/components/place-order/form-delivery';
 export * from '@/components/place-order/input-form-delivery';
 export * from '@/components/place-order/payment-method-button';
 export * from '@/components/product/product-description';

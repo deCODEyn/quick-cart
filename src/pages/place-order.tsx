@@ -2,19 +2,13 @@ import { useState } from 'react';
 import { assets } from '@/assets';
 import {
   CartTotal,
-  FormDelivery,
   LinkButton,
   PaymentMethodButton,
   Title,
 } from '@/components';
-import type { FormDeliveryData } from '@/types';
 
 export function PlaceOrder() {
   const [method, setMethod] = useState('cod');
-
-  const handleDeliverySubmit = (_formData: FormDeliveryData) => {
-    // Lógica para enviar formulário de endereço do usuário.
-  };
 
   return (
     <div className="flex min-h-[80vh] flex-col justify-between gap-4 border-t pt-5 sm:flex-row sm:pt-14">
@@ -22,7 +16,7 @@ export function PlaceOrder() {
         <h1 className="my-3 text-xl sm:text-2xl">
           <Title as="h1" span="information" title="delivery" />
         </h1>
-        <FormDelivery onSubmit={handleDeliverySubmit} />
+        {/* Cards de endereços como botão para selecionar na Orden; */}
       </div>
       <div className="mt-8">
         <div className="mt-8 min-w-80">
