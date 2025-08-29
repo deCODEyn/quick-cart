@@ -3,10 +3,10 @@ import type { EditSocialMediaInterface } from '@/types';
 
 export function EditSocialMedia({
   socialMedia,
-  onChange,
+  register,
 }: EditSocialMediaInterface) {
   const socialPlatforms = Object.keys(
-    socialMedia
+    socialMedia || {}
   ) as (keyof typeof socialMedia)[];
 
   return (
@@ -18,10 +18,8 @@ export function EditSocialMedia({
           </Label>
           <Input
             className="w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0"
-            id={platform}
-            name={platform}
-            onChange={(e) => onChange(e.target.name, e.target.value)}
-            value={socialMedia[platform] || ''}
+            id={`socialMedia.${platform}`}
+            {...register(`socialMedia.${platform}` as const)}
           />
         </div>
       ))}

@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {
   Button,
@@ -12,37 +13,43 @@ import {
   ValidatePasswordModal,
 } from '@/components';
 import { useAuthContext } from '@/context';
-import { useProfileForm, useToast } from '@/hooks';
+import { useProfile, useToast } from '@/hooks';
+import type { SocialMediaType, UserType } from '@/types';
+
+const inputClass =
+  'w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0';
 
 export function EditProfile() {
   const { user, isAuthReady, fetchUser } = useAuthContext();
   const {
-    userData,
-    handleInputChange,
-    handleSocialInputChange,
-    handleSubmit,
-    handleSave,
+    showPasswordModal,
+    handleConfirm,
+    closeModal,
+    startProfileUpdate,
     isCpfLocked,
     isRgLocked,
-    showPasswordModal,
-    setShowPasswordModal,
-  } = useProfileForm(user);
+  } = useProfile(user);
   const navigate = useNavigate();
   const { showSuccessToast } = useToast();
-  const inputClass =
-    'w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0';
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserType>({
+    // resolver: zodResolver(editProfileSchema),
+    defaultValues: user || {},
+    mode: 'onBlur',
+  });
 
-  const handleSaveProfile = useCallback(
-    async (password: string) => {
-      const { success, message } = await handleSave(password);
-      if (success) {
+  const onSubmit = useCallback(
+    (data: UserType) => {
+      startProfileUpdate(data, async (message) => {
         await fetchUser();
-        showSuccessToast(message || '');
+        showSuccessToast(message || 'Profile updated successfully');
         navigate('/profile');
-        return;
-      }
+      });
     },
-    [handleSave, fetchUser, showSuccessToast, navigate]
+    [startProfileUpdate, fetchUser, showSuccessToast, navigate]
   );
 
   if (!isAuthReady) {
@@ -59,7 +66,7 @@ export function EditProfile() {
         <h1 className="mb-8 font-bold text-3xl text-gray-900">
           <Title as="h1" span="profile" title="edit your" />
         </h1>
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded border border-gray-200 bg-gray-50 p-6">
             <div className="flex flex-row justify-between gap-4 text-4xl">
               <h2 className="mb-4 font-semibold text-gray-900 text-xl">
@@ -73,9 +80,7 @@ export function EditProfile() {
                 <Input
                   className={inputClass}
                   id="firstName"
-                  name="firstName"
-                  onChange={handleInputChange}
-                  value={userData.firstName || ''}
+                  {...register('firstName')}
                 />
               </div>
               <div className="space-y-2">
@@ -83,9 +88,7 @@ export function EditProfile() {
                 <Input
                   className={inputClass}
                   id="middleName"
-                  name="middleName"
-                  onChange={handleInputChange}
-                  value={userData.middleName || ''}
+                  {...register('middleName')}
                 />
               </div>
               <div className="space-y-2">
@@ -93,9 +96,7 @@ export function EditProfile() {
                 <Input
                   className={inputClass}
                   id="lastName"
-                  name="lastName"
-                  onChange={handleInputChange}
-                  value={userData.lastName || ''}
+                  {...register('lastName')}
                 />
               </div>
               <div className="space-y-2">
@@ -103,9 +104,7 @@ export function EditProfile() {
                 <Input
                   className={inputClass}
                   id="phoneNumber"
-                  name="phoneNumber"
-                  onChange={handleInputChange}
-                  value={userData.phoneNumber || ''}
+                  {...register('phoneNumber')}
                 />
               </div>
               <div className="space-y-2">
@@ -114,9 +113,7 @@ export function EditProfile() {
                   className={inputClass}
                   disabled={isCpfLocked}
                   id="cpf"
-                  name="cpf"
-                  onChange={handleInputChange}
-                  value={userData.cpf || ''}
+                  {...register('cpf')}
                 />
               </div>
               <div className="space-y-2">
@@ -125,9 +122,7 @@ export function EditProfile() {
                   className={inputClass}
                   disabled={isRgLocked}
                   id="rg"
-                  name="rg"
-                  onChange={handleInputChange}
-                  value={userData.rg || ''}
+                  {...register('rg')}
                 />
               </div>
             </div>
@@ -137,8 +132,8 @@ export function EditProfile() {
               <Title span="media" title="social" />
             </h2>
             <EditSocialMedia
-              onChange={handleSocialInputChange}
-              socialMedia={userData.socialMedia || {}}
+              register={register}
+              socialMedia={user.socialMedia || ({} as SocialMediaType)}
             />
           </div>
           <div className="rounded border border-gray-200 bg-gray-50 p-6">
@@ -150,11 +145,10 @@ export function EditProfile() {
               <Input
                 className={inputClass}
                 id="email"
-                name="email"
-                onChange={handleInputChange}
                 type="email"
-                value={userData.email || ''}
+                {...register('email')}
               />
+              {errors.email && <p>{errors.email.message}</p>}
             </div>
           </div>
           <div className="flex justify-end gap-4">
@@ -173,8 +167,8 @@ export function EditProfile() {
         </form>
         {showPasswordModal && (
           <ValidatePasswordModal
-            onClose={() => setShowPasswordModal(false)}
-            onConfirm={handleSaveProfile}
+            onClose={closeModal}
+            onConfirm={handleConfirm}
           />
         )}
       </div>

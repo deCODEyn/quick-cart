@@ -1,8 +1,10 @@
+import type { UseFormRegister } from 'react-hook-form';
 import type { IconType } from 'react-icons/lib';
+import type { ChangePasswordType } from '@/schemas';
 import type { SingleUserResponse, SocialMediaType, UserType } from '@/types';
 
 export interface EditSocialMediaInterface {
-  onChange: (name: string, value: string) => void;
+  register: UseFormRegister<UserType>;
   socialMedia: SocialMediaType;
 }
 
@@ -22,24 +24,26 @@ export interface UseHandleImageReturn {
   selectedImage: string | null;
 }
 
-export interface UseProfileFormReturn {
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handlePasswordChange: (data: {
-    password: string;
-    passwordValidate: string;
-  }) => void;
-  handleSave: (currentPassword: string) => Promise<{
+export type UseProfileReturn = {
+  closeModal: () => void;
+  handleConfirm: (password: string) => Promise<{
     success: boolean;
-    message: string | undefined;
+    message?: string | undefined;
   }>;
-  handleSocialInputChange: (name: string, value: string) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  setShowPasswordModal: (show: boolean) => void;
-  isCpfLocked: boolean;
+  startPasswordChange: (
+    data: ChangePasswordType,
+    onSuccess: (message?: string | undefined) => void
+  ) => void;
+  startProfileUpdate: (
+    data: UserType,
+    onSuccess: (message?: string) => void
+  ) => void;
   isRgLocked: boolean;
+  isCpfLocked: boolean;
+  setUserData: React.Dispatch<React.SetStateAction<UserType>>;
   showPasswordModal: boolean;
   userData: UserType;
-}
+};
 
 export interface UseUseDataReturn {
   changePassword: (
