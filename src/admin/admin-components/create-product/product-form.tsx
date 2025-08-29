@@ -107,7 +107,6 @@ export function ProductForm({
           />
         </div>
       </div>
-
       <SizesSelector
         handleSizeToggle={handleSizeToggle}
         selectedSizes={productData.sizes}

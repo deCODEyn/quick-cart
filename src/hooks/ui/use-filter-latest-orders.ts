@@ -17,7 +17,6 @@ function extractLatestUncancelledItems(
       }
     }
   }
-
   return products;
 }
 

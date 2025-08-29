@@ -31,13 +31,11 @@ export function useProductFilter(): UseProductFilterReturn {
 
   useEffect(() => {
     let productsCopy = products.slice();
-
     if (showSearch && search) {
       productsCopy = productsCopy.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
       );
     }
-
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
@@ -58,7 +56,6 @@ export function useProductFilter(): UseProductFilterReturn {
       default:
         break;
     }
-
     setFilterProducts(productsCopy);
   }, [products, category, subCategory, sortType, showSearch, search]);
 

@@ -63,7 +63,6 @@ export function AddressForm({
             <Label className="mb-2 text-lg">House Number</Label>
             <Input
               className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
-              disabled={isEditMode}
               name="houseNumber"
               onChange={handleInputChange}
               placeholder="House Number"

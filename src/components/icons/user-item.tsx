@@ -5,7 +5,6 @@ import { useAuthContext } from '@/context';
 export function UserItem() {
   const { userRole } = useAuthContext();
   const location = useLocation();
-
   const linkTo = userRole ? '/profile' : '/login';
   const linkState = userRole ? undefined : { from: location.pathname };
 

@@ -1,7 +1,3 @@
-export interface FormDeliveryInterface {
-  onSubmit: (formData: FormDeliveryFormData) => void;
-}
-
 export interface InputFormInterface {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
@@ -19,16 +15,3 @@ export interface PaymentMethodButtonInterface {
   logoSrc?: string;
   method: 'stripe' | 'razorpay' | 'cod';
 }
-
-export type FormDeliveryFormData = {
-  city: string;
-  country: string;
-  email: string;
-  firstName: string;
-  houseNumber: string;
-  lastName: string;
-  phone: string;
-  state: string;
-  street: string;
-  zipCode: string;
-};

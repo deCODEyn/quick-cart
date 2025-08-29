@@ -10,7 +10,6 @@ export function AddToCartButton({ id, size, name }: AddCartItemType) {
   const navigate = useNavigate();
   const location = useLocation();
   const { showSuccessToast } = useToast();
-
   const isLoggedIn = !!user;
 
   const handleAddToCart = () => {

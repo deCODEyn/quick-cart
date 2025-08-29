@@ -41,7 +41,6 @@ export function Cart() {
           const productData = products.find(
             (product) => product._id === item.id
           );
-
           return productData ? (
             <CartItemCard
               item={item}

@@ -11,7 +11,6 @@ export function usePrivateRequest(): AxiosInstance {
       },
       withCredentials: true,
     });
-
     return instance;
   }, []);
 
