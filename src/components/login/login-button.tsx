@@ -7,7 +7,12 @@ export function LoginButton({
   className,
 }: LoginButtonType) {
   return (
-    <Button className={className} disabled={isLoading} type="submit">
+    <Button
+      aria-busy={isLoading}
+      className={className}
+      disabled={isLoading}
+      type="submit"
+    >
       {isLogin
         ? `${isLoading ? 'Logging in' : 'Login'}`
         : `${isLoading ? 'Registering' : 'Sign Up'}`}

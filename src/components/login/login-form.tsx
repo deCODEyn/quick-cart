@@ -1,42 +1,51 @@
 import { Input, PasswordInputs } from '@/components';
 import type { LoginFormInterface } from '@/types';
 
+const inputClass =
+  'w-full rounded border border-gray-300 px-3 py-2 outline-none focus-visible:ring-1';
+
 export function LoginForm({
   isLogin = true,
-  formData,
-  handleChange,
+  register,
+  errors,
 }: LoginFormInterface) {
-  const inputClass =
-    'w-full rounded border border-gray-300 px-3 py-2 outline-none focus-visible:ring-1';
-
   return (
     <>
       {!isLogin && (
+        <div className="w-full">
+          <Input
+            className={inputClass}
+            placeholder="Username"
+            {...register('name')}
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-invalid={!!errors.name}
+          />
+          {errors.name && (
+            <p className="mt-1 text-red-500 text-sm" id="name-error">
+              {errors.name.message}
+            </p>
+          )}
+        </div>
+      )}
+      <div className="w-full">
         <Input
           className={inputClass}
-          name="name"
-          onChange={handleChange}
-          placeholder="Enter a username"
-          required
-          type="text"
-          value={formData.name}
+          placeholder={'Email'}
+          {...register('email')}
+          aria-describedby={errors.email ? 'email-error' : undefined}
+          aria-invalid={!!errors.email}
         />
-      )}
-
-      <Input
-        className={inputClass}
-        name="email"
-        onChange={handleChange}
-        placeholder={'Your e-mail'}
-        required
-        type="email"
-        value={formData.email}
-      />
+        {errors.email && (
+          <p className="mt-1 text-red-500 text-sm" id="email-error">
+            {errors.email.message}
+          </p>
+        )}
+      </div>
       <PasswordInputs
         className={inputClass}
-        formData={formData}
-        handleChange={handleChange}
+        errors={errors}
         needConfirm={!isLogin}
+        register={register}
       />
     </>
   );
