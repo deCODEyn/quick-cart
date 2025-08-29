@@ -4,18 +4,14 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button, PasswordInputs, ValidatePasswordModal } from '@/components';
 import { initialChangePasswordFormData } from '@/constants';
-import { useProfileForm, useToast } from '@/hooks';
+import { useProfile, useToast } from '@/hooks';
 import { type ChangePasswordType, changePasswordSchema } from '@/schemas';
 
 export function ChangePassword() {
   const navigate = useNavigate();
   const { showSuccessToast } = useToast();
-  const {
-    handlePasswordChange,
-    handleSave,
-    showPasswordModal,
-    setShowPasswordModal,
-  } = useProfileForm(null);
+  const { startPasswordChange, showPasswordModal, handleConfirm, closeModal } =
+    useProfile(null);
   const {
     register,
     handleSubmit,
@@ -23,25 +19,24 @@ export function ChangePassword() {
   } = useForm<ChangePasswordType>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: initialChangePasswordFormData,
+    mode: 'onBlur',
   });
 
-  const handleSavePassword = useCallback(
-    async (password: string) => {
-      const { success, message } = await handleSave(password);
-      if (success) {
+  const onSubmit = useCallback(
+    (password: ChangePasswordType) => {
+      startPasswordChange(password, (message) => {
         showSuccessToast(message || '');
         navigate('/profile');
-        return;
-      }
+      });
     },
-    [handleSave, showSuccessToast, navigate]
+    [startPasswordChange, showSuccessToast, navigate]
   );
 
   return (
     <div className="border-t">
       <form
         className="m-auto mt-14 flex w-[90%] flex-col items-center gap-3 text-gray-800 sm:max-w-96"
-        onSubmit={handleSubmit(handlePasswordChange)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mt-10 mb-2 inline-flex items-center gap-2">
           <h1 className="prata-regular text-3xl">Change Password</h1>
@@ -58,10 +53,7 @@ export function ChangePassword() {
         </Button>
       </form>
       {showPasswordModal && (
-        <ValidatePasswordModal
-          onClose={() => setShowPasswordModal(false)}
-          onConfirm={handleSavePassword}
-        />
+        <ValidatePasswordModal onClose={closeModal} onConfirm={handleConfirm} />
       )}
     </div>
   );

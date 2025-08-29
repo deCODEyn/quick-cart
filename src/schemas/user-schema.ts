@@ -11,28 +11,40 @@ export const passwordSchema = z
     'Password must contain at least one number or special character.'
   );
 
+export const passwordBaseInputSchema = z.object({
+  password: passwordSchema,
+  passwordValidate: z.string().optional(),
+});
+
 export const changePasswordSchema = z
-  .object({
-    password: passwordSchema,
-    passwordValidate: z.string(),
-  })
+  .object({})
+  .extend(passwordBaseInputSchema.required({ passwordValidate: true }).shape)
   .refine((data) => data.password === data.passwordValidate, {
     message: 'Password does not match.',
     path: ['passwordValidate'],
   });
-
 export type ChangePasswordType = z.infer<typeof changePasswordSchema>;
 
-export const userRegisterSchema = z
+export const authFormSchema = z
   .object({
-    name: z.string().min(1, 'O nome é obrigatório.'),
-    email: z.string().email('Endereço de e-mail inválido.'),
-    password: passwordSchema,
-    passwordValidate: z.string(),
+    email: z.email('Invalid email address.'),
+    name: z.string().optional(),
+    isLogin: z.boolean(),
   })
-  .refine((data) => data.password === data.passwordValidate, {
-    message: 'As senhas não conferem.',
-    path: ['passwordValidate'],
-  });
-
-export type UserRegisterType = z.infer<typeof userRegisterSchema>;
+  .extend(passwordBaseInputSchema.shape)
+  .refine(
+    (data) => data.isLogin || (data.name !== '' && data.name !== undefined),
+    {
+      message: 'Name is required.',
+      path: ['name'],
+    }
+  )
+  .refine(
+    (data) =>
+      !(data.passwordValidate && data.password !== data.passwordValidate),
+    {
+      message: 'Passwords do not match.',
+      path: ['passwordValidate'],
+    }
+  );
+export type AuthFormType = z.infer<typeof authFormSchema>;

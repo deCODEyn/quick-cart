@@ -20,6 +20,7 @@ export interface AuthContextInterface {
   ) => Promise<{ success: boolean; message: string }>;
   fetchUser: () => Promise<void>;
   isAuthReady: boolean;
+  isLoading: boolean;
   user: UserType | null;
   userRole: UserRoleType | null;
 }
@@ -45,5 +46,5 @@ export interface UIContextInterface {
 }
 
 export type ContextProviderType = {
-  children: React.ReactNode;
+  children: React.ReactElement;
 };

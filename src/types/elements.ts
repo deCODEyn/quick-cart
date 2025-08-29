@@ -1,5 +1,8 @@
-import type { FieldErrors, UseFormRegister } from 'react-hook-form';
-import type { ChangePasswordType } from '@/schemas';
+import type {
+  FieldErrors,
+  FieldValues,
+  UseFormRegister,
+} from 'react-hook-form';
 
 export interface ImageInterface
   extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -13,9 +16,11 @@ export interface ImageInterface
   width?: number | string;
 }
 
-export interface ValidatePasswordModalInterface {
-  onClose: () => void;
-  onConfirm: (password: string) => void;
+export interface UseConfirmPasswordModalReturn<T = void> {
+  closeModal: () => void;
+  handleConfirm: (password: string) => Promise<T>;
+  openModal: (action: ConfirmPasswordFn<T>) => void;
+  showPasswordModal: boolean;
 }
 
 export interface UseSearchBarReturn {
@@ -25,6 +30,13 @@ export interface UseSearchBarReturn {
   search: string;
   showSearch: boolean;
 }
+
+export interface ValidatePasswordModalInterface {
+  onClose: () => void;
+  onConfirm: (password: string) => void;
+}
+
+export type ConfirmPasswordFn<T = void> = (password: string) => Promise<T> | T;
 
 export type DisplayPriceType = {
   price: number;
@@ -42,11 +54,11 @@ export type LoadingDataType = {
   data: string;
 };
 
-export type PasswordInputsType = {
+export type PasswordInputsType<TFormValues extends FieldValues> = {
   className: string;
-  errors: FieldErrors<ChangePasswordType>;
+  errors: FieldErrors<TFormValues>;
   needConfirm: boolean;
-  register: UseFormRegister<ChangePasswordType>;
+  register: UseFormRegister<TFormValues>;
 };
 
 export type SummaryRowType = {

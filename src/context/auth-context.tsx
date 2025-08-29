@@ -18,7 +18,8 @@ export const AuthContext = createContext<AuthContextInterface | undefined>(
 );
 
 export const AuthProvider = ({ children }: ContextProviderType) => {
-  const { getMe, userLogin, userLogout, userRegister } = useUserData();
+  const { getMe, userLogin, userLogout, userRegister, isLoading } =
+    useUserData();
   const [userRole, setUserRole] = useState<UserRoleType | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
@@ -84,6 +85,7 @@ export const AuthProvider = ({ children }: ContextProviderType) => {
     user,
     userRole,
     isAuthReady,
+    isLoading,
     authLogin,
     authLogout,
     authRegister,
