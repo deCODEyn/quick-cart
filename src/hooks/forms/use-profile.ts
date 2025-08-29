@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useConfirmPasswordModal, useUserData } from '@/hooks';
-import type { ChangePasswordType } from '@/schemas/user-schema';
-import type { UseProfileReturn, UserType } from '@/types';
+import type { ChangePasswordType, UserType } from '@/schemas';
+import type { UseProfileReturn } from '@/types';
 
 export function useProfile(user: UserType | null): UseProfileReturn {
   const { updateProfile, changePassword } = useUserData();

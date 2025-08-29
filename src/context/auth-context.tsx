@@ -6,12 +6,8 @@ import {
   useState,
 } from 'react';
 import { useUserData } from '@/hooks';
-import type {
-  AuthContextInterface,
-  ContextProviderType,
-  UserRoleType,
-  UserType,
-} from '@/types';
+import type { UserRoleType, UserType } from '@/schemas';
+import type { AuthContextInterface, ContextProviderType } from '@/types';
 
 export const AuthContext = createContext<AuthContextInterface | undefined>(
   undefined

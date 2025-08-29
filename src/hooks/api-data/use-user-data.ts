@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useApiRequest, usePrivateRequest } from '@/hooks';
-import type { SingleUserResponse, UserType, UseUseDataReturn } from '@/types';
+import type { UserType } from '@/schemas';
+import type { SingleUserResponse, UseUseDataReturn } from '@/types';
 
 export function useUserData(): UseUseDataReturn {
   const { execute, isLoading } = useApiRequest();

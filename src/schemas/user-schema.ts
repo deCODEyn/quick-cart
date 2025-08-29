@@ -48,3 +48,30 @@ export const authFormSchema = z
     }
   );
 export type AuthFormType = z.infer<typeof authFormSchema>;
+
+export const userRoleSchema = z.enum(['Admin', 'User'])
+export type UserRoleType = z.infer<typeof userRoleSchema>
+
+export const socialMediaSchema = z.object({
+  instagram: z.string().optional(),
+  facebook: z.string().optional(),
+  X: z.string().optional(),
+  linkedIn: z.string().optional(),
+  whatsApp: z.string().optional(),
+});
+export type SocialMediaType = z.infer<typeof socialMediaSchema>;
+
+export const userSchema = z.object({
+  email: z.string().email('Invalid email'),
+  role: userRoleSchema,
+  name: z.string().min(1, 'Name is required'),
+  firstName: z.string().optional(),
+  middleName: z.string().optional(),
+  lastName: z.string().optional(),
+  cpf: z.string().optional(),
+  rg: z.string().optional(),
+  phoneNumber: z.string().optional(),
+  socialMedia: socialMediaSchema.optional(),
+  profileImage: z.string().optional(),
+});
+export type UserType = z.infer<typeof userSchema>;

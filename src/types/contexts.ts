@@ -1,10 +1,9 @@
+import type { UserRoleType, UserType } from '@/schemas';
 import type {
   CartItemsType,
   CartUpdateItemType,
   CartUpdateQuantityType,
   ProductType,
-  UserRoleType,
-  UserType,
 } from '@/types';
 
 export interface AuthContextInterface {

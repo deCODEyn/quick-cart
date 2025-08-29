@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +15,7 @@ import {
 } from '@/components';
 import { useAuthContext } from '@/context';
 import { useProfile, useToast } from '@/hooks';
-import type { SocialMediaType, UserType } from '@/types';
+import { type SocialMediaType, type UserType, userSchema } from '@/schemas';
 
 const inputClass =
   'w-full rounded border border-gray-400 focus-visible:border-gray-500 focus-visible:ring-0';
@@ -36,7 +37,7 @@ export function EditProfile() {
     handleSubmit,
     formState: { errors },
   } = useForm<UserType>({
-    // resolver: zodResolver(editProfileSchema),
+    resolver: zodResolver(userSchema),
     defaultValues: user || {},
     mode: 'onBlur',
   });

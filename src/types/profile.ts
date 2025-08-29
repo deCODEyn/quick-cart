@@ -1,7 +1,7 @@
 import type { UseFormRegister } from 'react-hook-form';
 import type { IconType } from 'react-icons/lib';
-import type { ChangePasswordType } from '@/schemas';
-import type { SingleUserResponse, SocialMediaType, UserType } from '@/types';
+import type { ChangePasswordType, SocialMediaType, UserType } from '@/schemas';
+import type { SingleUserResponse } from '@/types';
 
 export interface EditSocialMediaInterface {
   register: UseFormRegister<UserType>;
