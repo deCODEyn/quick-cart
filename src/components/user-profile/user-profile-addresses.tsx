@@ -2,7 +2,7 @@ import { Plus } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { AddressCard, LinkButton, Title } from '@/components';
 import { useAddressData } from '@/hooks';
-import type { AddressType } from '@/types';
+import type { AddressType } from '@/schemas';
 
 export function UserProfileAddresses() {
   const { listAddresses } = useAddressData();

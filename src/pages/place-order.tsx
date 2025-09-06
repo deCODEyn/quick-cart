@@ -11,7 +11,7 @@ import {
   Title,
 } from '@/components';
 import { useAddressData } from '@/hooks';
-import type { AddressType } from '@/types';
+import type { AddressType } from '@/schemas';
 
 export function PlaceOrder() {
   const [method, setMethod] = useState('cod');

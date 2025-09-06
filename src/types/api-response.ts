@@ -1,11 +1,6 @@
 import type { AxiosResponse } from 'axios';
-import type { UserType } from '@/schemas';
-import type {
-  AddressType,
-  CartDisplayItem,
-  OrderType,
-  ProductType,
-} from '@/types';
+import type { AddressType, UserType } from '@/schemas';
+import type { CartDisplayItem, OrderType, ProductType } from '@/types';
 
 export interface ApiResponse<T> {
   result?: T;

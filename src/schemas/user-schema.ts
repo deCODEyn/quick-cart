@@ -49,8 +49,8 @@ export const authFormSchema = z
   );
 export type AuthFormType = z.infer<typeof authFormSchema>;
 
-export const userRoleSchema = z.enum(['Admin', 'User'])
-export type UserRoleType = z.infer<typeof userRoleSchema>
+export const userRoleSchema = z.enum(['Admin', 'User']);
+export type UserRoleType = z.infer<typeof userRoleSchema>;
 
 export const socialMediaSchema = z.object({
   instagram: z.string().optional(),
@@ -62,7 +62,7 @@ export const socialMediaSchema = z.object({
 export type SocialMediaType = z.infer<typeof socialMediaSchema>;
 
 export const userSchema = z.object({
-  email: z.string().email('Invalid email'),
+  email: z.email('Invalid email'),
   role: userRoleSchema,
   name: z.string().min(1, 'Name is required'),
   firstName: z.string().optional(),

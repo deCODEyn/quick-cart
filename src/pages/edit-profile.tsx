@@ -13,6 +13,7 @@ import {
   Title,
   ValidatePasswordModal,
 } from '@/components';
+import { initialProfileFormData } from '@/constants';
 import { useAuthContext } from '@/context';
 import { useProfile, useToast } from '@/hooks';
 import { type SocialMediaType, type UserType, userSchema } from '@/schemas';
@@ -38,7 +39,7 @@ export function EditProfile() {
     formState: { errors },
   } = useForm<UserType>({
     resolver: zodResolver(userSchema),
-    defaultValues: user || {},
+    defaultValues: user || initialProfileFormData,
     mode: 'onBlur',
   });
 
@@ -46,7 +47,9 @@ export function EditProfile() {
     (data: UserType) => {
       startProfileUpdate(data, async (message) => {
         await fetchUser();
-        showSuccessToast(message || 'Profile updated successfully');
+        showSuccessToast(message || 'Profile updated successfully', {
+          autoClose: 5000,
+        });
         navigate('/profile');
       });
     },
@@ -78,53 +81,49 @@ export function EditProfile() {
             <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  className={inputClass}
-                  id="firstName"
-                  {...register('firstName')}
-                />
+                <Input className={inputClass} {...register('firstName')} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="middleName">Middle Name</Label>
-                <Input
-                  className={inputClass}
-                  id="middleName"
-                  {...register('middleName')}
-                />
+                <Input className={inputClass} {...register('middleName')} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  className={inputClass}
-                  id="lastName"
-                  {...register('lastName')}
-                />
+                <Input className={inputClass} {...register('lastName')} />
               </div>
+              <h2 className="mt-10 font-semibold text-gray-900 text-xl">
+                <Title span="& docs" title="contact" />
+              </h2>
               <div className="space-y-2">
                 <Label htmlFor="phoneNumber">Phone Number</Label>
-                <Input
-                  className={inputClass}
-                  id="phoneNumber"
-                  {...register('phoneNumber')}
-                />
+                <Input className={inputClass} {...register('phoneNumber')} />
+                {errors.phoneNumber && (
+                  <p className="text-red-500 text-sm">
+                    {errors.phoneNumber?.message}
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cpf">CPF</Label>
                 <Input
                   className={inputClass}
                   disabled={isCpfLocked}
-                  id="cpf"
                   {...register('cpf')}
                 />
+                {errors.cpf && (
+                  <p className="text-red-500 text-sm">{errors.cpf?.message}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="rg">RG</Label>
                 <Input
                   className={inputClass}
                   disabled={isRgLocked}
-                  id="rg"
                   {...register('rg')}
                 />
+                {errors.rg && (
+                  <p className="text-red-500 text-sm">{errors.rg?.message}</p>
+                )}
               </div>
             </div>
           </div>
@@ -134,7 +133,10 @@ export function EditProfile() {
             </h2>
             <EditSocialMedia
               register={register}
-              socialMedia={user.socialMedia || ({} as SocialMediaType)}
+              socialMedia={
+                user.socialMedia ||
+                (initialProfileFormData.socialMedia as SocialMediaType)
+              }
             />
           </div>
           <div className="rounded border border-gray-200 bg-gray-50 p-6">
@@ -145,11 +147,12 @@ export function EditProfile() {
               <Label htmlFor="email">Email</Label>
               <Input
                 className={inputClass}
-                id="email"
                 type="email"
                 {...register('email')}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )}
             </div>
           </div>
           <div className="flex justify-end gap-4">

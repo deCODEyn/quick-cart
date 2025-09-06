@@ -1,3 +1,4 @@
+import type { AddressFormData, AddressType } from '@/schemas';
 import type { ListAddressesResponse, SingleAddressResponse } from '@/types';
 
 export interface UseAddressDataReturn {

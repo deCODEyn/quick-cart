@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import { useApiRequest, usePrivateRequest } from '@/hooks';
+import type { AddressFormData, AddressType } from '@/schemas';
 import type {
-  AddressFormData,
-  AddressType,
   ListAddressesResponse,
   SingleAddressResponse,
   UseAddressDataReturn,

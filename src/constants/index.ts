@@ -1,5 +1,11 @@
 import type { ImageFiles, ProductFormData } from '@/admin/admin-types';
-import type { AddressFormData, PageLinksType } from '@/types';
+import type {
+  AddressFormData,
+  AuthFormType,
+  ChangePasswordType,
+  UserType,
+} from '@/schemas';
+import type { PageLinksType } from '@/types';
 
 //STORE CONTROL
 export const allCategories = ['Men', 'Women', 'Kids'];
@@ -35,7 +41,7 @@ export const initialAddressFormData: AddressFormData = {
   reference: '',
 };
 
-export const initialAuthFormData = {
+export const initialAuthFormData: AuthFormType = {
   name: '',
   email: '',
   password: '',
@@ -43,9 +49,16 @@ export const initialAuthFormData = {
   isLogin: true,
 };
 
-export const initialChangePasswordFormData = {
+export const initialChangePasswordFormData: ChangePasswordType = {
   password: '',
   passwordValidate: '',
+};
+
+export const initialImages: ImageFiles = {
+  image1: null,
+  image2: null,
+  image3: null,
+  image4: null,
 };
 
 export const initialProductFormData: ProductFormData = {
@@ -58,9 +71,21 @@ export const initialProductFormData: ProductFormData = {
   sizes: [],
 };
 
-export const initialImages: ImageFiles = {
-  image1: null,
-  image2: null,
-  image3: null,
-  image4: null,
+export const initialProfileFormData: UserType = {
+  email: '',
+  role: 'User',
+  name: '',
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  cpf: '',
+  rg: '',
+  phoneNumber: '',
+  socialMedia: {
+    instagram: '',
+    facebook: '',
+    X: '',
+    linkedIn: '',
+    whatsApp: '',
+  },
 };
