@@ -1,5 +1,15 @@
+import type { UseFormReturn } from 'react-hook-form';
 import type { AddressFormData, AddressType } from '@/schemas';
 import type { ListAddressesResponse, SingleAddressResponse } from '@/types';
+
+export interface AddressFormInterface {
+  form: UseFormReturn<AddressFormData>;
+  onSubmit: (
+    data: AddressFormData
+  ) => Promise<{ success: boolean; message: string }>;
+  isEditMode?: boolean;
+  isLoading?: boolean;
+}
 
 export interface UseAddressDataReturn {
   createAddress: (formData: FormData) => Promise<SingleAddressResponse>;
@@ -16,48 +26,4 @@ export interface UseAddressDataReturn {
 export type AddressCardType = {
   address: AddressType;
   allowToEdit?: boolean;
-};
-
-export type AddressFormData = {
-  city: string;
-  country: string;
-  houseNumber: string;
-  state: string;
-  street: string;
-  type: AddressTypeEnum;
-  zipCode: string;
-  complement?: string | undefined;
-  neighborhood?: string | undefined;
-  reference?: string | undefined;
-};
-
-export type AddressFormType = {
-  initialData?: AddressType;
-  isEditMode: boolean;
-};
-
-export type AddressType = {
-  _id: string;
-  city: string;
-  country: string;
-  houseNumber: string;
-  state: string;
-  street: string;
-  type: AddressTypeEnum;
-  userId: string;
-  zipCode: string;
-  complement?: string | undefined;
-  neighborhood?: string | undefined;
-  reference?: string | undefined;
-};
-
-export type AddressTypeEnum = 'Home' | 'Work' | 'Other';
-
-export type MinimizeAddressType = {
-  city: string;
-  country: string;
-  houseNumber: string;
-  state: string;
-  street: string;
-  zipCode: string;
 };

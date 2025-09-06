@@ -1,30 +1,28 @@
+import { Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input, Label, LinkButton, SelectInput } from '@/components';
 import { addressTypes } from '@/constants';
-import { useAddressForm, useToast } from '@/hooks';
-import type { AddressFormType } from '@/types';
+import { useToast } from '@/hooks';
+import type { AddressFormData } from '@/schemas';
+import type { AddressFormInterface } from '@/types';
 
 export function AddressForm({
-  initialData,
+  form,
+  onSubmit,
   isEditMode = false,
-}: AddressFormType) {
-  const { addressData, isLoading, handleInputChange, onSubmit } =
-    useAddressForm(initialData, isEditMode);
+  isLoading,
+}: AddressFormInterface) {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = form;
   const navigate = useNavigate();
   const { showSuccessToast } = useToast();
 
-  const handleSelectChange = (name: string, value: string) => {
-    handleInputChange({
-      target: {
-        name,
-        value,
-      },
-    } as React.ChangeEvent<HTMLInputElement>);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const result = await onSubmit(e);
+  const handleFormSubmit = async (data: AddressFormData) => {
+    const result = await onSubmit(data);
     if (result.success) {
       showSuccessToast(result.message);
     }
@@ -34,55 +32,58 @@ export function AddressForm({
   return (
     <form
       className="flex w-full flex-col items-start gap-5"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(handleFormSubmit)}
     >
       <div className="m-auto flex flex-col items-center gap-2 p-3 md:p-10">
         <div className="mb-2 w-full max-w-[150px] self-start">
-          <SelectInput
-            className="mb-2"
-            label="Address Type"
-            onChange={(value: string) => handleSelectChange('type', value)}
-            options={addressTypes}
-            value={addressData.type}
+          <Controller
+            control={control}
+            name="type"
+            render={({ field }) => (
+              <SelectInput
+                label="Address Type"
+                onChange={field.onChange}
+                options={addressTypes}
+                value={field.value}
+              />
+            )}
           />
+          {errors.type && <p className="text-red-500">{errors.type.message}</p>}
         </div>
         <div className="w-full">
           <Label className="mb-2 text-lg">Street</Label>
           <Input
             className="w-full max-w-[500px] rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
-            name="street"
-            onChange={handleInputChange}
             placeholder="Street"
-            required
-            type="text"
-            value={addressData.street}
+            {...register('street')}
           />
+          {errors.street && (
+            <p className="text-red-500">{errors.street.message}</p>
+          )}
         </div>
         <div className="grid w-full grid-cols-2 gap-2">
           <div className="w-full">
             <Label className="mb-2 text-lg">House Number</Label>
             <Input
               className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
-              name="houseNumber"
-              onChange={handleInputChange}
               placeholder="House Number"
-              required
-              type="number"
-              value={addressData.houseNumber}
+              {...register('houseNumber')}
             />
+            {errors.houseNumber && (
+              <p className="text-red-500">{errors.houseNumber.message}</p>
+            )}
           </div>
           <div className="w-full">
             <Label className="mb-2 text-lg">Zip Code</Label>
             <Input
               className="w-full max-w-[500px] rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
               disabled={isEditMode}
-              name="zipCode"
-              onChange={handleInputChange}
               placeholder="Zip Code"
-              required
-              type="text"
-              value={addressData.zipCode}
+              {...register('zipCode')}
             />
+            {errors.zipCode && (
+              <p className="text-red-500">{errors.zipCode.message}</p>
+            )}
           </div>
         </div>
         <div className="w-full">
@@ -90,13 +91,10 @@ export function AddressForm({
           <Input
             className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
             disabled={isEditMode}
-            name="city"
-            onChange={handleInputChange}
             placeholder="City"
-            required
-            type="text"
-            value={addressData.city}
+            {...register('city')}
           />
+          {errors.city && <p className="text-red-500">{errors.city.message}</p>}
         </div>
         <div className="grid w-full grid-cols-2 gap-2">
           <div className="w-full">
@@ -104,58 +102,48 @@ export function AddressForm({
             <Input
               className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
               disabled={isEditMode}
-              name="state"
-              onChange={handleInputChange}
               placeholder="State"
-              required
-              type="text"
-              value={addressData.state}
+              {...register('state')}
             />
+            {errors.state && (
+              <p className="text-red-500">{errors.state.message}</p>
+            )}
           </div>
           <div className="w-full">
             <Label className="mb-2 text-lg">Country</Label>
             <Input
               className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
               disabled={isEditMode}
-              name="country"
-              onChange={handleInputChange}
               placeholder="Country"
-              required
-              type="text"
-              value={addressData.country}
+              {...register('country')}
             />
+            {errors.country && (
+              <p className="text-red-500">{errors.country.message}</p>
+            )}
           </div>
         </div>
         <div className="w-full">
           <Label className="mb-2 text-lg">Neighborhood</Label>
           <Input
             className="w-full max-w-[500px] rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
-            name="neighborhood"
-            onChange={handleInputChange}
             placeholder="Neighborhood"
-            type="text"
-            value={addressData.neighborhood || ''}
+            {...register('neighborhood')}
           />
         </div>
         <div className="w-full">
           <Label className="mb-2 text-lg">Complement</Label>
           <Input
             className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
-            name="complement"
-            onChange={handleInputChange}
             placeholder="Complement"
-            type="text"
-            value={addressData.complement || ''}
+            {...register('complement')}
           />
         </div>
         <div className="w-full">
           <Label className="mb-2 text-lg">Reference Point</Label>
           <Input
             className="w-full rounded-sm border border-gray-500 px-3 py-2 ring-0 focus-visible:border-gray-800 focus-visible:ring-1"
-            name="reference"
-            onChange={handleInputChange}
             placeholder="e.g. Near the main square"
-            value={addressData.reference || ''}
+            {...register('reference')}
           />
         </div>
         <div className="mt-5 flex justify-end gap-4">

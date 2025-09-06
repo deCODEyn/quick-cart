@@ -1,4 +1,4 @@
-import type { MinimizeAddressType } from '@/types';
+import type { MinimizeAddressType } from '@/schemas';
 
 export type OrderCardType = {
   order: OrderType;

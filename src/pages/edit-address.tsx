@@ -1,9 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { AddressForm, LoadingData, Title } from '@/components';
-import type { AddressType } from '@/types';
+import { useAddressForm } from '@/hooks';
+import type { AddressType } from '@/schemas';
 
 export function EditAddress() {
   const address = useLocation().state.address as AddressType;
+  const { form, onSubmit, isLoading } = useAddressForm(address, true);
 
   if (!address) {
     return <LoadingData data="address data" />;
@@ -14,7 +16,12 @@ export function EditAddress() {
       <h1 className="mb-4 font-bold text-2xl">
         <Title as="h1" span="address" title="edit" />
       </h1>
-      <AddressForm initialData={address} isEditMode={true} />
+      <AddressForm
+        form={form}
+        isEditMode
+        isLoading={isLoading}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }
