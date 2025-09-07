@@ -9,21 +9,15 @@ import {
 } from '@/components';
 import { useShopContext } from '@/context';
 import type { CartDisplayItem } from '@/types';
+import { transformCartItems } from '@/utils/transform-cart-items';
 
 export function Cart() {
   const { products, cartItems, getCartItemCount, clearCart } = useShopContext();
   const [cartData, setCartData] = useState<CartDisplayItem[]>([]);
 
   useEffect(() => {
-    const transformedCartData: CartDisplayItem[] = Object.entries(
-      cartItems
-    ).flatMap(([productId, sizes]) =>
-      Object.entries(sizes).map(([size, quantity]) => ({
-        id: productId,
-        size,
-        quantity,
-      }))
-    );
+    const transformedCartData: CartDisplayItem[] =
+      transformCartItems(cartItems);
     setCartData(transformedCartData);
   }, [cartItems]);
 

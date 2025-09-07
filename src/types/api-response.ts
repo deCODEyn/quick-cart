@@ -34,9 +34,10 @@ export interface UseApiRequestReturn {
 
 export type ListAddressesResponse = ApiResponse<AddressType[]>;
 export type ListCartItemsResponse = ApiResponse<CartDisplayItem[]>;
-export type ListProductsResponse = ApiResponse<ProductType[]>;
 export type ListOrdersResponse = ApiResponse<OrderType[]>;
+export type ListProductsResponse = ApiResponse<ProductType[]>;
 
 export type SingleAddressResponse = ApiResponse<AddressType>;
+export type SingleOrderResponse = ApiResponse<OrderType>;
 export type SingleProductResponse = ApiResponse<ProductType>;
 export type SingleUserResponse = ApiResponse<UserType>;

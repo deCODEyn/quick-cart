@@ -1,4 +1,12 @@
 import type { MinimizeAddressType } from '@/schemas';
+import type { CartDisplayItem } from './cart';
+
+export type CreateOrderType = {
+  addressId: string;
+  items: CartDisplayItem[];
+  deliveryFee: number;
+  paymentMethod: string;
+}
 
 export type OrderCardType = {
   order: OrderType;

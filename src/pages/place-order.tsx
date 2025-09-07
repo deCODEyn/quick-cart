@@ -10,18 +10,24 @@ import {
   PaymentMethodButton,
   Title,
 } from '@/components';
-import { useAddressData } from '@/hooks';
+import { deliveryFee } from '@/constants';
+import { useShopContext } from '@/context';
+import { useAddressData, useOrdersData, useToast } from '@/hooks';
 import type { AddressType } from '@/schemas';
+import { transformCartItems } from '@/utils/transform-cart-items';
 
 export function PlaceOrder() {
-  const [method, setMethod] = useState('cod');
+  const [method, setMethod] = useState<string | null>(null);
   const { listAddresses } = useAddressData();
+  const { cartItems, clearCart } = useShopContext();
+  const { createOrder } = useOrdersData();
   const [addresses, setAddresses] = useState<AddressType[] | undefined>();
   const [selectedAddressId, setSelectedAddressId] = useState<string | null>(
     null
   );
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { showErrorToast, showSuccessToast } = useToast();
   const navigate = useNavigate();
+  const isPlaceOrderDisabled = !(selectedAddressId && method);
 
   const fetchAddresses = useCallback(async () => {
     setAddresses((await listAddresses()).result);
@@ -29,16 +35,37 @@ export function PlaceOrder() {
 
   const handleSelectAddress = useCallback((addressId: string) => {
     setSelectedAddressId(addressId);
-    setErrorMessage(null);
   }, []);
 
-  const handlePlaceOrder = useCallback(() => {
-    if (!selectedAddressId) {
-      setErrorMessage('Please select a delivery address.');
+  const handlePlaceOrder = useCallback(async () => {
+    if (!(selectedAddressId && method)) {
+      showErrorToast('Please select both delivery address and payment method');
       return;
     }
-    navigate(`/orders/${selectedAddressId}`);
-  }, [selectedAddressId, navigate]);
+    const items = transformCartItems(cartItems);
+    const orderPayload = {
+      addressId: selectedAddressId,
+      items,
+      deliveryFee,
+      paymentMethod: method,
+    };
+    const { success, message } = await createOrder(orderPayload);
+    if (success) {
+      showSuccessToast(message || '');
+      clearCart();
+      navigate('/orders');
+      return;
+    }
+  }, [
+    selectedAddressId,
+    method,
+    showErrorToast,
+    cartItems,
+    showSuccessToast,
+    createOrder,
+    clearCart,
+    navigate,
+  ]);
 
   useEffect(() => {
     fetchAddresses();
@@ -66,9 +93,6 @@ export function PlaceOrder() {
             </Button>
           </div>
         ))}
-        {errorMessage && (
-          <p className="mt-2 font-medium text-red-500">{errorMessage}</p>
-        )}
       </div>
       <div className="mt-8">
         <div className="mt-8 min-w-80">
@@ -80,19 +104,19 @@ export function PlaceOrder() {
           </h4>
           <div className="flex flex-col gap-3 lg:flex-row">
             <PaymentMethodButton
-              currentMethod={method}
+              currentMethod={method || ''}
               logoSrc={assets.stripe_logo}
               method="stripe"
               onClick={setMethod}
             />
             <PaymentMethodButton
-              currentMethod={method}
+              currentMethod={method || ''}
               logoSrc={assets.razorpay_logo}
               method="razorpay"
               onClick={setMethod}
             />
             <PaymentMethodButton
-              currentMethod={method}
+              currentMethod={method || ''}
               label="cash on delivery"
               method="cod"
               onClick={setMethod}
@@ -100,7 +124,11 @@ export function PlaceOrder() {
           </div>
           <div className="mt-8 w-full text-end">
             <Button
-              className="rounded-md bg-black px-4 py-2 font-semibold text-white transition duration-200 ease-in-out hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              className={`cursor-pointer rounded-md px-4 py-2 font-semibold text-white transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                isPlaceOrderDisabled
+                  ? 'cursor-not-allowed bg-gray-400'
+                  : 'bg-black hover:bg-gray-800 focus:ring-black'
+              }`}
               onClick={handlePlaceOrder}
             >
               Place Order
