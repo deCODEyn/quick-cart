@@ -13,6 +13,7 @@ export * from '@/hooks/ui/use-click-outside';
 export * from '@/hooks/ui/use-filter-latest-orders';
 export * from '@/hooks/ui/use-handle-profile-image';
 export * from '@/hooks/ui/use-password-modal';
+export * from '@/hooks/ui/use-place-order';
 export * from '@/hooks/ui/use-product-filter';
 export * from '@/hooks/ui/use-search-bar';
 export * from '@/hooks/ui/use-toast';

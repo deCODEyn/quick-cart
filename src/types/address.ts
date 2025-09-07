@@ -11,6 +11,12 @@ export interface AddressFormInterface {
   isLoading?: boolean;
 }
 
+export interface AddressListInterface {
+  onSelect: (id: string) => void;
+  addresses: AddressType[] | undefined;
+  selectedId: string | null;
+}
+
 export interface UseAddressDataReturn {
   createAddress: (formData: FormData) => Promise<SingleAddressResponse>;
   deleteAddress: (addressId: string) => Promise<SingleAddressResponse>;

@@ -1,4 +1,5 @@
 import type { ImageFiles, ProductFormData } from '@/admin/admin-types';
+import { assets } from '@/assets';
 import type {
   AddressFormData,
   AuthFormType,
@@ -18,6 +19,13 @@ export const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 export const sortOptions = ['Relevant', 'Low-high', 'High-low'];
 
 export const addressTypes = ['Home', 'Work', 'Other'];
+
+//PAYMENT METHODS
+export const paymentMethods = [
+  { payMethod: 'stripe', logo: assets.stripe_logo, label: undefined },
+  { payMethod: 'razorpay', logo: assets.razorpay_logo, label: undefined },
+  { payMethod: 'cod', logo: undefined, label: 'cash on delivery' },
+];
 
 //NAVIGATION
 export const links: PageLinksType[] = [

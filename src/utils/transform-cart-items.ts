@@ -1,4 +1,4 @@
-import type { CartDisplayItem, CartItemsType } from "@/types";
+import type { CartDisplayItem, CartItemsType } from '@/types';
 
 export function transformCartItems(
   cartItems: CartItemsType

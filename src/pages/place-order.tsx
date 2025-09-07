@@ -1,58 +1,38 @@
 import { Plus } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { assets } from '@/assets';
 import {
-  AddressCard,
+  AddressList,
   Button,
   CartTotal,
   LinkButton,
   PaymentMethodButton,
   Title,
 } from '@/components';
-import { deliveryFee } from '@/constants';
-import { useShopContext } from '@/context';
-import { useAddressData, useOrdersData, useToast } from '@/hooks';
-import type { AddressType } from '@/schemas';
-import { transformCartItems } from '@/utils/transform-cart-items';
+import { paymentMethods } from '@/constants';
+import { usePlaceOrder, useToast } from '@/hooks';
 
 export function PlaceOrder() {
-  const [method, setMethod] = useState<string | null>(null);
-  const { listAddresses } = useAddressData();
-  const { cartItems, clearCart } = useShopContext();
-  const { createOrder } = useOrdersData();
-  const [addresses, setAddresses] = useState<AddressType[] | undefined>();
-  const [selectedAddressId, setSelectedAddressId] = useState<string | null>(
-    null
-  );
+  const {
+    addresses,
+    selectedAddressId,
+    handleSelectAddress,
+    method,
+    setMethod,
+    isPlaceOrderDisabled,
+    handlePlaceOrder,
+  } = usePlaceOrder();
   const { showErrorToast, showSuccessToast } = useToast();
   const navigate = useNavigate();
-  const isPlaceOrderDisabled = !(selectedAddressId && method);
 
-  const fetchAddresses = useCallback(async () => {
-    setAddresses((await listAddresses()).result);
-  }, [listAddresses]);
-
-  const handleSelectAddress = useCallback((addressId: string) => {
-    setSelectedAddressId(addressId);
-  }, []);
-
-  const handlePlaceOrder = useCallback(async () => {
+  const handleSubmit = useCallback(async () => {
     if (!(selectedAddressId && method)) {
       showErrorToast('Please select both delivery address and payment method');
       return;
     }
-    const items = transformCartItems(cartItems);
-    const orderPayload = {
-      addressId: selectedAddressId,
-      items,
-      deliveryFee,
-      paymentMethod: method,
-    };
-    const { success, message } = await createOrder(orderPayload);
+    const { success, message } = await handlePlaceOrder();
     if (success) {
       showSuccessToast(message || '');
-      clearCart();
       navigate('/orders');
       return;
     }
@@ -60,16 +40,10 @@ export function PlaceOrder() {
     selectedAddressId,
     method,
     showErrorToast,
-    cartItems,
     showSuccessToast,
-    createOrder,
-    clearCart,
     navigate,
+    handlePlaceOrder,
   ]);
-
-  useEffect(() => {
-    fetchAddresses();
-  }, [fetchAddresses]);
 
   return (
     <div className="flex min-h-[80vh] flex-col justify-between gap-4 border-t pt-5 sm:flex-row sm:pt-14">
@@ -80,19 +54,11 @@ export function PlaceOrder() {
         <LinkButton href="/address/add" label="add address">
           <Plus className="size-4" />
         </LinkButton>
-        {addresses?.map((address) => (
-          <div
-            className={`flex cursor-pointer rounded-md ${selectedAddressId === address._id ? 'border-2 border-green-400 shadow-lg' : 'border border-gray-200'} `}
-            key={address._id}
-          >
-            <Button
-              className="block h-full w-full cursor-pointer appearance-none bg-transparent p-0 text-start text-gray-900 text-lg hover:bg-transparent"
-              onClick={() => handleSelectAddress(address._id)}
-            >
-              <AddressCard address={address} allowToEdit={false} />
-            </Button>
-          </div>
-        ))}
+        <AddressList
+          addresses={addresses}
+          onSelect={handleSelectAddress}
+          selectedId={selectedAddressId}
+        />
       </div>
       <div className="mt-8">
         <div className="mt-8 min-w-80">
@@ -103,24 +69,16 @@ export function PlaceOrder() {
             <Title as="h4" span="method" title="payment" />
           </h4>
           <div className="flex flex-col gap-3 lg:flex-row">
-            <PaymentMethodButton
-              currentMethod={method || ''}
-              logoSrc={assets.stripe_logo}
-              method="stripe"
-              onClick={setMethod}
-            />
-            <PaymentMethodButton
-              currentMethod={method || ''}
-              logoSrc={assets.razorpay_logo}
-              method="razorpay"
-              onClick={setMethod}
-            />
-            <PaymentMethodButton
-              currentMethod={method || ''}
-              label="cash on delivery"
-              method="cod"
-              onClick={setMethod}
-            />
+            {paymentMethods.map(({ payMethod, logo, label }) => (
+              <PaymentMethodButton
+                currentMethod={method || ''}
+                key={payMethod}
+                label={label}
+                logoSrc={logo}
+                method={payMethod}
+                onClick={setMethod}
+              />
+            ))}
           </div>
           <div className="mt-8 w-full text-end">
             <Button
@@ -129,7 +87,7 @@ export function PlaceOrder() {
                   ? 'cursor-not-allowed bg-gray-400'
                   : 'bg-black hover:bg-gray-800 focus:ring-black'
               }`}
-              onClick={handlePlaceOrder}
+              onClick={handleSubmit}
             >
               Place Order
             </Button>

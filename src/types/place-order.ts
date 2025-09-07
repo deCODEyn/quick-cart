@@ -13,5 +13,5 @@ export interface PaymentMethodButtonInterface {
   currentMethod: string;
   label?: string;
   logoSrc?: string;
-  method: 'stripe' | 'razorpay' | 'cod';
+  method: string;
 }

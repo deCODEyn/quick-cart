@@ -6,7 +6,7 @@ export type CreateOrderType = {
   items: CartDisplayItem[];
   deliveryFee: number;
   paymentMethod: string;
-}
+};
 
 export type OrderCardType = {
   order: OrderType;
