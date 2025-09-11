@@ -16,7 +16,7 @@ export interface SizesSelectorType {
 export interface SelectInputType {
   onChange: (value: string) => void;
   className?: string;
-  label: string;
+  label?: string;
   options: string[];
   value: string;
 }

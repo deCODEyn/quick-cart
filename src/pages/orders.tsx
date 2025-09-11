@@ -37,7 +37,7 @@ export function Orders() {
         <Title as="h1" span="orders" title="my" />
       </h1>
       {orders.map((order) => (
-        <OrderCard key={order._id} order={order} />
+        <OrderCard key={order._id} onRefresh={getOrders} order={order} />
       ))}
     </div>
   );

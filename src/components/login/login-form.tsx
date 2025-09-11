@@ -29,6 +29,7 @@ export function LoginForm({
       )}
       <div className="w-full">
         <Input
+          autoComplete="username"
           className={inputClass}
           placeholder={'Email'}
           {...register('email')}

@@ -1,11 +1,14 @@
 import { Button } from '@/components';
-import type { OrderStatusIndicatorType } from '@/types';
+import type { OrderStatusIndicatorInterface } from '@/types';
 
-export function OrderStatusIndicator({ status }: OrderStatusIndicatorType) {
+export function OrderStatusIndicator({
+  status,
+  onRefresh,
+}: OrderStatusIndicatorInterface) {
   let colorClass = '';
 
   switch (status) {
-    case 'Order Placed':
+    case 'Order placed':
       colorClass = 'bg-gray-500';
       break;
     case 'Ready to ship':
@@ -32,6 +35,7 @@ export function OrderStatusIndicator({ status }: OrderStatusIndicatorType) {
       </div>
       <Button
         className="h-8 cursor-pointer rounded border border-gray-600 bg-gray-300 px-2 py-1 text-[0.7rem] text-gray-900 uppercase hover:bg-gray-400 active:bg-gray-200"
+        onClick={onRefresh}
         type="button"
       >
         Track Order

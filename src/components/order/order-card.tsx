@@ -5,9 +5,9 @@ import {
   Title,
 } from '@/components';
 import { useDateFormat } from '@/hooks';
-import type { OrderCardType } from '@/types';
+import type { OrderCardInterface } from '@/types';
 
-export function OrderCard({ order }: OrderCardType) {
+export function OrderCard({ order, onRefresh }: OrderCardInterface) {
   const formattedDate = useDateFormat(order.createdAt);
 
   return (
@@ -21,13 +21,21 @@ export function OrderCard({ order }: OrderCardType) {
           />
         </h4>
         <div className="flex items-center gap-5">
-          <p className="mx-5 text-gray-500 text-xs md:mx-5 md:text-base">
-            Date:
-            <span className="ml-1 font-medium text-gray-700">
-              {formattedDate}
-            </span>
-          </p>
-          <OrderStatusIndicator status={order.status} />
+          <div className="mx-1 text-xs md:mx-5 md:text-base">
+            <p className="text-gray-500">
+              Date:
+              <span className="ml-1 font-medium text-gray-700">
+                {formattedDate}
+              </span>
+            </p>
+            <p className="text-gray-500">
+              Payment:
+              <span className="ml-1 font-medium text-gray-700">
+                {order.paymentMethod.toUpperCase()}
+              </span>
+            </p>
+          </div>
+          <OrderStatusIndicator onRefresh={onRefresh} status={order.status} />
         </div>
       </div>
       <hr className="mx-10 my-4 border-gray-300" />

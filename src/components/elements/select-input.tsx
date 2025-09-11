@@ -17,7 +17,9 @@ export function SelectInput({
 }: SelectInputType) {
   return (
     <div>
-      <Label className={`${className} font-medium text-lg`}>{label}</Label>
+      {label && (
+        <Label className={`${className} font-medium text-lg`}>{label}</Label>
+      )}
       <Select onValueChange={onChange} value={value}>
         <SelectTrigger className="h-10 w-full rounded border border-gray-500 px-2 text-gray-900 text-sm">
           <SelectValue />

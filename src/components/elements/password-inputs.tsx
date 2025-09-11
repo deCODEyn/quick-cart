@@ -17,6 +17,7 @@ export function PasswordInputs<TFormValues extends FieldValues>({
     <>
       <div className="w-full">
         <Input
+          autoComplete="current-password"
           className={className}
           id="password"
           placeholder="Password"
