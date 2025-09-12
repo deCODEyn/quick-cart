@@ -1,7 +1,8 @@
 import { ClipboardEdit } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
-import { LoadingData, SelectInput } from '@/components';
-import { allOrdersStatus, currency } from '@/constants';
+import { ManageAddressCard, OrderItemsList } from '@/admin/admin-components';
+import { DisplayPrice, LoadingData, SelectInput } from '@/components';
+import { allOrdersStatus } from '@/constants';
 import { useOrdersData } from '@/hooks';
 import type { OrderType } from '@/types';
 
@@ -54,41 +55,16 @@ export function ManageOrders() {
             <ClipboardEdit className="size-15" />
             <div>
               <div>
-                {order.items.map((item, index) => {
-                  if (index === order.items.length - 1) {
-                    return (
-                      <p
-                        className="py-0.5 "
-                        key={`${order._id}-${item._id}-${index}`}
-                      >
-                        {item.product.name} x {item.quantity}
-                        <span> {item.size}</span>
-                      </p>
-                    );
-                  }
-                  return (
-                    <p
-                      className="py-0.5 "
-                      key={`${order._id}-${item._id}-${index}`}
-                    >
-                      {item.product.name} x {item.quantity}
-                      <span className="ml-0.5">{item.size}</span>,
-                    </p>
-                  );
-                })}
+                {order.items.map((item, index) => (
+                  <OrderItemsList
+                    key={`${order._id}-${item._id}-${index}`}
+                    lastItem={index === order.items.length - 1}
+                    order={item}
+                  />
+                ))}
               </div>
               <p className="mt-3 mb-2 font-medium">Usuário: {order.userId}</p>
-              <div>
-                <p>
-                  {order.address.street}, {order.address.houseNumber}
-                </p>
-                <p>
-                  {order.address.city} - {order.address.state}.
-                  <span className="ml-2">
-                    {order.address.country} ({order.address.zipCode})
-                  </span>
-                </p>
-              </div>
+              <ManageAddressCard address={order.address} />
             </div>
             <div>
               <p className="text-sm md:text-base">
@@ -96,11 +72,9 @@ export function ManageOrders() {
               </p>
               <p className="mt-3 ">Method: {order.paymentMethod}</p>
               <p>Payment: {order.payment ? 'Done' : 'Pending'}</p>
-              <p> Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+              <p> Date: {new Date(order.createdAt).toDateString()}</p>
             </div>
-            <p className="text-sm md:text-lg">
-              {currency} {order.amount}
-            </p>
+            <DisplayPrice price={order.amount} />
             <SelectInput
               className="text-md"
               onChange={(value: string) => updateStatus(value, order._id)}

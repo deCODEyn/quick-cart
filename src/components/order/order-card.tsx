@@ -4,12 +4,9 @@ import {
   OrderTotal,
   Title,
 } from '@/components';
-import { useDateFormat } from '@/hooks';
 import type { OrderCardInterface } from '@/types';
 
 export function OrderCard({ order, onRefresh }: OrderCardInterface) {
-  const formattedDate = useDateFormat(order.createdAt);
-
   return (
     <div className="my-5 rounded-lg border border-gray-400 p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
@@ -25,7 +22,7 @@ export function OrderCard({ order, onRefresh }: OrderCardInterface) {
             <p className="text-gray-500">
               Date:
               <span className="ml-1 font-medium text-gray-700">
-                {formattedDate}
+                {new Date(order.createdAt).toDateString()}
               </span>
             </p>
             <p className="text-gray-500">

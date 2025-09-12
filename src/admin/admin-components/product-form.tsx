@@ -73,28 +73,20 @@ export function ProductForm({
         />
       </div>
       <div className="flex w-full flex-col gap-2 sm:flex-row md:gap-8">
-        {(isEditMode && initialData) || !isEditMode ? (
-          <>
-            <SelectInput
-              className="mb-2"
-              label="Product category"
-              onChange={(value: string) =>
-                handleSelectChange('category', value)
-              }
-              options={allCategories}
-              value={productData.category}
-            />
-            <SelectInput
-              className="mb-2"
-              label="Product subcategory"
-              onChange={(value: string) =>
-                handleSelectChange('subCategory', value)
-              }
-              options={allSubCategories}
-              value={productData.subCategory}
-            />
-          </>
-        ) : null}
+        <SelectInput
+          className="mb-2"
+          label="Product category"
+          onChange={(value: string) => handleSelectChange('category', value)}
+          options={allCategories}
+          value={productData.category}
+        />
+        <SelectInput
+          className="mb-2"
+          label="Product subcategory"
+          onChange={(value: string) => handleSelectChange('subCategory', value)}
+          options={allSubCategories}
+          value={productData.subCategory}
+        />
         <div>
           <Label className="mb-2 text-lg">Product Price</Label>
           <Input
