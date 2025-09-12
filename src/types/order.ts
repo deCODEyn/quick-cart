@@ -1,15 +1,21 @@
 import type { MinimizeAddressType } from '@/schemas';
 import type { CartDisplayItem } from './cart';
 
+export interface OrderCardInterface {
+  onRefresh: () => Promise<void>;
+  order: OrderType;
+}
+
+export interface OrderStatusIndicatorInterface {
+  onRefresh: () => Promise<void>;
+  status: OrderStatusEnunType;
+}
+
 export type CreateOrderType = {
   addressId: string;
   items: CartDisplayItem[];
   deliveryFee: number;
   paymentMethod: string;
-};
-
-export type OrderCardType = {
-  order: OrderType;
 };
 
 export type OrderItemType = {
@@ -19,12 +25,8 @@ export type OrderItemType = {
   size: string;
 };
 
-export type OrderStatusIndicatorType = {
-  status: OrderStatusEnunType;
-};
-
 export type OrderStatusEnunType =
-  | 'Order Placed'
+  | 'Order placed'
   | 'Ready to ship'
   | 'Shipped'
   | 'Delivered'
@@ -45,6 +47,7 @@ export type OrderType = {
   payment: string;
   paymentMethod: string;
   status: OrderStatusEnunType;
+  userId: string;
 };
 
 export type OrderUnitProduct = {

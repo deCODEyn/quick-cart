@@ -11,6 +11,13 @@ import type { PageLinksType } from '@/types';
 //STORE CONTROL
 export const allCategories = ['Men', 'Women', 'Kids'];
 export const allSubCategories = ['Topwear', 'Bottomwear', 'Winterwear'];
+export const allOrdersStatus = [
+  'Order placed',
+  'Ready to ship',
+  'Shipped',
+  'Delivered',
+  'Cancelled',
+];
 
 export const currency = '$';
 export const deliveryFee = 10;

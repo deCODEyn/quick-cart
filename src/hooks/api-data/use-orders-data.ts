@@ -26,5 +26,29 @@ export function useOrdersData() {
     );
   }, [execute, privateApi]);
 
-  return { createOrder, listOrders, isLoading };
+  const getAllOrders = useCallback(async (): Promise<ListOrdersResponse> => {
+    return await execute<OrderType[]>(() =>
+      privateApi.get<ListOrdersResponse>('/orders/admin')
+    );
+  }, [execute, privateApi]);
+
+  const updateOrderStatus = useCallback(
+    async (orderId: string, status: string): Promise<SingleOrderResponse> => {
+      return await execute<OrderType>(() =>
+        privateApi.patch<SingleOrderResponse>(
+          `/orders/admin/${orderId}/status`,
+          { status }
+        )
+      );
+    },
+    [execute, privateApi]
+  );
+
+  return {
+    createOrder,
+    listOrders,
+    getAllOrders,
+    updateOrderStatus,
+    isLoading,
+  };
 }
