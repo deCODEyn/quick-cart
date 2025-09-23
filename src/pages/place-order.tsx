@@ -22,7 +22,7 @@ export function PlaceOrder() {
     isPlaceOrderDisabled,
     handlePlaceOrder,
   } = usePlaceOrder();
-  const { showErrorToast, showSuccessToast } = useToast();
+  const { showErrorToast } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(async () => {
@@ -30,20 +30,16 @@ export function PlaceOrder() {
       showErrorToast('Please select both delivery address and payment method');
       return;
     }
-    const { success, message } = await handlePlaceOrder();
+    const { success, result } = await handlePlaceOrder();
     if (success) {
-      showSuccessToast(message || '');
-      navigate('/orders');
+      if (result) {
+        window.location.replace(result);
+      } else {
+        navigate('/orders');
+      }
       return;
     }
-  }, [
-    selectedAddressId,
-    method,
-    showErrorToast,
-    showSuccessToast,
-    navigate,
-    handlePlaceOrder,
-  ]);
+  }, [selectedAddressId, method, showErrorToast, navigate, handlePlaceOrder]);
 
   return (
     <div className="flex min-h-[80vh] flex-col justify-between gap-4 border-t pt-5 sm:flex-row sm:pt-14">

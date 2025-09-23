@@ -12,3 +12,4 @@ export * from '@/pages/orders';
 export * from '@/pages/place-order';
 export * from '@/pages/product';
 export * from '@/pages/user-profile';
+export * from '@/pages/verify';

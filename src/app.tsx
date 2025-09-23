@@ -24,6 +24,7 @@ import {
   PlaceOrder,
   Product,
   UserProfile,
+  Verify,
 } from '@/pages';
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
           <Route element={<Contact />} path="contact" />
           <Route element={<Login />} path="login" />
           <Route element={<Orders />} path="orders" />
+          <Route element={<Verify />} path="verify" />
           <Route element={<PlaceOrder />} path="place-order" />
           <Route element={<Product />} path="product/:productId" />
           <Route element={<UserProfile />} path="profile" />

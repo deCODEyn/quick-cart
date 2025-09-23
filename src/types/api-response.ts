@@ -38,6 +38,7 @@ export type ListOrdersResponse = ApiResponse<OrderType[]>;
 export type ListProductsResponse = ApiResponse<ProductType[]>;
 
 export type SingleAddressResponse = ApiResponse<AddressType>;
+export type SingleOrderCreateResponse = ApiResponse<string>;
 export type SingleOrderResponse = ApiResponse<OrderType>;
 export type SingleProductResponse = ApiResponse<ProductType>;
 export type SingleUserResponse = ApiResponse<UserType>;

@@ -3,12 +3,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { ManageAddressCard, OrderItemsList } from '@/admin/admin-components';
 import { DisplayPrice, LoadingData, SelectInput } from '@/components';
 import { allOrdersStatus } from '@/constants';
-import { useOrdersData } from '@/hooks';
+import { useOrdersData, useToast } from '@/hooks';
 import type { OrderType } from '@/types';
 
 export function ManageOrders() {
   const { getAllOrders, updateOrderStatus } = useOrdersData();
   const [orders, setOrders] = useState<OrderType[] | null>(null);
+  const { showSuccessToast } = useToast();
 
   const getOrders = useCallback(async () => {
     const { result, success } = await getAllOrders();
@@ -22,9 +23,10 @@ export function ManageOrders() {
       const { success } = await updateOrderStatus(orderId, status);
       if (success) {
         getOrders();
+        showSuccessToast('Status updated sussesfully');
       }
     },
-    [updateOrderStatus, getOrders]
+    [updateOrderStatus, getOrders, showSuccessToast]
   );
 
   useEffect(() => {

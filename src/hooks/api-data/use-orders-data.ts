@@ -4,6 +4,7 @@ import type {
   CreateOrderType,
   ListOrdersResponse,
   OrderType,
+  SingleOrderCreateResponse,
   SingleOrderResponse,
 } from '@/types';
 
@@ -12,9 +13,11 @@ export function useOrdersData() {
   const privateApi = usePrivateRequest();
 
   const createOrder = useCallback(
-    async (orderPayload: CreateOrderType): Promise<SingleOrderResponse> => {
-      return await execute<OrderType>(() =>
-        privateApi.post<SingleOrderResponse>('/orders', orderPayload)
+    async (
+      orderPayload: CreateOrderType
+    ): Promise<SingleOrderCreateResponse> => {
+      return await execute<string>(() =>
+        privateApi.post<SingleOrderCreateResponse>('/orders', orderPayload)
       );
     },
     [execute, privateApi]
@@ -44,11 +47,21 @@ export function useOrdersData() {
     [execute, privateApi]
   );
 
+  const verifyStripePayment = useCallback(
+    async (orderId: string, status: boolean) => {
+      return await execute(() =>
+        privateApi.patch(`/orders/${orderId}/verify-stripe`, { status })
+      );
+    },
+    [execute, privateApi]
+  );
+
   return {
     createOrder,
     listOrders,
     getAllOrders,
     updateOrderStatus,
+    verifyStripePayment,
     isLoading,
   };
 }

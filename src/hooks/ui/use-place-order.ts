@@ -13,7 +13,7 @@ export function usePlaceOrder() {
     null
   );
   const { listAddresses } = useAddressData();
-  const { cartItems, clearCart } = useShopContext();
+  const { cartItems } = useShopContext();
   const { createOrder } = useOrdersData();
   const isPlaceOrderDisabled = !(selectedAddressId && method);
 
@@ -29,6 +29,7 @@ export function usePlaceOrder() {
   const handlePlaceOrder = useCallback(async (): Promise<{
     success: boolean;
     message: string | undefined;
+    result: string | undefined;
   }> => {
     const items = transformCartItems(cartItems);
     const orderPayload: CreateOrderType = {
@@ -37,12 +38,9 @@ export function usePlaceOrder() {
       deliveryFee,
       paymentMethod: method || '',
     };
-    const { success, message } = await createOrder(orderPayload);
-    if (success) {
-      clearCart();
-    }
-    return { success, message };
-  }, [selectedAddressId, method, cartItems, createOrder, clearCart]);
+    const { success, message, result } = await createOrder(orderPayload);
+    return { success, message, result };
+  }, [selectedAddressId, method, cartItems, createOrder]);
 
   useEffect(() => {
     fetchAddresses();
