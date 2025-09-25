@@ -66,6 +66,7 @@ export const ShopContextProvider = ({ children }: ContextProviderType) => {
     cartItems,
     products,
     clearCart,
+    resetCart,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

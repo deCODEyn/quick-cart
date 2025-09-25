@@ -30,7 +30,6 @@ export const addressTypes = ['Home', 'Work', 'Other'];
 //PAYMENT METHODS
 export const paymentMethods = [
   { payMethod: 'stripe', logo: assets.stripe_logo, label: undefined },
-  { payMethod: 'razorpay', logo: assets.razorpay_logo, label: undefined },
   { payMethod: 'cod', logo: undefined, label: 'cash on delivery' },
 ];
 

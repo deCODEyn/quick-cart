@@ -31,6 +31,7 @@ export interface ShopContextInterface {
   getCartTotalAmount: () => number;
   getCartItemCount: () => number;
   getProducts: () => Promise<void>;
+  resetCart: () => void;
   updateQuantity: ({ id, size, quantity }: CartUpdateQuantityType) => void;
   cartItems: CartItemsType;
   products: ProductType[];

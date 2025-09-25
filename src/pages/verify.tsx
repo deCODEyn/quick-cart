@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { LoadingData } from '@/components';
+import { useShopContext } from '@/context';
 import { useOrdersData, useToast } from '@/hooks';
 
 export function Verify() {
@@ -8,6 +9,7 @@ export function Verify() {
   const [searchParams] = useSearchParams();
   const status = searchParams.get('success');
   const orderId = searchParams.get('orderId');
+  const { resetCart } = useShopContext();
   const { verifyStripePayment } = useOrdersData();
   const { showErrorToast, showSuccessToast } = useToast();
 
@@ -20,6 +22,7 @@ export function Verify() {
     const { success } = await verifyStripePayment(orderId, status === 'true');
     if (success) {
       showSuccessToast('Order created successfully.');
+      resetCart();
       navigate('/orders');
     } else {
       showErrorToast('Payment not processed.');
